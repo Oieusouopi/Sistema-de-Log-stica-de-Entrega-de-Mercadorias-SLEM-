@@ -76,18 +76,24 @@ Operações do serviço {
 ```
 .
 ├── src
+│   ├──Storage --> Aqui vão ser armazenado os arquivos bin
+│   ├── pedidos.bin
+│   ├── locais.bin
+│   └── veiculos.bin
 │   ├──Controller --> Camada para a requisição e resposta para o usuário camada mais externa
 │   │   ├──PedidoController.cpp
 │   │   ├──LocalController.cpp
 │   │   ├──VeiculoController.cpp
+│   │   ├──RotaController.cpp
 │   ├── Service --> Criação das tabelas
 │   │   ├──PedidoService.cpp
 │   │   ├──LocalService.cpp
 │   │   ├──VeiculoService.cpp
+│   │   ├── RotaService.cpp 
 │   ├── Model --> Camada de como deve ser as entidades
-│   │   ├──Pedido.cpp Classe Pedido
-│   │   ├──Local.cpp --> Classe Local
-│   │   ├──Veiculo.cpp --> classe Veiculo
+│   │   ├──Pedido.h Classe Pedido
+│   │   ├──Local.h --> Classe Local
+│   │   ├──Veiculo.h --> classe Veiculo
 │   └──main.cpp --> Arquivo onde começa a aplicação para starta em que porta estará
 └──README.MD
 ```
