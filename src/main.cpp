@@ -68,7 +68,6 @@ void menuPrincipal() {
             case FINALIZAR_PROGRAMA:
                 exibirDespedida();
                 exit(1);
-                break;
             default:
                 exibirMensagemDeErro();
                 break;
@@ -81,34 +80,37 @@ void menuLocal() {
     teclaGlobal = '\0';
     std::string entrada;
 
-    std::cout << "\n----- MENU LOCAL -----\n";
-    std::cout << static_cast<char>(CRIAR_LOCAL) << " -  Criar local\n";
-    std::cout << static_cast<char>(EXCLUIR_LOCAL) << " -  Excluir local\n";
-    std::cout << static_cast<char>(LISTAR_TODOS_LOCAIS) << " -  Listar todos locais\n";
-    std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_LOCAL) << " -  Voltar para o menu principal\n";
-    std::cout << "-----------------------------\n";
+    while (true) {
 
-    std::cin >> entrada;
+        std::cout << "\n----- MENU LOCAL -----\n";
+        std::cout << static_cast<char>(CRIAR_LOCAL) << " -  Criar local\n";
+        std::cout << static_cast<char>(EXCLUIR_LOCAL) << " -  Excluir local\n";
+        std::cout << static_cast<char>(LISTAR_TODOS_LOCAIS) << " -  Listar todos locais\n";
+        std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_LOCAL) << " -  Voltar para o menu principal\n";
+        std::cout << "-----------------------------\n";
 
-    if (entrada.length() != 1) {
-        exibirMensagemDeErro();
-        menuLocal();
-    }
+        std::cin >> entrada;
 
-    teclaGlobal = entrada[0];
+        if (entrada.length() != 1) {
+            exibirMensagemDeErro();
+            continue;
+        }
 
-    switch (teclaGlobal) {
-        case CRIAR_LOCAL:
-            break;
-        case EXCLUIR_LOCAL:
-            break;
-        case LISTAR_TODOS_LOCAIS:
-            break;
-        case VOLTAR_PARA_O_MENU_PRINCIPAL_LOCAL:
-            menuPrincipal();
-            break;
-        default:
-            break;
+        teclaGlobal = entrada[0];
+
+        switch (teclaGlobal) {
+            case CRIAR_LOCAL:
+                break;
+            case EXCLUIR_LOCAL:
+                break;
+            case LISTAR_TODOS_LOCAIS:
+                break;
+            case VOLTAR_PARA_O_MENU_PRINCIPAL_LOCAL:
+                return;
+            default:
+                exibirMensagemDeErro();
+                break;
+        }
     }
 }
 
@@ -116,34 +118,38 @@ void menuVeiculo() {
     teclaGlobal = '\0';
     std::string entrada;
 
-    std::cout << "\n----- MENU VEICULO -----\n";
-    std::cout << static_cast<char>(CRIAR_VEICULO) << " -  Criar Veiculo\n";
-    std::cout << static_cast<char>(EXCLUIR_VEICULO) << " -  Excluir Veiculo\n";
-    std::cout << static_cast<char>(LISTAR_TODOS_VEICULOS) << " -  Listar todos veiculos\n";
-    std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO) << " -  Voltar para o menu principal\n";
-    std::cout << "-----------------------------\n";
+    while (true) {
 
-    std::cin >> entrada;
+        std::cout << "\n----- MENU VEICULO -----\n";
+        std::cout << static_cast<char>(CRIAR_VEICULO) << " -  Criar Veiculo\n";
+        std::cout << static_cast<char>(EXCLUIR_VEICULO) << " -  Excluir Veiculo\n";
+        std::cout << static_cast<char>(LISTAR_TODOS_VEICULOS) << " -  Listar todos veiculos\n";
+        std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO) << " -  Voltar para o menu principal\n";
+        std::cout << "-----------------------------\n";
 
-    if (entrada.length() != 1) {
-        exibirMensagemDeErro();
-        menuVeiculo();
-    }
+        std::cin >> entrada;
 
-    teclaGlobal = entrada[0];
+        if (entrada.length() != 1) {
+            exibirMensagemDeErro();
+            continue;
+        }
 
-    switch (teclaGlobal) {
-        case CRIAR_VEICULO:
-            break;
-        case EXCLUIR_VEICULO:
-            break;
-        case LISTAR_TODOS_VEICULOS:
-            break;
-        case VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO:
-            menuPrincipal();
-            break;
-        default:
-            break;
+        teclaGlobal = entrada[0];
+
+        switch (teclaGlobal) {
+            case CRIAR_VEICULO:
+                break;
+            case EXCLUIR_VEICULO:
+                break;
+            case LISTAR_TODOS_VEICULOS:
+                break;
+            case VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO:
+                return;
+            default:
+                exibirMensagemDeErro();
+                break;
+        }
+
     }
 }
 
@@ -151,34 +157,38 @@ void menuPedidos() {
     teclaGlobal = '\0';
     std::string entrada;
 
-    std::cout << "\n----- MENU PEDIDOS -----\n";
-    std::cout << static_cast<char>(CRIAR_PEDIDO) << " -  Criar pedido\n";
-    std::cout << static_cast<char>(EXCLUIR_PEDIDO) << " -  Excluir pedido\n";
-    std::cout << static_cast<char>(LISTAR_TODOS_PEDIDOS) << " -  Listar todos pedidos\n";
-    std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_PEDIDOS) << " -  Voltar para o menu principal\n";
-    std::cout << "-----------------------------\n";
+    while (true) {
 
-    std::cin >> entrada;
+        std::cout << "\n----- MENU PEDIDOS -----\n";
+        std::cout << static_cast<char>(CRIAR_PEDIDO) << " -  Criar pedido\n";
+        std::cout << static_cast<char>(EXCLUIR_PEDIDO) << " -  Excluir pedido\n";
+        std::cout << static_cast<char>(LISTAR_TODOS_PEDIDOS) << " -  Listar todos pedidos\n";
+        std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_PEDIDOS) << " -  Voltar para o menu principal\n";
+        std::cout << "-----------------------------\n";
 
-    if (entrada.length() != 1) {
-        exibirMensagemDeErro();
-        menuPedidos();
-    }
+        std::cin >> entrada;
 
-    teclaGlobal = entrada[0];
+        if (entrada.length() != 1) {
+            exibirMensagemDeErro();
+            continue;
+        }
 
-    switch (teclaGlobal) {
-        case CRIAR_PEDIDO:
-            break;
-        case EXCLUIR_PEDIDO:
-            break;
-        case LISTAR_TODOS_PEDIDOS:
-            break;
-        case VOLTAR_PARA_O_MENU_PRINCIPAL_PEDIDOS:
-            menuPrincipal();
-            break;
-        default:
-            break;
+        teclaGlobal = entrada[0];
+
+        switch (teclaGlobal) {
+            case CRIAR_PEDIDO:
+                break;
+            case EXCLUIR_PEDIDO:
+                break;
+            case LISTAR_TODOS_PEDIDOS:
+                break;
+            case VOLTAR_PARA_O_MENU_PRINCIPAL_PEDIDOS:
+                return;
+            default:
+                exibirMensagemDeErro();
+                break;
+        }
+
     }
 }
 
@@ -210,32 +220,36 @@ void menuBanco() {
     teclaGlobal = '\0';
     std::string entrada;
 
-    std::cout << "\n----- MENU BANCO -----\n";
-    std::cout << static_cast<char>(SALVAR_TODOS_DADOS) << " -  Salvar todos dados\n";
-    std::cout << static_cast<char>(RESTAURAR_DADOS_DE_BACKUPS_ANTIGOS) << " -  Restaurar dados de backups antigos\n";
-    std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_BANCO) << " -  Voltar para o menu principal\n";
-    std::cout << "-----------------------------\n";
+    while (true) {
 
-    std::cin >> entrada;
+        std::cout << "\n----- MENU BANCO -----\n";
+        std::cout << static_cast<char>(SALVAR_TODOS_DADOS) << " -  Salvar todos dados\n";
+        std::cout << static_cast<char>(RESTAURAR_DADOS_DE_BACKUPS_ANTIGOS) << " -  Restaurar dados de backups antigos\n";
+        std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_BANCO) << " -  Voltar para o menu principal\n";
+        std::cout << "-----------------------------\n";
 
-    if (entrada.length() != 1) {
-        exibirMensagemDeErro();
-        menuPedidos();
+        std::cin >> entrada;
+
+        if (entrada.length() != 1) {
+            exibirMensagemDeErro();
+            continue;
+        }
+
+        teclaGlobal = entrada[0];
+
+        switch (teclaGlobal) {
+            case SALVAR_TODOS_DADOS:
+                break;
+            case RESTAURAR_DADOS_DE_BACKUPS_ANTIGOS:
+                break;
+            case VOLTAR_PARA_O_MENU_PRINCIPAL_BANCO:
+                return;
+            default:
+                exibirMensagemDeErro();
+                break;
+        }
+
     }
-
-    teclaGlobal = entrada[0];
-
-    switch (teclaGlobal) {
-        case SALVAR_TODOS_DADOS:
-            break;
-        case RESTAURAR_DADOS_DE_BACKUPS_ANTIGOS:
-            break;
-        case VOLTAR_PARA_O_MENU_PRINCIPAL_BANCO:
-            break;
-        default:
-            break;
-    }
-
 }
 
 void exibirBoasVindas() {
