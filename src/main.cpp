@@ -1,15 +1,8 @@
 
 #include <iostream>
+#include "Utils/EnumMenu.h"
 
 char teclaGlobal;
-enum Tecla {
-    TECLA_1 = '1',
-    TECLA_2 = '2',
-    TECLA_3 = '3',
-    TECLA_4 = '4',
-    TECLA_5 = '5',
-    TECLA_6 = '6'
-};
 
 void exibirBoasVindas();
 void exibirDespedida();
@@ -26,6 +19,7 @@ int main() {
     exibirBoasVindas();
     menuPrincipal();
 
+    return 0;
 }
 
 void menuPrincipal() {
@@ -36,18 +30,17 @@ void menuPrincipal() {
 
     while (!sairDoSistema) {
         switch (teclaGlobal) {
-            case TECLA_1:
-
+            case EXIR_MENU_LOCAL:
                 break;
-            case TECLA_2:
+            case EXIBIR_MENU_VEICULO:
                 break;
-            case TECLA_3:
+            case EXIBIR_MENU_PEDIDO:
                 break;
-            case TECLA_4:
+            case EXIBIR_MENU_ROTA:
                 break;
-            case TECLA_5:
+            case EXIBIR_MENU_BANCO:
                 break;
-            case TECLA_6:
+            case FINALIZAR_PROGRAMA:
                 exibirDespedida();
                 sairDoSistema = true;
                 break;
@@ -63,17 +56,13 @@ void menuLocal() {
 
     std::cin >> teclaGlobal;
     switch (teclaGlobal) {
-        case TECLA_1:
+        case CRIAR_LOCAL:
             break;
-        case TECLA_2:
+        case EXCLUIR_LOCAL:
             break;
-        case TECLA_3:
+        case LISTAR_TODOS_LOCAIS:
             break;
-        case TECLA_4:
-            break;
-        case TECLA_5:
-            break;
-        case TECLA_6:
+        case VOLTAR_PARA_O_MENU_PRINCIPAL_LOCAL:
             break;
         default:
             break;
@@ -85,17 +74,13 @@ void menuVeiculo() {
 
     std::cin >> teclaGlobal;
     switch (teclaGlobal) {
-        case TECLA_1:
+        case CRIAR_VEICULO:
             break;
-        case TECLA_2:
+        case EXCLUIR_VEICULO:
             break;
-        case TECLA_3:
+        case LISTAR_TODOS_VEICULOS:
             break;
-        case TECLA_4:
-            break;
-        case TECLA_5:
-            break;
-        case TECLA_6:
+        case VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO:
             break;
         default:
             break;
@@ -107,42 +92,40 @@ void menuPedidos() {
 
     std::cin >> teclaGlobal;
     switch (teclaGlobal) {
-        case TECLA_1:
+        case CRIAR_PEDIDO:
             break;
-        case TECLA_2:
+        case EXIBIR_PEDIDO:
             break;
-        case TECLA_3:
+        case LISTAR_TODOS_PEDIDOS:
             break;
-        case TECLA_4:
-            break;
-        case TECLA_5:
-            break;
-        case TECLA_6:
+        case VOLTAR_PARA_O_MENU_PRINCIPAL_PEDIDOS:
             break;
         default:
             break;
     }
 }
 
-void menuRota() {
 
-    std::cin >> teclaGlobal;
-    switch (teclaGlobal) {
-        case TECLA_1:
-            break;
-        case TECLA_2:
-            break;
-        case TECLA_3:
-            break;
-        case TECLA_4:
-            break;
-        case TECLA_5:
-            break;
-        case TECLA_6:
-            break;
-        default:
-            break;
-    }
+// Falta pensar sobre essa implementação
+void menuRota() {
+    //
+    // std::cin >> teclaGlobal;
+    // switch (teclaGlobal) {
+    //     case TECLA_1:
+    //         break;
+    //     case TECLA_2:
+    //         break;
+    //     case TECLA_3:
+    //         break;
+    //     case TECLA_4:
+    //         break;
+    //     case TECLA_5:
+    //         break;
+    //     case TECLA_6:
+    //         break;
+    //     default:
+    //         break;
+    // }
 
 }
 
@@ -150,17 +133,11 @@ void menuBanco() {
 
     std::cin >> teclaGlobal;
     switch (teclaGlobal) {
-        case TECLA_1:
+        case SALVAR_TODOS_DADOS:
             break;
-        case TECLA_2:
+        case RESTAURAR_DADOS_DE_BACKUPS_ANTIGOS:
             break;
-        case TECLA_3:
-            break;
-        case TECLA_4:
-            break;
-        case TECLA_5:
-            break;
-        case TECLA_6:
+        case VOLTAR_PARA_O_MENU_PRINCIPAL_BANCO:
             break;
         default:
             break;
