@@ -76,10 +76,12 @@ Operações do serviço {
 ```
 .
 ├── src
+│   ├──Utils
+│   │ ├──EnumMenu.h
 │   ├──Storage --> Aqui vão ser armazenado os arquivos bin
-│   ├── pedidos.bin
-│   ├── locais.bin
-│   └── veiculos.bin
+│   │ ├──pedidos.bin
+│   │ ├──locais.bin
+│   │ └──veiculos.bin
 │   ├──Controller --> Camada para a requisição e resposta para o usuário camada mais externa
 │   │   ├──PedidoController.cpp
 │   │   ├──LocalController.cpp
