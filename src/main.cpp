@@ -138,6 +138,7 @@ void menuVeiculo() {
 
         switch (teclaGlobal) {
             case CRIAR_VEICULO:
+
                 break;
             case EXCLUIR_VEICULO:
                 break;

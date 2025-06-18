@@ -21,4 +21,8 @@ add_executable(Sistema_de_Logistica_de_Entrega_de_Mercadorias src/main.cpp
         src/Test/Controller/VeiculoControllerTest.cpp
         src/Test/Service/LocalServiceTest.cpp
         src/Test/Service/PedidoServiceTest.cpp
-        src/Test/Service/VeiculoServiceTest.cpp)
+        src/Test/Service/VeiculoServiceTest.cpp
+        src/Controller/LocalController.h
+        src/Controller/PedidoController.h
+        src/Controller/RotaController.h
+        src/Controller/VeiculoController.h)
