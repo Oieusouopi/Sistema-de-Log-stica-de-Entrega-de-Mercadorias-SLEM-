@@ -93,14 +93,21 @@ Operações do serviço {
 │   │ ├──locais.bin
 │   │ └──veiculos.bin
 │   ├──Controller --> Camada para a requisição e resposta para o usuário camada mais externa
-│   │   ├──PedidoController.cpp
+│   │   ├──PedidoController.cpp --> Implementação
+│   │   ├──PedidoController.h --> Declaração
 │   │   ├──LocalController.cpp
+│   │   ├──LocalController.h
 │   │   ├──VeiculoController.cpp
+│   │   ├──VeiculoController.h
 │   │   └──RotaController.cpp
+│   │   ├──RotaController.h
 │   ├── Service --> Criação das tabelas
-│   │   ├──PedidoService.cpp
+│   │   ├──PedidoService.cpp --> Implementação
+│   │   ├──PedidoService.h --> Declaração
 │   │   ├──LocalService.cpp
+│   │   ├──LocalService.h
 │   │   ├──VeiculoService.cpp
+│   │   ├──VeiculoService.h
 │   │   └──RotaService.cpp 
 │   ├── Model --> Camada de como deve ser as entidades
 │   │   ├──Pedido.h Classe Pedido
