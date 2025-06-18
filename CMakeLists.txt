@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.31)
+project(Sistema_de_Logistica_de_Entrega_de_Mercadorias)
+
+set(CMAKE_CXX_STANDARD 26)
+
+add_executable(Sistema_de_Logistica_de_Entrega_de_Mercadorias main.cpp)
