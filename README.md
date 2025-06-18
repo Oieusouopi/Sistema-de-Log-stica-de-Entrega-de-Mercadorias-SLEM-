@@ -94,7 +94,7 @@ Operações do serviço {
 │   │   ├──Pedido.h Classe Pedido
 │   │   ├──Local.h --> Classe Local
 │   │   ├──Veiculo.h --> classe Veiculo
-│   └──main.cpp --> Arquivo onde começa a aplicação para starta em que porta estará
+│   └──main.cpp --> Arquivo onde começa a aplicação pode ser somente a lógica do menu
 └──README.MD
 ```
   
