@@ -2,8 +2,6 @@
 #include <iostream>
 #include "Utils/EnumMenu.h"
 
-char teclaGlobal;
-
 void exibirBoasVindas();
 void exibirDespedida();
 
@@ -13,6 +11,11 @@ void menuLocal();
 void menuVeiculo();
 void menuPedidos();
 void menuRota();
+void menuBanco();
+
+void exibirMensagemDeErro();
+
+char teclaGlobal;
 
 int main() {
 
@@ -24,6 +27,7 @@ int main() {
 
 void menuPrincipal() {
     teclaGlobal = '\0';
+    std::string entrada;
     bool sairDoSistema = false;
 
     while (!sairDoSistema) {
@@ -36,7 +40,14 @@ void menuPrincipal() {
         std::cout << static_cast<char>(FINALIZAR_PROGRAMA) << " -  Finalizar o programa\n";
         std::cout << "-----------------------------\n";
 
-        std::cin >> teclaGlobal;
+        std::cin >> entrada;
+
+        if (entrada.length() != 1) {
+            exibirMensagemDeErro();
+            continue;
+        }
+
+        teclaGlobal = entrada[0];
 
         switch (teclaGlobal) {
             case EXIBIR_MENU_LOCAL:
@@ -49,14 +60,17 @@ void menuPrincipal() {
                 menuPedidos();
                 break;
             case EXIBIR_MENU_ROTA:
+                menuRota();
                 break;
             case EXIBIR_MENU_BANCO:
+                menuBanco();
                 break;
             case FINALIZAR_PROGRAMA:
                 exibirDespedida();
-                sairDoSistema = true;
+                exit(1);
                 break;
             default:
+                exibirMensagemDeErro();
                 break;
         }
     }
@@ -65,8 +79,24 @@ void menuPrincipal() {
 
 void menuLocal() {
     teclaGlobal = '\0';
+    std::string entrada;
 
-    std::cin >> teclaGlobal;
+    std::cout << "\n----- MENU LOCAL -----\n";
+    std::cout << static_cast<char>(CRIAR_LOCAL) << " -  Criar local\n";
+    std::cout << static_cast<char>(EXCLUIR_LOCAL) << " -  Excluir local\n";
+    std::cout << static_cast<char>(LISTAR_TODOS_LOCAIS) << " -  Listar todos locais\n";
+    std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_LOCAL) << " -  Voltar para o menu principal\n";
+    std::cout << "-----------------------------\n";
+
+    std::cin >> entrada;
+
+    if (entrada.length() != 1) {
+        exibirMensagemDeErro();
+        menuLocal();
+    }
+
+    teclaGlobal = entrada[0];
+
     switch (teclaGlobal) {
         case CRIAR_LOCAL:
             break;
@@ -75,6 +105,7 @@ void menuLocal() {
         case LISTAR_TODOS_LOCAIS:
             break;
         case VOLTAR_PARA_O_MENU_PRINCIPAL_LOCAL:
+            menuPrincipal();
             break;
         default:
             break;
@@ -83,8 +114,24 @@ void menuLocal() {
 
 void menuVeiculo() {
     teclaGlobal = '\0';
+    std::string entrada;
 
-    std::cin >> teclaGlobal;
+    std::cout << "\n----- MENU VEICULO -----\n";
+    std::cout << static_cast<char>(CRIAR_VEICULO) << " -  Criar Veiculo\n";
+    std::cout << static_cast<char>(EXCLUIR_VEICULO) << " -  Excluir Veiculo\n";
+    std::cout << static_cast<char>(LISTAR_TODOS_VEICULOS) << " -  Listar todos veiculos\n";
+    std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO) << " -  Voltar para o menu principal\n";
+    std::cout << "-----------------------------\n";
+
+    std::cin >> entrada;
+
+    if (entrada.length() != 1) {
+        exibirMensagemDeErro();
+        menuVeiculo();
+    }
+
+    teclaGlobal = entrada[0];
+
     switch (teclaGlobal) {
         case CRIAR_VEICULO:
             break;
@@ -93,6 +140,7 @@ void menuVeiculo() {
         case LISTAR_TODOS_VEICULOS:
             break;
         case VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO:
+            menuPrincipal();
             break;
         default:
             break;
@@ -101,16 +149,33 @@ void menuVeiculo() {
 
 void menuPedidos() {
     teclaGlobal = '\0';
+    std::string entrada;
 
-    std::cin >> teclaGlobal;
+    std::cout << "\n----- MENU PEDIDOS -----\n";
+    std::cout << static_cast<char>(CRIAR_PEDIDO) << " -  Criar pedido\n";
+    std::cout << static_cast<char>(EXCLUIR_PEDIDO) << " -  Excluir pedido\n";
+    std::cout << static_cast<char>(LISTAR_TODOS_PEDIDOS) << " -  Listar todos pedidos\n";
+    std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_PEDIDOS) << " -  Voltar para o menu principal\n";
+    std::cout << "-----------------------------\n";
+
+    std::cin >> entrada;
+
+    if (entrada.length() != 1) {
+        exibirMensagemDeErro();
+        menuPedidos();
+    }
+
+    teclaGlobal = entrada[0];
+
     switch (teclaGlobal) {
         case CRIAR_PEDIDO:
             break;
-        case EXIBIR_PEDIDO:
+        case EXCLUIR_PEDIDO:
             break;
         case LISTAR_TODOS_PEDIDOS:
             break;
         case VOLTAR_PARA_O_MENU_PRINCIPAL_PEDIDOS:
+            menuPrincipal();
             break;
         default:
             break;
@@ -142,8 +207,24 @@ void menuRota() {
 }
 
 void menuBanco() {
+    teclaGlobal = '\0';
+    std::string entrada;
 
-    std::cin >> teclaGlobal;
+    std::cout << "\n----- MENU BANCO -----\n";
+    std::cout << static_cast<char>(SALVAR_TODOS_DADOS) << " -  Salvar todos dados\n";
+    std::cout << static_cast<char>(RESTAURAR_DADOS_DE_BACKUPS_ANTIGOS) << " -  Restaurar dados de backups antigos\n";
+    std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_BANCO) << " -  Voltar para o menu principal\n";
+    std::cout << "-----------------------------\n";
+
+    std::cin >> entrada;
+
+    if (entrada.length() != 1) {
+        exibirMensagemDeErro();
+        menuPedidos();
+    }
+
+    teclaGlobal = entrada[0];
+
     switch (teclaGlobal) {
         case SALVAR_TODOS_DADOS:
             break;
@@ -157,8 +238,7 @@ void menuBanco() {
 
 }
 
-void exibirBoasVindas()
-{
+void exibirBoasVindas() {
     std::string linha(100, '-'); // Linha com 100 hifens
 
     std::cout << linha << std::endl;
@@ -171,8 +251,7 @@ void exibirBoasVindas()
     std::cout << std::endl;
 }
 
-void exibirDespedida()
-{
+void exibirDespedida() {
     std::string linha(100, '-');
 
     std::cout << linha << std::endl;
@@ -182,4 +261,14 @@ void exibirDespedida()
     std::cout << "Esperamos ter ajudado no gerenciamento de suas entregas.\n";
     std::cout << "Volte sempre que precisar. Até a próxima!" << std::endl;
     std::cout << std::endl;
+}
+
+void exibirMensagemDeErro() {
+
+    std::string linha(30, '-');
+
+    std::cout << linha << std::endl;
+    std::cout << std::string(5, ' ') << "Essa tecla não existe" << std::endl;
+    std::cout << linha << std::endl;
+
 }
