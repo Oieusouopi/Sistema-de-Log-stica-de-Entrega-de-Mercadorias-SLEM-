@@ -76,8 +76,18 @@ Operações do serviço {
 ```
 .
 ├── src
+│   ├──Tests
+│   │   ├──Service
+│   │   │  ├──PedidoServiceTest.cpp
+│   │   │  ├──LocalServiceTest.cpp
+│   │   │  ├──VeiculoServiceTest.cpp
+│   │   │  └──RotaServiceTest.cpp
+│   │   ├──Controller
+│   │   │   ├──PedidoControllerTest.cpp
+│   │   │   ├──LocalControllerTest.cpp
+│   │   │   └──RotaControllerTest.cpp
 │   ├──Utils
-│   │ ├──EnumMenu.h
+│   │ └──EnumMenu.h
 │   ├──Storage --> Aqui vão ser armazenado os arquivos bin
 │   │ ├──pedidos.bin
 │   │ ├──locais.bin
@@ -86,16 +96,16 @@ Operações do serviço {
 │   │   ├──PedidoController.cpp
 │   │   ├──LocalController.cpp
 │   │   ├──VeiculoController.cpp
-│   │   ├──RotaController.cpp
+│   │   └──RotaController.cpp
 │   ├── Service --> Criação das tabelas
 │   │   ├──PedidoService.cpp
 │   │   ├──LocalService.cpp
 │   │   ├──VeiculoService.cpp
-│   │   ├── RotaService.cpp 
+│   │   └──RotaService.cpp 
 │   ├── Model --> Camada de como deve ser as entidades
 │   │   ├──Pedido.h Classe Pedido
 │   │   ├──Local.h --> Classe Local
-│   │   ├──Veiculo.h --> classe Veiculo
+│   │   └──Veiculo.h --> classe Veiculo
 │   └──main.cpp --> Arquivo onde começa a aplicação pode ser somente a lógica do menu
 └──README.MD
 ```
