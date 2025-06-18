@@ -98,3 +98,6 @@ Operações do serviço {
 └──README.MD
 ```
   
+## Fluxo
+
+![fluxo projeto](./fluxo_aeds_trabalho.png)<br/>
