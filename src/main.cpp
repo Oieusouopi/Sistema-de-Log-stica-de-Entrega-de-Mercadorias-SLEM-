@@ -26,15 +26,27 @@ void menuPrincipal() {
     teclaGlobal = '\0';
     bool sairDoSistema = false;
 
-    std::cin >> teclaGlobal;
-
     while (!sairDoSistema) {
+        std::cout << "\n--- MENU PRINCIPAL ---\n";
+        std::cout << static_cast<char>(EXIBIR_MENU_LOCAL) << " -  Ir para o menu local\n";
+        std::cout << static_cast<char>(EXIBIR_MENU_VEICULO) << " -  Ir para o menu veiculo\n";
+        std::cout << static_cast<char>(EXIBIR_MENU_PEDIDO) << " -  Ir para o menu pedido\n";
+        std::cout << static_cast<char>(EXIBIR_MENU_ROTA) << " -  Ir para o menu pedido\n";
+        std::cout << static_cast<char>(EXIBIR_MENU_BANCO) << " -  Ir para o menu pedido\n";
+        std::cout << static_cast<char>(FINALIZAR_PROGRAMA) << " -  Ir para o menu pedido\n";
+        std::cout << "------------------------\n";
+        
+        std::cin >> teclaGlobal;
+
         switch (teclaGlobal) {
-            case EXIR_MENU_LOCAL:
+            case EXIBIR_MENU_LOCAL:
+                menuLocal();
                 break;
             case EXIBIR_MENU_VEICULO:
+                menuVeiculo();
                 break;
             case EXIBIR_MENU_PEDIDO:
+                menuPedidos();
                 break;
             case EXIBIR_MENU_ROTA:
                 break;
