@@ -15,4 +15,10 @@ add_executable(Sistema_de_Logistica_de_Entrega_de_Mercadorias src/main.cpp
         src/Controller/VeiculoController.cpp
         src/Controller/RotaController.cpp
         src/Service/RotaService.cpp
-        src/Utils/EnumMenu.h)
+        src/Utils/EnumMenu.h
+        src/Test/Controller/LocalControllerTest.cpp
+        src/Test/Controller/PedidoControllerTest.cpp
+        src/Test/Controller/VeiculoControllerTest.cpp
+        src/Test/Service/LocalServiceTest.cpp
+        src/Test/Service/PedidoServiceTest.cpp
+        src/Test/Service/VeiculoServiceTest.cpp)
