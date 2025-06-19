@@ -5,4 +5,8 @@
 #ifndef VEICULO_H
 #define VEICULO_H
 
+class Veiculo {
+
+};
+
 #endif //VEICULO_H

@@ -5,5 +5,8 @@
 #ifndef LOCAL_H
 #define LOCAL_H
 
+class Local {
+
+};
 
 #endif //LOCAL_H
