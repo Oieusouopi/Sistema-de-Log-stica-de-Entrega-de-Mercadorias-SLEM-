@@ -18,23 +18,8 @@ int main() {
     return 0;
 }
 
-
-
-void menuLocal() {
-
-}
-
-void menuVeiculo() {
-
-}
-
-void menuPedidos() {
-
-}
-
-
 // Falta pensar sobre essa implementação
-void menuRota() {
+// void menuRota() {
     //
     // std::cin >> teclaGlobal;
     // switch (teclaGlobal) {
