@@ -6,7 +6,11 @@
 #define PEDIDOCONTROLLER_H
 
 class PedidoController {
-
+    public:
+        static void criar();
+        static void listar();
+        static void excluir();
+        static void update(int id);
 };
 
 #endif //PEDIDOCONTROLLER_H

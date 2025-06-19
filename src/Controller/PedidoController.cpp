@@ -1,14 +1,15 @@
 //
 // Created by eec on 18/06/25.
 //
-void criar() {
+#include "PedidoController.h"
+void PedidoController::criar() {
 
 }
 
-void excluir() {
+void PedidoController::excluir() {
 
 }
 
-void listar() {
+void PedidoController::listar() {
 
 }
