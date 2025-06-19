@@ -5,4 +5,8 @@
 #ifndef ROTASERVICE_H
 #define ROTASERVICE_H
 
+class RotaService {
+
+};
+
 #endif //ROTASERVICE_H

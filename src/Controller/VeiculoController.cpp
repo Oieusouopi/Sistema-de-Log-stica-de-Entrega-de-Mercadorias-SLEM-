@@ -12,15 +12,15 @@ void VeiculoController::listar() {
 
 }
 
-void VeiculoController::excluir(std::string placa) {
+void VeiculoController::excluir() {
 
 }
 
-void VeiculoController::updateLocalAtual(std::string placa, Local local) {
+void VeiculoController::updateLocalAtual() {
 
 }
 
-void VeiculoController::updateStatus(std::string placa, bool status) {
+void VeiculoController::updateStatus() {
 
 }
 

@@ -1,14 +1,16 @@
+#include "LocalService.h"
 //
 // Created by eec on 18/06/25.
 //
-void criar() {
+void LocalService::criar() {
 
 }
 
-void excluir() {
+void LocalService::listar() {
 
 }
 
-void listar() {
+void LocalService::excluir(std::string nome) {
 
 }
+

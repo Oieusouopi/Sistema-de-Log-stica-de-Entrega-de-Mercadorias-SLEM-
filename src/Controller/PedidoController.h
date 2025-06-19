@@ -10,7 +10,7 @@ class PedidoController {
         static void criar();
         static void listar();
         static void excluir();
-        static void update(int id);
+        static void update();
 };
 
 #endif //PEDIDOCONTROLLER_H
