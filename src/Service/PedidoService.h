@@ -5,13 +5,19 @@
 #ifndef PEDIDOSERVICE_H
 #define PEDIDOSERVICE_H
 #include <string>
+#include <vector>
+
+#include "../Model/Pedido.h"
 
 class PedidoService {
+
     public:
-        static void criar();
-        static void listar();
-        static void update(int id);
-        static void excluir(int id);
+        void criar(const Pedido& pedido);
+        std::vector<Pedido> listar();
+        void update(int id);
+        void excluir(int id);
+    private:
+        std::vector<Pedido> pedidos;
 };
 
 #endif //PEDIDOSERVICE_H

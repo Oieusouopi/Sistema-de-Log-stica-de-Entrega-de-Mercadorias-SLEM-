@@ -4,16 +4,21 @@
 
 #ifndef VEICULOSERVICE_H
 #define VEICULOSERVICE_H
+#include <vector>
+
+#include "../Model/Veiculo.h"
 
 class VeiculoService {
 
     public:
-        static void criar();
-        static void listar();
-        static void excluir(std::string placa);
-        static void updateStatus(std::string placa, bool status);
-        static void updateLocalAtual(std::string placa, Local local);
+        void criar(Veiculo& veiculo);
+        std::vector<Veiculo> listar();
+        void excluir(std::string placa);
+        void updateStatus(std::string placa, bool status);
+        void updateLocalAtual(std::string placa, Local local);
 
+    private:
+        std::vector<Veiculo> veiculos;
 };
 
 #endif //VEICULOSERVICE_H
