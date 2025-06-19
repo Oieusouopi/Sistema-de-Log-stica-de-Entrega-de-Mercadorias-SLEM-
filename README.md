@@ -73,6 +73,14 @@ Operações do serviço {
 ## Arquietura
  Vamos desenvolver uma arquitetura MSC (Model, Service, Controller)
 
+### Explicação dessa arquitetura:
+  Essa arquitetura e feito por camadas (Controller,Service,Model) onde cada camada tem suas responsabilidades o que torna o desenvolvimento mais granular, maior facilidade na manutenibilidade pois alterar uma camada raramente altera a outra, testabilidade, reutilização do código (Services podem ser reutilizados em outros Services o que evita a duplicação da lógica). 
+  
+  O que cada camada faz:
+    Model: Gerencia dados e regras de negocio (Seria a camada mais interna mais proxima das entidades e do dado real)
+    Service: Gerencia a lógica,negocios e operações na aplicação (Seria a camada que faz a comunicação entre as duas a Controller e a Model)
+    Controller: Gerencia as requisições feitas pelo usuário (Seria a camada mais externa mais próxima do usuário)
+
 ```
 .
 ├── src
