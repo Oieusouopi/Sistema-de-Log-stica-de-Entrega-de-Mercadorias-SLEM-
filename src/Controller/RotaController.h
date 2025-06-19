@@ -5,4 +5,8 @@
 #ifndef ROTACONTROLLER_H
 #define ROTACONTROLLER_H
 
+class RotaController {
+
+};
+
 #endif //ROTACONTROLLER_H

@@ -5,4 +5,8 @@
 #ifndef PEDIDOCONTROLLER_H
 #define PEDIDOCONTROLLER_H
 
+class PedidoController {
+
+};
+
 #endif //PEDIDOCONTROLLER_H

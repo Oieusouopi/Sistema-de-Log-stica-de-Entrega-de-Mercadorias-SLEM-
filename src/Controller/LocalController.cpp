@@ -1,14 +1,16 @@
 //
 // Created by eec on 18/06/25.
 //
-void criar() {
+#include "LocalController.h"
+
+void LocalController::criar() {
 
 }
 
-void excluir() {
+void LocalController::excluir() {
 
 }
 
-void listar() {
+void LocalController::listar() {
 
 }
