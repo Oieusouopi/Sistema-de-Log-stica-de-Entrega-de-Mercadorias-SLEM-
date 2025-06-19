@@ -4,8 +4,10 @@
 
 #ifndef VEICULOSERVICE_H
 #define VEICULOSERVICE_H
+#include <string>
 #include <vector>
 
+#include "../Model/Local.h"
 #include "../Model/Veiculo.h"
 
 class VeiculoService {

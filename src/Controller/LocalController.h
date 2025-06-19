@@ -4,12 +4,18 @@
 
 #ifndef LOCALCONTROLLER_H
 #define LOCALCONTROLLER_H
+#include "../Service/LocalService.h"
 
 class LocalController {
     public:
-        static void criar();
-        static void listar();
-        static void excluir();
+        LocalController(LocalService& localService);
+        void criar();
+        void listar();
+        void excluir();
+        void menu();
+
+    private:
+        LocalService& localService;
 };
 
 #endif //LOCALCONTROLLER_H

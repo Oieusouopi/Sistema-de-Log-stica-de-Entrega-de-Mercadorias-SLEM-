@@ -8,17 +8,16 @@
 #include <vector>
 
 #include "../Model/Local.h"
-#include "../Model/Veiculo.h"
 
 class LocalService {
 
     public:
         void criar(const Local& local);
-        std::vector<Veiculo> listar();
+        std::vector<Local> listar();
         void excluir(std::string nome);
 
     private:
-        std::vector<Veiculo> veiculos;
+        std::vector<Local> locais;
 };
 
 

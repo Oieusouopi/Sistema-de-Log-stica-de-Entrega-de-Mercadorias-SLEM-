@@ -29,4 +29,8 @@ add_executable(Sistema_de_Logistica_de_Entrega_de_Mercadorias src/main.cpp
         src/Service/LocalService.h
         src/Service/PedidoService.h
         src/Service/RotaService.h
-        src/Service/VeiculoService.h)
+        src/Service/VeiculoService.h
+        src/App.cpp
+        src/App.h
+        src/Utils/ExibirMensagem.cpp
+        src/Utils/ExibirMensagem.h)

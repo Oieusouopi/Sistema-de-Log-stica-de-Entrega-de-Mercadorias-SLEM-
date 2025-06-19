@@ -2,11 +2,11 @@
 //
 // Created by eec on 18/06/25.
 //
-void PedidoService::criar() {
+void PedidoService::criar(const Pedido& pedido) {
 
 }
 
-void PedidoService::listar() {
+std::vector<Pedido> PedidoService::listar() {
 
 }
 

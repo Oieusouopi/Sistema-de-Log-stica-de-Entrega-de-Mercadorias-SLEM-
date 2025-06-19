@@ -4,17 +4,23 @@
 #include <string>
 
 #include "../Model/Local.h"
+#include "../Service/VeiculoService.h"
 
 #ifndef VEICULOCONTROLLER_H
 #define VEICULOCONTROLLER_H
 
 class VeiculoController {
+
     public:
-        static void criar();
-        static void listar();
-        static void excluir();
-        static void updateStatus();
-        static void updateLocalAtual();
+        VeiculoController(VeiculoService &veiculoService);
+        void criar();
+        void listar();
+        void excluir();
+        void updateStatus();
+        void updateLocalAtual();
+        void menu();
+    private:
+        VeiculoService& veiculoService;
 
 };
 

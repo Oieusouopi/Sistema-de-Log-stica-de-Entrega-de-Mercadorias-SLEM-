@@ -2,11 +2,11 @@
 //
 // Created by eec on 18/06/25.
 //
-void LocalService::criar() {
+void LocalService::criar(const Local& local) {
 
 }
 
-void LocalService::listar() {
+std::vector<Local> LocalService::listar() {
 
 }
 

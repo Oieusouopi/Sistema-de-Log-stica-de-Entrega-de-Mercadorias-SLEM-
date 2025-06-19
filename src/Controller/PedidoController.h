@@ -4,13 +4,19 @@
 
 #ifndef PEDIDOCONTROLLER_H
 #define PEDIDOCONTROLLER_H
+#include "../Service/PedidoService.h"
 
 class PedidoController {
     public:
-        static void criar();
-        static void listar();
-        static void excluir();
-        static void update();
+        PedidoController(PedidoService& pedidoService);
+        void criar();
+        void listar();
+        void excluir();
+        void update();
+        void menu();
+
+    private:
+        PedidoService& pedidoService;
 };
 
 #endif //PEDIDOCONTROLLER_H
