@@ -27,6 +27,7 @@ public:
 
     void setX(float x) { cord_x = x; }
     void setY(float y) { cord_y = y; }
+    void setEndereco(char end[]) { strcpy(endereco, end); }
 
 
     float getX() const { return cord_x; }
