@@ -6,7 +6,7 @@
 #define VEICULO_H
 
 class Veiculo {
-
+    char placa[7];
 };
 
 #endif //VEICULO_H
