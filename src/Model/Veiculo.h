@@ -4,8 +4,18 @@
 
 #ifndef VEICULO_H
 #define VEICULO_H
+#include <string.h>
+
+#include "../Utils/EnumUtils.h"
 
 class Veiculo {
+public:
+    Veiculo(std::string placa, std::string modelo, Local localAtual):placa(placa), modelo(modelo), status(PENDENTE),  localAtual(localAtual) {}
+
+    std::string placa;
+    std::string modelo;
+    EnumStatusVeiculo status;
+    Local localAtual;
 
 };
 

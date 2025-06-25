@@ -11,16 +11,19 @@
 
 class VeiculoController {
 
-    public:
-        VeiculoController(VeiculoService &veiculoService);
-        void criar();
-        void listar();
-        void excluir();
-        void updateStatus();
-        void updateLocalAtual();
-        void menu();
-    private:
-        VeiculoService& veiculoService;
+public:
+    VeiculoController(VeiculoService &veiculoService);
+    void criar();
+    void listar();
+    void excluir();
+    void updateStatus();
+    void updateLocalAtual();
+    void menu();
+
+private:
+    VeiculoService& veiculoService;
+    Local selecionarLocal();
+
 
 };
 

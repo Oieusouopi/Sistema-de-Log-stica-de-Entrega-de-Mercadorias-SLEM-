@@ -39,7 +39,7 @@ int main() {
     //         break;
     // }
 
-
+// }
 
 // void menuBanco() {
 //     char teclaGlobal = '\0';
