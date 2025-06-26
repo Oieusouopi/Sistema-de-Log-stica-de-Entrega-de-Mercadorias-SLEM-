@@ -71,7 +71,8 @@ void VeiculoController::criar() {
 
     std::string modelo;
 
-    std::cin >> modelo;
+    std::cin.ignore();
+    getline(std::cin, modelo);
 
     // Vai ser trocado pelo metodo se selecionar um local do localService
     Local localSelecionado = selecionarLocal();
@@ -82,7 +83,7 @@ void VeiculoController::criar() {
 
     switch (resultado) {
         case SUCESSO:
-            std::cout << "Veiculo criado com sucesso";
+            std::cout << "Veiculo criado com sucesso" << std::endl;
             break;
         default:
             std::cout << "Veiculo não criado aconteceu algum erro inesperado" << std::endl;
