@@ -105,7 +105,7 @@ Local VeiculoController::selecionarLocal() {
 
     std::cout << "Selecione o local atual do veículo: " << std::endl;
     for (int i = 1; i < locaisDisponiveis.size(); i++) {
-        std::cout << i << " - " << locaisDisponiveis[i].nome << std::endl;
+        std::cout << i << " - " << locaisDisponiveis[i].getEndereco() << std::endl;
     }
 
     int opcao = 0;
@@ -114,7 +114,7 @@ Local VeiculoController::selecionarLocal() {
         std::cin >> opcao;
 
         if (std::cin.fail() || opcao < 1 || opcao > locaisDisponiveis.size()) {
-            std::cin.clear(); // limpa o erro
+            std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Opção inválida. Tente novamente." << std::endl;
         } else {

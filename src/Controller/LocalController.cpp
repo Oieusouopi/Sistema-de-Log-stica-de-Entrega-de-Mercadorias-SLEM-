@@ -12,34 +12,6 @@
 LocalController::LocalController(LocalService &localService): localService(localService) {
 }
 
-class local{
-private:
-    float cord_x;
-    float cord_y;
-    char endereco[100];
-
-public:
-    local(float x, float y, const char end[]) {
-        cord_x = x;
-        cord_y = y;
-        strcpy(endereco, end);
-    }
-
-    void setX(float x) { cord_x = x; }
-    void setY(float y) { cord_y = y; }
-    void setEndereco(char end[]) { strcpy(endereco, end); }
-
-
-    float getX() const { return cord_x; }
-    float getY() const { return cord_y; }
-    const char* getEndereco() const { return endereco; }
-
-    void mostrar() const {
-        std::cout << "Endereço: " << endereco
-                  << "\nCoordenadas: (" << cord_x << ", " << cord_y << ")\n";
-    }
-};
-
 void LocalController::menu() {
     char teclaGlobal = '\0';
     std::string entrada;
