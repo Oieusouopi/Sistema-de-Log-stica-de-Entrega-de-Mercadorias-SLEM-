@@ -6,6 +6,9 @@
 #define LOCAL_H
 
 class Local {
+public:
+    Local(std::string nome): nome(nome) {}
+    std::string nome;
 
 };
 

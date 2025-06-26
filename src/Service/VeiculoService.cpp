@@ -5,8 +5,8 @@
 //
 // Created by eec on 18/06/25.
 //
-void VeiculoService::criar(Veiculo &veiculo) {
-
+EnumResultadoCriacaoVeiculo VeiculoService::criar(Veiculo &veiculo) {
+    return SUCESSO;
 }
 
 void VeiculoService::excluir(std::string placa) {
