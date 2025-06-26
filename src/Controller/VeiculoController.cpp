@@ -135,11 +135,55 @@ void VeiculoController::excluir() {
 }
 
 void VeiculoController::updateLocalAtual() {
+    std:: string placa;
+    std:: string nomeLocal;
+    int x, y;
+
+    std::cout << "Digite a placa do veículo: ";
+    std::cin >> placa;
+
+    std::cout << "Digite o nome do novo local: ";
+    std::cin.ignore();
+    getline(std::cin, nomeLocal);
+
+    std::cout << "Digite a coordenada X: ";
+    std::cin >> x;
+
+    std::cout << "Digite a coordenada Y: ";
+    std::cin >> y;
+
+    Local novoLocal;
+    novoLocal.nome = nomeLocal;
+    novoLocal.x = x;
+    novoLocal.y = y;
+
+    veiculoService.updateLocalAtual(placa, novoLocal);
+    std::cout << "Local atual do veículo atualizado com sucesso!" << endl;
 
 }
 
 void VeiculoController::updateStatus() {
+    std::string placa;
+    int opcao;
+    bool status;
 
+    std::cout << "Digite a placa do veículo: ";
+    std::cin >> placa;
+
+    std::cout << "Digite o novo status (1 - Disponível, 0 - Ocupado): ";
+    std::cin >> opcao;
+
+    if (opcao == 1)
+        status = true;
+    else if (opcao == 0)
+        status = false;
+    else {
+        std::cout << "Opção inválida." << std::endl;
+        return;
+    }
+
+    veiculoService.updateStatus(placa, status);
+    std::cout << "Status atualizado com sucesso!" << endl;
 }
 
 
