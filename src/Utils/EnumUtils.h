@@ -1,5 +1,4 @@
 //
-// Created by rafas on 24/06/2025.
 //
 
 #ifndef ENUMUTILS_H

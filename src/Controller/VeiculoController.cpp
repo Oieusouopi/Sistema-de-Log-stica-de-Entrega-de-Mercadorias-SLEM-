@@ -4,6 +4,7 @@
 
 #include "VeiculoController.h"
 
+#include <iomanip>
 #include <iostream>
 #include <limits>
 
@@ -41,6 +42,7 @@ void VeiculoController::menu() {
             case EXCLUIR_VEICULO:
                 break;
             case LISTAR_TODOS_VEICULOS:
+                listar();
                 break;
             case VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO:
                 return;
@@ -128,6 +130,20 @@ Local VeiculoController::selecionarLocal() {
 
 
 void VeiculoController::listar() {
+
+    std::cout << "\n-------------------------- LISTA DE VEÍCULOS --------------------------\n";
+
+    std::cout << std::left
+              << std::setw(10) << "PLACA"
+              << std::setw(20) << "MODELO"
+              << std::setw(12) << "STATUS"
+              << std::setw(30) << "LOCAL"  << "\n";
+
+    std::cout << std::string(72, '-') << '\n';
+
+    // std::vector<Veiculo> veiculos = veiculoService.listar();
+    std::vector<Veiculo> veiculos = {Veiculo("Veiculo_1"), Veiculo(), Veiculo()};
+
 
 }
 
