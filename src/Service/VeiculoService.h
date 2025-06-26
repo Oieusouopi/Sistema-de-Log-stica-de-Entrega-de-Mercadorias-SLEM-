@@ -10,10 +10,15 @@
 #include "../Model/Local.h"
 #include "../Model/Veiculo.h"
 
+enum EnumResultadoCriacaoVeiculo {
+    SUCESSO,
+    PLACA_DUPLICADA,
+};
+
 class VeiculoService {
 
     public:
-        void criar(Veiculo& veiculo);
+        EnumResultadoCriacaoVeiculo criar(Veiculo& veiculo);
         std::vector<Veiculo> listar();
         void excluir(std::string placa);
         void updateStatus(std::string placa, bool status);
