@@ -65,33 +65,55 @@ void VeiculoController::excluir() {
 }
 
 void VeiculoController::updateLocalAtual() {
+    std:: string placa;
+    std:: string nomeLocal;
+    int x, y;
 
-    std::string placa;
-    cout << "Digite a placa do veiculo" << endl;
-
+    cout << "Digite a placa do veículo: ";
     cin >> placa;
 
-    Veiculo veiculoAchado = veiculoService.acharVeiculoPlaca(placa);
+    cout << "Digite o nome do novo local: ";
+    cin.ignore();
+    getline(cin, nomeLocal);
 
-    cout << "Selecione o local novo do veiculo: ";
+    cout << "Digite a coordenada X: ";
+    cin >> x;
 
-    std::vector<Local> locais = {Local("Belo horizonte"), Local("São paulo"), Local("Vitoria") };
+    cout << "Digite a coordenada Y: ";
+    cin >> y;
 
-    for (int i = 0; i < locais.size(); i++) {
-        cout << i << " - " << locais[i].nome << endl;
-    }
+    Local novoLocal;
+    novoLocal.nome = nomeLocal;
+    novoLocal.x = x;
+    novoLocal.y = y;
 
+    veiculoService.updateLocalAtual(placa, novoLocal);
+    cout << "Local atual do veículo atualizado com sucesso!" << endl;
 
-
-    // pegar id veiculo
-    // ver se o veiculo existe
-    // se existe segue, se não, erro;
-    // pegar id unico do local;
-    // ver se o id existe;
 }
 
 void VeiculoController::updateStatus() {
+    std::string placa;
+    int opcao;
+    bool status;
 
+    cout << "Digite a placa do veículo: ";
+    cin >> placa;
+
+    cout << "Digite o novo status (1 - Disponível, 0 - Ocupado): ";
+    cin >> opcao;
+
+    if (opcao == 1)
+        status = true;
+    else if (opcao == 0)
+        status = false;
+    else {
+        cout << "Opção inválida." << endl;
+        return;
+    }
+
+    veiculoService.updateStatus(placa, status);
+    cout << "Status atualizado com sucesso!" << endl;
 }
 
 
