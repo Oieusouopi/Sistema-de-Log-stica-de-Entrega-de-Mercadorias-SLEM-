@@ -5,23 +5,18 @@
 
 #include "../Model/Local.h"
 #include "../Service/VeiculoService.h"
+#include "../Service/LocalService.h"
 
 #ifndef VEICULOCONTROLLER_H
 #define VEICULOCONTROLLER_H
 
 class VeiculoController {
+    private:
+        VeiculoService veiculoService;
 
     public:
-        VeiculoController(VeiculoService &veiculoService);
-        void criar();
-        void listar();
-        void excluir();
-        void updateStatus();
-        void updateLocalAtual();
-        void menu();
-    private:
-        VeiculoService& veiculoService;
-
+        void atualizarStatusVeiculo();
+        void atualizarLocalAtualVeiculo();
 };
 
 #endif //VEICULOCONTROLLER_H

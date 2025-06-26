@@ -3,14 +3,14 @@
 //
 
 #include "VeiculoController.h"
+#include "LocalController.h"
 
 #include <iostream>
 
+#include "../Service/LocalService.h"
 #include "../Utils/EnumMenu.h"
 #include "../Utils/ExibirMensagem.h"
-
-VeiculoController::VeiculoController(VeiculoService &veiculoService): veiculoService(veiculoService) {}
-
+using namespace std;
 
 void VeiculoController::menu() {
     char teclaGlobal = '\0';
@@ -65,11 +65,55 @@ void VeiculoController::excluir() {
 }
 
 void VeiculoController::updateLocalAtual() {
+    std:: string placa;
+    std:: string nomeLocal;
+    int x, y;
+
+    cout << "Digite a placa do veículo: ";
+    cin >> placa;
+
+    cout << "Digite o nome do novo local: ";
+    cin.ignore();
+    getline(cin, nomeLocal);
+
+    cout << "Digite a coordenada X: ";
+    cin >> x;
+
+    cout << "Digite a coordenada Y: ";
+    cin >> y;
+
+    Local novoLocal;
+    novoLocal.nome = nomeLocal;
+    novoLocal.x = x;
+    novoLocal.y = y;
+
+    veiculoService.updateLocalAtual(placa, novoLocal);
+    cout << "Local atual do veículo atualizado com sucesso!" << endl;
 
 }
 
 void VeiculoController::updateStatus() {
+    std::string placa;
+    int opcao;
+    bool status;
 
+    cout << "Digite a placa do veículo: ";
+    cin >> placa;
+
+    cout << "Digite o novo status (1 - Disponível, 0 - Ocupado): ";
+    cin >> opcao;
+
+    if (opcao == 1)
+        status = true;
+    else if (opcao == 0)
+        status = false;
+    else {
+        cout << "Opção inválida." << endl;
+        return;
+    }
+
+    veiculoService.updateStatus(placa, status);
+    cout << "Status atualizado com sucesso!" << endl;
 }
 
 

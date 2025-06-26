@@ -7,6 +7,9 @@
 
 class Local {
 
+public:
+    Local (std::string n): nome(n) {}
+    std::string nome;
 };
 
 #endif //LOCAL_H
