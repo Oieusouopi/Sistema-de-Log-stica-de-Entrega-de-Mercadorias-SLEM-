@@ -158,7 +158,7 @@ void VeiculoController::updateLocalAtual() {
     novoLocal.y = y;
 
     veiculoService.updateLocalAtual(placa, novoLocal);
-    std::cout << "Local atual do veículo atualizado com sucesso!" << endl;
+    std::cout << "Local atual do veículo atualizado com sucesso!" << std::endl;
 
 }
 

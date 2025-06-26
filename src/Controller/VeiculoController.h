@@ -17,8 +17,8 @@ public:
     void criar();
     void listar();
     void excluir();
-    void atualizarStatusVeiculo();
-    void atualizarLocalAtualVeiculo();
+    void updateStatus();
+    void updateLocalAtual();
     void menu();
 
 private:
