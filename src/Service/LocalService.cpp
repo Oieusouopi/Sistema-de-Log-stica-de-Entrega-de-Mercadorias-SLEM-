@@ -14,3 +14,4 @@ void LocalService::excluir(std::string nome) {
 
 }
 
+void LocalService::encontrarlocalid(int id) {}

@@ -3,14 +3,14 @@
 //
 
 #include "VeiculoController.h"
+#include "LocalController.h"
 
 #include <iostream>
 
+#include "../Service/LocalService.h"
 #include "../Utils/EnumMenu.h"
 #include "../Utils/ExibirMensagem.h"
-
-VeiculoController::VeiculoController(VeiculoService &veiculoService): veiculoService(veiculoService) {}
-
+using namespace std;
 
 void VeiculoController::menu() {
     char teclaGlobal = '\0';
@@ -66,6 +66,28 @@ void VeiculoController::excluir() {
 
 void VeiculoController::updateLocalAtual() {
 
+    std::string placa;
+    cout << "Digite a placa do veiculo" << endl;
+
+    cin >> placa;
+
+    Veiculo veiculoAchado = veiculoService.acharVeiculoPlaca(placa);
+
+    cout << "Selecione o local novo do veiculo: ";
+
+    std::vector<Local> locais = {Local("Belo horizonte"), Local("São paulo"), Local("Vitoria") };
+
+    for (int i = 0; i < locais.size(); i++) {
+        cout << i << " - " << locais[i].nome << endl;
+    }
+
+
+
+    // pegar id veiculo
+    // ver se o veiculo existe
+    // se existe segue, se não, erro;
+    // pegar id unico do local;
+    // ver se o id existe;
 }
 
 void VeiculoController::updateStatus() {

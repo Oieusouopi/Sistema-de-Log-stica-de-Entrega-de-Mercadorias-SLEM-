@@ -25,4 +25,3 @@ void VeiculoService::updateStatus(std::string placa, bool status) {
 
 }
 
-
