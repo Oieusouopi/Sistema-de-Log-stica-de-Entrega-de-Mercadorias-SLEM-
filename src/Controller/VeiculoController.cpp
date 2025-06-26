@@ -3,9 +3,11 @@
 //
 
 #include "VeiculoController.h"
+#include "LocalController.h"
 
 #include <iostream>
 
+#include "../Service/LocalService.h"
 #include "../Utils/EnumMenu.h"
 #include "../Utils/ExibirMensagem.h"
 
@@ -50,8 +52,6 @@ void VeiculoController::menu() {
 
     }
 }
-
-
 
 void VeiculoController::criar() {
 

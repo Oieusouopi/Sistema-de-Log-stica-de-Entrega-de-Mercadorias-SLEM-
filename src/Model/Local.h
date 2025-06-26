@@ -10,6 +10,9 @@ public:
     Local(std::string nome): nome(nome) {}
     std::string nome;
 
+public:
+    Local (std::string n): nome(n) {}
+    std::string nome;
 };
 
 #endif //LOCAL_H

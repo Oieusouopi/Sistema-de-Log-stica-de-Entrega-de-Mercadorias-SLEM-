@@ -5,6 +5,7 @@
 
 #include "../Model/Local.h"
 #include "../Service/VeiculoService.h"
+#include "../Service/LocalService.h"
 
 #ifndef VEICULOCONTROLLER_H
 #define VEICULOCONTROLLER_H
@@ -16,13 +17,14 @@ public:
     void criar();
     void listar();
     void excluir();
-    void updateStatus();
-    void updateLocalAtual();
+    void atualizarStatusVeiculo();
+    void atualizarLocalAtualVeiculo();
     void menu();
 
 private:
     VeiculoService& veiculoService;
     Local selecionarLocal();
+
 
 
 };

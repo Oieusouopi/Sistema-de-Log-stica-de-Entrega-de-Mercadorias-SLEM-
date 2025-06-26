@@ -22,6 +22,9 @@ class VeiculoService {
         std::vector<Veiculo> listar();
         void excluir(std::string placa);
         void updateStatus(std::string placa, bool status);
+
+        Veiculo acharVeiculoPlaca(std::string p);
+
         void updateLocalAtual(std::string placa, Local local);
 
     private:
