@@ -41,6 +41,7 @@ void LocalController::menu() {
             case EXCLUIR_LOCAL:
                 break;
             case LISTAR_TODOS_LOCAIS:
+                listar();
                 break;
             case VOLTAR_PARA_O_MENU_PRINCIPAL_LOCAL:
                 return;
@@ -66,6 +67,8 @@ bool validarEndereco(const char end[]) {
     return temLetra;
 }
 
+int Local::proximoId = 1;
+
 void LocalController::criar() {
     float x, y;
     char endereco[100];
@@ -77,7 +80,7 @@ void LocalController::criar() {
     std::cin >> y;
 
     std::cin.ignore();
-    std::cout << "Digite o endereço (Ex: 'Sao Paulo', 'Avenida X, 123'): ";
+    std::cout << "Digite o endereço (Ex: 'Sao Paulo', 'Avenida X 123'): ";
     std::cin.getline(endereco, 100);
 
     if (!validarEndereco(endereco)) {
@@ -85,7 +88,13 @@ void LocalController::criar() {
         return;
     }
 
+    Local local(x, y, endereco);
+
+    localService.criar(local);
+
     std::cout << "Local criado com sucesso!\n";
+
+
 }
 
 
@@ -94,5 +103,17 @@ void LocalController::excluir() {
 }
 
 void LocalController::listar() {
+    std::vector<Local> locais = localService.listar();
+
+    if (locais.empty()) {
+        std::cout << "Nenhum local cadastrado.\n";
+        return;
+    }
+
+    std::cout << "\n--- Lista de Locais Cadastrados ---\n";
+    for (const auto& local : locais) {
+        local.mostrar();
+        std::cout << "--------------------------\n";
+    }
 
 }
