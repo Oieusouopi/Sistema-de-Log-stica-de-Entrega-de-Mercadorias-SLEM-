@@ -39,6 +39,7 @@ void LocalController::menu() {
                 criar();
                 break;
             case EXCLUIR_LOCAL:
+                excluir();
                 break;
             case LISTAR_TODOS_LOCAIS:
                 listar();
@@ -99,7 +100,25 @@ void LocalController::criar() {
 
 
 void LocalController::excluir() {
+    std::cout << "Digite o ID do local para excluir: ";
+    int id;
+    std::cin >> id;
 
+    auto locais = localService.listar();
+    bool existe = false;
+    for (const auto& local : locais) {
+        if (local.getId() == id) {
+            existe = true;
+            break;
+        }
+    }
+
+    if (existe) {
+        localService.excluirPorId(id);
+        std::cout << "Local com ID " << id << " excluído com sucesso.\n";
+    } else {
+        std::cout << "Nenhum local encontrado com o ID " << id << ".\n";
+    }
 }
 
 void LocalController::listar() {

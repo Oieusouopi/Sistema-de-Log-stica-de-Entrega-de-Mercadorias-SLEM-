@@ -6,6 +6,7 @@
 #define LOCALSERVICE_H
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "../Model/Local.h"
 
@@ -14,7 +15,7 @@ class LocalService {
     public:
         void criar(const Local& local);
         std::vector<Local> listar();
-        void excluir(std::string nome);
+        void excluirPorId(int id);
 
     private:
         std::vector<Local> locais;

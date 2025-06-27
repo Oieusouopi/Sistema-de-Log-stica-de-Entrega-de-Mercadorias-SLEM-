@@ -10,7 +10,10 @@ std::vector<Local> LocalService::listar() {
         return locais;
 }
 
-void LocalService::excluir(std::string nome) {
-
+void LocalService::excluirPorId(int id) {
+        locais.erase(
+            std::remove_if(locais.begin(), locais.end(),
+                           [id](const Local& l) { return l.getId() == id; }),
+            locais.end());
 }
 
