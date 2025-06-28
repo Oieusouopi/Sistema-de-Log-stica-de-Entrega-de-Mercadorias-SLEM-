@@ -68,18 +68,10 @@ void VeiculoController::criar() {
     std::cout << "-----------------------------\n";
 
     std::string placa;
-    while (true) {
-        std::cout << "Qual a placa deste veiculo: ";
 
-        std::cin >> placa;
+    std::cout << "Qual a placa deste veiculo: ";
 
-        if (!veiculoService.validarPlaca(placa)) {
-            std::cout << "Placa inválida, tente novamente.\n";
-            continue;
-        }
-
-        break;
-    }
+    std::cin >> placa;
 
     std::cout << "Qual o modelo deste veiculo: ";
 
