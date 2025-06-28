@@ -2,10 +2,7 @@
 #include <iostream>
 
 #include "App.h"
-#include "Controller/VeiculoController.h"
-#include "Service/VeiculoService.h"
-#include "Utils/EnumMenu.h"
-#include "Utils/ExibirMensagem.h"
+#include <windows.h>
 
 
 // void menuBanco(); // Tenho que pensar onde vou colocar esse menu
@@ -13,32 +10,10 @@
 
 
 int main() {
+    SetConsoleOutputCP(CP_UTF8);
     App app;
     app.executar();
     return 0;
-}
-
-// Falta pensar sobre essa implementação
-// void menuRota() {
-    //
-    // std::cin >> teclaGlobal;
-    // switch (teclaGlobal) {
-    //     case TECLA_1:
-    //         break;
-    //     case TECLA_2:
-    //         break;
-    //     case TECLA_3:
-    //         break;
-    //     case TECLA_4:
-    //         break;
-    //     case TECLA_5:
-    //         break;
-    //     case TECLA_6:
-    //         break;
-    //     default:
-    //         break;
-    // }
-
 }
 
 // void menuBanco() {
