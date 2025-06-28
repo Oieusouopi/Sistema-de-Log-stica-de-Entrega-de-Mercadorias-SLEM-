@@ -5,6 +5,7 @@
 #include "VeiculoController.h"
 
 #include <iostream>
+#include <limits>
 
 #include "../Utils/EnumMenu.h"
 #include "../Utils/ExibirMensagem.h"
