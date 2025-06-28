@@ -12,6 +12,7 @@
 #include "../Utils/EnumMenu.h"
 #include "../Utils/EnumStatusVeiculoUtils.h"
 #include "../Utils/ExibirMensagem.h"
+#include "../Utils/LocalUtils.h"
 
 VeiculoController::VeiculoController(VeiculoService &veiculoService, LocalService &localService): veiculoService(veiculoService), localService(localService) {}
 
@@ -80,14 +81,14 @@ void VeiculoController::criar() {
     std::cin.ignore();
     getline(std::cin, modelo);
 
-    Local localSelecionado = selecionarLocal();
+    Local localSelecionado = LocalUtils::selecionarLocal(localService);
 
     Veiculo veiculo = Veiculo(placa, modelo, localSelecionado);
 
     EnumResultadoCriacaoVeiculo resultado = veiculoService.criar(veiculo);
 
     switch (resultado) {
-        case SUCESSO:
+        case SUCESSO_CRIACAO_DO_VEICULO:
             std::cout << "Veiculo criado com sucesso" << std::endl;
             break;
         default:
@@ -96,36 +97,6 @@ void VeiculoController::criar() {
     }
 
     std::cout << "Redirecionando para o menu veículo..." << std::endl;
-}
-
-Local VeiculoController::selecionarLocal() {
-    std::vector<Local> locaisDisponiveis = localService.listar();
-
-    if (locaisDisponiveis.empty()) {
-        std::cout << "Nenhum local cadastrado";
-        Local("Não definido");
-    }
-
-    std::cout << "Selecione o local atual do veículo: " << std::endl;
-    for (int i = 0; i < locaisDisponiveis.size(); i++) {
-        std::cout << (i + 1) << " - " << locaisDisponiveis[i].getEndereco() << std::endl;
-    }
-
-    int opcao = 0;
-    while (true) {
-        std::cout << "Digite o número da opção: ";
-        std::cin >> opcao;
-
-        if (std::cin.fail() || opcao < 1 || opcao > locaisDisponiveis.size()) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Opção inválida. Tente novamente." << std::endl;
-        } else {
-            break;
-        }
-    }
-
-    return locaisDisponiveis[opcao - 1];
 }
 
 

@@ -24,7 +24,6 @@ public:
 private:
     VeiculoService& veiculoService;
     LocalService& localService;
-    Local selecionarLocal();
 
 
 };

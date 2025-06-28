@@ -13,7 +13,7 @@ EnumResultadoCriacaoVeiculo VeiculoService::criar(Veiculo &veiculo) {
 
     veiculos.push_back(veiculo);
 
-    return SUCESSO;
+    return SUCESSO_CRIACAO_DO_VEICULO;
 }
 
 bool VeiculoService::excluir(std::string placa) {
