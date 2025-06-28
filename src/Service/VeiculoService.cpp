@@ -32,4 +32,9 @@ void VeiculoService::updateStatus(std::string placa, bool status) {
 
 }
 
+bool VeiculoService::validarPlaca(std::string placa) {
+
+}
+
+
 

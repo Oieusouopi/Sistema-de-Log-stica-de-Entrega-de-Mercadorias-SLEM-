@@ -64,14 +64,22 @@ void VeiculoController::criar() {
     std::cout << "\n----- CRIAÇÃO DE UM VEICULO -----\n";
     std::cout << "Para criar um veículo vamos precisar de algumas informações" << std::endl;
     std::cout << "se você der alguma informação que não é certa vai pedir a informação novamente" << std::endl;
-    std::cout << "se você quiser cancelar a qualquer momento a criação do veiculo escreva 'CANCELAR'" << std::endl;
+    // std::cout << "se você quiser cancelar a qualquer momento a criação do veiculo escreva ''" << std::endl;
     std::cout << "-----------------------------\n";
 
-    std::cout << "Qual a placa deste veiculo: ";
-
     std::string placa;
+    while (true) {
+        std::cout << "Qual a placa deste veiculo: ";
 
-    std::cin >> placa;
+        std::cin >> placa;
+
+        if (!veiculoService.validarPlaca(placa)) {
+            std::cout << "Placa inválida, tente novamente.\n";
+            continue;
+        }
+
+        break;
+    }
 
     std::cout << "Qual o modelo deste veiculo: ";
 
