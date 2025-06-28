@@ -8,11 +8,12 @@
 #include <iostream>
 #include <limits>
 
+#include "../Service/LocalService.h"
 #include "../Utils/EnumMenu.h"
 #include "../Utils/EnumStatusVeiculoUtils.h"
 #include "../Utils/ExibirMensagem.h"
 
-VeiculoController::VeiculoController(VeiculoService &veiculoService): veiculoService(veiculoService) {}
+VeiculoController::VeiculoController(VeiculoService &veiculoService, LocalService &localService): veiculoService(veiculoService), localService(localService) {}
 
 void VeiculoController::menu() {
     char teclaGlobal = '\0';
@@ -79,7 +80,6 @@ void VeiculoController::criar() {
     std::cin.ignore();
     getline(std::cin, modelo);
 
-    // Vai ser trocado pelo metodo se selecionar um local do localService
     Local localSelecionado = selecionarLocal();
 
     Veiculo veiculo = Veiculo(placa, modelo, localSelecionado);
@@ -99,9 +99,7 @@ void VeiculoController::criar() {
 }
 
 Local VeiculoController::selecionarLocal() {
-    std::vector<Local> locaisDisponiveis = {
-        Local("São Paulo"), Local("Belo Horizonte"), Local("Rio de Janeiro")
-    };
+    std::vector<Local> locaisDisponiveis = localService.listar();
 
     if (locaisDisponiveis.empty()) {
         std::cout << "Nenhum local cadastrado";
@@ -109,8 +107,8 @@ Local VeiculoController::selecionarLocal() {
     }
 
     std::cout << "Selecione o local atual do veículo: " << std::endl;
-    for (int i = 1; i < locaisDisponiveis.size(); i++) {
-        std::cout << i << " - " << locaisDisponiveis[i].getEndereco() << std::endl;
+    for (int i = 0; i < locaisDisponiveis.size(); i++) {
+        std::cout << (i + 1) << " - " << locaisDisponiveis[i].getEndereco() << std::endl;
     }
 
     int opcao = 0;
