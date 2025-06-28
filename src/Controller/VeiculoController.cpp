@@ -41,6 +41,7 @@ void VeiculoController::menu() {
                 criar();
                 break;
             case EXCLUIR_VEICULO:
+                excluir();
                 break;
             case LISTAR_TODOS_VEICULOS:
                 listar();
@@ -159,7 +160,40 @@ void VeiculoController::listar() {
 }
 
 void VeiculoController::excluir() {
+    std::vector<Veiculo> veiculos = veiculoService.listar();
 
+    if (veiculos.empty()) {
+        std::cout << "Sem veículo nenhum cadastrado para ser excluído" << std::endl;
+    } else {
+
+        std::cout << "\n-------------------------- LISTA DE VEÍCULOS PARA SEREM EXCLUIDOS --------------------------\n";
+
+        for (int i = 0; i < veiculos.size(); i++) {
+            std::cout << (i + 1) << " - " << veiculos[i].placa << " | " << veiculos[i].modelo <<  std::endl;
+        }
+
+        int opcao = 0;
+        while (true) {
+            std::cout << "Digite o número do veículo pra excluir: ";
+            std::cin >> opcao;
+
+            if (std::cin.fail() || opcao < 1 || opcao > veiculos.size()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Opção inválida. Tente novamente." << std::endl;
+            } else {
+                break;
+            }
+        }
+
+        if (veiculoService.excluir(veiculos[opcao - 1].placa)) {
+            std::cout << "Veículo excluído com sucesso" << std::endl;
+        } else {
+            std::cout << "Aconteceu algum erro ao excluir o veículo" << std::endl;
+        }
+    }
+
+    std::cout << "Redirecionando para o menu veículo...";
 }
 
 void VeiculoController::updateLocalAtual() {
