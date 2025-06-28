@@ -9,6 +9,7 @@
 #include <limits>
 
 #include "../Utils/EnumMenu.h"
+#include "../Utils/EnumStatusVeiculoUtils.h"
 #include "../Utils/ExibirMensagem.h"
 
 VeiculoController::VeiculoController(VeiculoService &veiculoService): veiculoService(veiculoService) {}
@@ -93,7 +94,7 @@ void VeiculoController::criar() {
         break;
     }
 
-    std::cout << "Redirecionando para o menu principal...";
+    std::cout << "Redirecionando para o menu veículo..." << std::endl;
 }
 
 Local VeiculoController::selecionarLocal() {
@@ -131,7 +132,7 @@ Local VeiculoController::selecionarLocal() {
 
 void VeiculoController::listar() {
 
-    std::cout << "\n-------------------------- LISTA DE VEÍCULOS --------------------------\n";
+    std::cout << "\n-------------------------- LISTA DE VEÍCULOS ---------------------------\n";
 
     std::cout << std::left
               << std::setw(10) << "PLACA"
@@ -141,10 +142,20 @@ void VeiculoController::listar() {
 
     std::cout << std::string(72, '-') << '\n';
 
-    // std::vector<Veiculo> veiculos = veiculoService.listar();
-    std::vector<Veiculo> veiculos = {Veiculo("Veiculo_1"), Veiculo(), Veiculo()};
+    std::vector<Veiculo> veiculos = veiculoService.listar();
 
+    for (const auto& v : veiculos) {
+        std::cout << std::left
+                  << std::setw(10) << v.placa
+                  << std::setw(20) << v.modelo
+                  << std::setw(12) << statusToString(v.status)
+                  << std::setw(30) << v.localAtual.getEndereco()
+                  << '\n';
+    }
 
+    std::cout << std::string(72, '-') << '\n';
+
+    std::cout << "Redirecionando para o menu do veículo..." << std::endl;
 }
 
 void VeiculoController::excluir() {

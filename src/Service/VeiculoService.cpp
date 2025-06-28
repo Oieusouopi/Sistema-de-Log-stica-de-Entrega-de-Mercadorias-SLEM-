@@ -14,6 +14,13 @@ void VeiculoService::excluir(std::string placa) {
 }
 
 std::vector<Veiculo> VeiculoService::listar() {
+    std::vector<Veiculo> veiculos = {
+        Veiculo("ABC1234"),
+        Veiculo("XYZ9876"),
+        Veiculo("LMN4567")
+    };
+
+    return veiculos;
 
 }
 
