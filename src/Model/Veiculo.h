@@ -10,7 +10,8 @@
 
 class Veiculo {
 public:
-    Veiculo(std::string placa): placa(placa), modelo(""), status(PENDENTE), localAtual(Local("Desconhecido")) {}
+    Veiculo(std::string placa)
+        : placa(placa), modelo("Modelo " + placa), status(PENDENTE), localAtual(Local("Local " + placa)) {}
     Veiculo(std::string placa, std::string modelo, Local localAtual):placa(placa), modelo(modelo), status(PENDENTE),  localAtual(localAtual) {}
 
     std::string placa;

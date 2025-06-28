@@ -20,7 +20,7 @@ class VeiculoService {
     public:
         EnumResultadoCriacaoVeiculo criar(Veiculo& veiculo);
         std::vector<Veiculo> listar();
-        void excluir(std::string placa);
+        bool excluir(std::string placa);
         void updateStatus(std::string placa, bool status);
         void updateLocalAtual(std::string placa, Local local);
 

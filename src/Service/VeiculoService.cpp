@@ -9,8 +9,8 @@ EnumResultadoCriacaoVeiculo VeiculoService::criar(Veiculo &veiculo) {
     return SUCESSO;
 }
 
-void VeiculoService::excluir(std::string placa) {
-
+bool VeiculoService::excluir(std::string placa) {
+    return true;
 }
 
 std::vector<Veiculo> VeiculoService::listar() {
