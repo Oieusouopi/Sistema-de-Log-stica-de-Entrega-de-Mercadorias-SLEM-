@@ -39,8 +39,10 @@ void LocalController::menu() {
                 criar();
                 break;
             case EXCLUIR_LOCAL:
+                excluir();
                 break;
             case LISTAR_TODOS_LOCAIS:
+                listar();
                 break;
             case VOLTAR_PARA_O_MENU_PRINCIPAL_LOCAL:
                 return;
@@ -49,21 +51,6 @@ void LocalController::menu() {
                 break;
         }
     }
-}
-
-bool validarEndereco(const char end[]) {
-    bool temLetra = false;
-    for (int i = 0; end[i] != '\0'; i++) {
-        char c = end[i];
-        if (isalpha(c)) {
-            temLetra = true;
-        } else if (isdigit(c) || c == ' ') {
-            continue;
-        } else {
-            return false;
-        }
-    }
-    return temLetra;
 }
 
 void LocalController::criar() {
@@ -77,22 +64,43 @@ void LocalController::criar() {
     std::cin >> y;
 
     std::cin.ignore();
-    std::cout << "Digite o endereço (Ex: 'Sao Paulo', 'Avenida X, 123'): ";
+    std::cout << "Digite o endereço (Ex: 'Sao Paulo', 'Avenida X 123'): ";
     std::cin.getline(endereco, 100);
 
-    if (!validarEndereco(endereco)) {
-        std::cout << "Endereço inválido. O local não foi criado.\n";
-        return;
-    }
 
-    std::cout << "Local criado com sucesso!\n";
+    int novoId = localService.gerarNovoId();
+
+    Local local(novoId, x, y, endereco);
+
+    localService.criar(local);
 }
 
 
 void LocalController::excluir() {
+    std::cout << "Digite o ID do local para excluir: ";
+    int id;
+    std::cin >> id;
 
+    if (localService.existeId(id)) {
+        localService.excluirPorId(id);
+        std::cout << "Local com ID " << id << " excluído com sucesso.\n";
+    } else {
+        std::cout << "Nenhum local encontrado com o ID " << id << ".\n";
+    }
 }
 
 void LocalController::listar() {
+    std::vector<Local> locais = localService.listar();
+
+    if (locais.empty()) {
+        std::cout << "Nenhum local cadastrado.\n";
+        return;
+    }
+
+    std::cout << "\n--- Lista de Locais Cadastrados ---\n";
+    for (const auto& local : locais) {
+        local.mostrar();
+        std::cout << "--------------------------\n";
+    }
 
 }
