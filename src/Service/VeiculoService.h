@@ -23,7 +23,7 @@ class VeiculoService {
         bool excluir(std::string placa);
         void updateStatus(std::string placa, bool status);
         void updateLocalAtual(std::string placa, Local local);
-
+        bool validarPlaca(std::string placa);
     private:
         std::vector<Veiculo> veiculos;
 };
