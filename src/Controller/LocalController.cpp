@@ -53,23 +53,6 @@ void LocalController::menu() {
     }
 }
 
-bool validarEndereco(const char end[]) {
-    bool temLetra = false;
-    for (int i = 0; end[i] != '\0'; i++) {
-        char c = end[i];
-        if (isalpha(c)) {
-            temLetra = true;
-        } else if (isdigit(c) || c == ' ') {
-            continue;
-        } else {
-            return false;
-        }
-    }
-    return temLetra;
-}
-
-int Local::proximoId = 1;
-
 void LocalController::criar() {
     float x, y;
     char endereco[100];
@@ -84,18 +67,12 @@ void LocalController::criar() {
     std::cout << "Digite o endereço (Ex: 'Sao Paulo', 'Avenida X 123'): ";
     std::cin.getline(endereco, 100);
 
-    if (!validarEndereco(endereco)) {
-        std::cout << "Endereço inválido. O local não foi criado.\n";
-        return;
-    }
 
-    Local local(x, y, endereco);
+    int novoId = localService.gerarNovoId();
+
+    Local local(novoId, x, y, endereco);
 
     localService.criar(local);
-
-    std::cout << "Local criado com sucesso!\n";
-
-
 }
 
 
@@ -104,16 +81,7 @@ void LocalController::excluir() {
     int id;
     std::cin >> id;
 
-    auto locais = localService.listar();
-    bool existe = false;
-    for (const auto& local : locais) {
-        if (local.getId() == id) {
-            existe = true;
-            break;
-        }
-    }
-
-    if (existe) {
+    if (localService.existeId(id)) {
         localService.excluirPorId(id);
         std::cout << "Local com ID " << id << " excluído com sucesso.\n";
     } else {

@@ -9,7 +9,6 @@
 
 class Local {
 private:
-    static int proximoId;
     int id;
     float cord_x;
     float cord_y;
@@ -18,7 +17,7 @@ private:
 public:
     Local(std::string endereco): endereco(endereco) {}
 
-    Local(float x, float y, const std::string end): id(proximoId++), cord_x(x), cord_y(y), endereco(end) {}
+    Local(int id, float x, float y, const std::string end): id(id), cord_x(x), cord_y(y), endereco(end) {}
 
     void setX(float x) { cord_x = x; }
     void setY(float y) { cord_y = y; }

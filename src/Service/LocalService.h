@@ -16,6 +16,10 @@ class LocalService {
         void criar(const Local& local);
         std::vector<Local> listar();
         void excluirPorId(int id);
+        bool existeId(int id);
+        int gerarNovoId();
+        bool existeEndereco(const std::string& endereco) const;
+
 
     private:
         std::vector<Local> locais;
