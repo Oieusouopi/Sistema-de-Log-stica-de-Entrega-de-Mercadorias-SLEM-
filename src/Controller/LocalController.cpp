@@ -22,7 +22,6 @@ void LocalController::menu() {
         std::cout << static_cast<char>(CRIAR_LOCAL) << " -  Criar local\n";
         std::cout << static_cast<char>(EXCLUIR_LOCAL) << " -  Excluir local\n";
         std::cout << static_cast<char>(LISTAR_TODOS_LOCAIS) << " -  Listar todos locais\n";
-        std::cout << static_cast<char>(ATUALIZAR_LOCAL) << " -  Atualizar local\n";
         std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_LOCAL) << " -  Voltar para o menu principal\n";
         std::cout << "-----------------------------\n";
 
@@ -44,9 +43,6 @@ void LocalController::menu() {
                 break;
             case LISTAR_TODOS_LOCAIS:
                 listar();
-                break;
-            case ATUALIZAR_LOCAL:
-                atualizar();
                 break;
             case VOLTAR_PARA_O_MENU_PRINCIPAL_LOCAL:
                 return;
@@ -106,61 +102,5 @@ void LocalController::listar() {
         local.mostrar();
         std::cout << "--------------------------\n";
     }
-}
 
-void LocalController::atualizar() {
-    int id;
-    std::cout << "Digite o ID do local que deseja atualizar: ";
-    std::cin >> id;
-
-    Local* local = localService.buscarPorId(id);
-
-    if (!local) {
-        std::cout << "Nenhum local encontrado com o ID " << id << ".\n";
-        return;
-    }
-
-    std::cout << "Local atual:\n";
-    local->mostrar();
-
-    char opcao;
-    std::cout << "O que deseja atualizar?\n";
-    std::cout << "1 - Coordenada X\n";
-    std::cout << "2 - Coordenada Y\n";
-    std::cout << "3 - Endereço\n";
-    std::cout << "Escolha: ";
-    std::cin >> opcao;
-
-    switch (opcao) {
-        case '1': {
-            float novoX;
-            std::cout << "Nova coordenada X: ";
-            std::cin >> novoX;
-            local->setX(novoX);
-            std::cout << "Coordenada X atualizada com sucesso.\n";
-            break;
-        }
-        case '2': {
-            float novoY;
-            std::cout << "Nova coordenada Y: ";
-            std::cin >> novoY;
-            local->setY(novoY);
-            std::cout << "Coordenada Y atualizada com sucesso.\n";
-            break;
-        }
-        case '3': {
-            std::string novoEndereco;
-            std::cin.ignore();
-            std::cout << "Novo endereço: ";
-            std::getline(std::cin, novoEndereco);
-
-            if (!localService.atualizarEnderecoPorId(id, novoEndereco)) {
-                return;
-            }
-            break;
-        }
-        default:
-            std::cout << "Opção inválida.\n";
-            return;
-    }
 }

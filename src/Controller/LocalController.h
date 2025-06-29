@@ -13,7 +13,6 @@ class LocalController {
         void listar();
         void excluir();
         void menu();
-        void atualizar();
 
     private:
         LocalService& localService;
