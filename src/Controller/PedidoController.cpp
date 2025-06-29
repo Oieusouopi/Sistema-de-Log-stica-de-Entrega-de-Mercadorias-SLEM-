@@ -3,6 +3,7 @@
 //
 #include "PedidoController.h"
 
+#include <iomanip>
 #include <iostream>
 
 #include "../Service/LocalService.h"
@@ -42,6 +43,7 @@ void PedidoController::menu() {
             case EXCLUIR_PEDIDO:
                 break;
             case LISTAR_TODOS_PEDIDOS:
+                listar();
                 break;
             case VOLTAR_PARA_O_MENU_PRINCIPAL_PEDIDOS:
                 return;
@@ -88,5 +90,13 @@ void PedidoController::excluir() {
 }
 
 void PedidoController::listar() {
+
+    std::cout << "\n-------------------------- LISTA DE PEDIDOS ---------------------------\n";
+
+    std::cout << std::left
+              << std::setw(10) << "PLACA"
+              << std::setw(20) << "MODELO"
+              << std::setw(12) << "STATUS"
+              << std::setw(30) << "LOCAL"  << "\n";
 
 }
