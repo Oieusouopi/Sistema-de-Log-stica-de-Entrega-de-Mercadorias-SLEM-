@@ -26,6 +26,7 @@ void VeiculoController::menu() {
         std::cout << static_cast<char>(CRIAR_VEICULO) << " -  Criar Veiculo\n";
         std::cout << static_cast<char>(EXCLUIR_VEICULO) << " -  Excluir Veiculo\n";
         std::cout << static_cast<char>(LISTAR_TODOS_VEICULOS) << " -  Listar todos veiculos\n";
+        std::cout << static_cast<char>(UPDATE_LOCAL_VEICULO) << " -  Atualizar Veiculos\n";
         std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO) << " -  Voltar para o menu principal\n";
         std::cout << "-----------------------------\n";
 
@@ -46,7 +47,10 @@ void VeiculoController::menu() {
                 excluir();
                 break;
             case LISTAR_TODOS_VEICULOS:
-                listar();
+                break;
+            case UPDATE_LOCAL_VEICULOS:
+                updateLocalAtual();
+                updateStatus();
                 break;
             case VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO:
                 return;
@@ -57,8 +61,6 @@ void VeiculoController::menu() {
 
     }
 }
-
-
 
 void VeiculoController::criar() {
 
@@ -166,11 +168,56 @@ void VeiculoController::excluir() {
 }
 
 void VeiculoController::updateLocalAtual() {
+    std::string placa;
 
+    std::cout << "Digite a placa do veículo: ";
+    std::cin >> placa;
+
+    std::vector<Local> locais = {
+        Local("Minas Gerais", 0, 0),
+        Local("São Paulo", 10, 5),
+        Local("Rio de Janeiro", -8, 4),
+        Local("Bahia", 15, -3)
+    };
+
+    std::cout << "\nLocais disponíveis:\n";
+    for (int i = 0; i < locais.size(); ++i) {
+        std::cout << i + 1 << " - " << locais[i].getEndereco()
+                  << " (" << locais[i].getX() << ", " << locais[i].getY() << ")\n";
+    }
+
+    int escolha;
+    std::cout << "Digite o número do local desejado: ";
+    std::cin >> escolha;
+
+    if (escolha < 1 || escolha > locais.size()) {
+        std::cout << "Opção inválida!" << std::endl;
+        return;
+    }
+
+    Local novoLocal = locais[escolha - 1];
+
+    veiculoService.updateLocalAtual(placa, novoLocal);
+
+    std::cout << "Local atual do veículo atualizado com sucesso!" << std::endl;
 }
 
 void VeiculoController::updateStatus() {
 
+    std::cout << "Digite o novo status (1 - Disponível, 0 - Ocupado): ";
+    std::cin >> opcao;
+
+    if (opcao == 1)
+        status = true;
+    else if (opcao == 0)
+        status = false;
+    else {
+        std::cout << "Opção inválida." << std::endl;
+        return;
+    }
+
+    veiculoService.updateStatus(placa, status);
+    std::cout << "Status atualizado com sucesso!" << std::endl;
 }
 
 

@@ -23,6 +23,14 @@ public:
     void setY(float y) { cord_y = y; }
     void setEndereco(std::string end) { this->endereco = end; }
 
+    float getX() const { return cord_x; }
+    float getY() const { return cord_y; }
+    std::string getEndereco() const { return endereco; }
+
+    void mostrar() const {
+        std::cout << "Endereço: " << endereco
+                  << "\nCoordenadas: (" << cord_x << ", " << cord_y << ")\n";
+    }
 
     int getId() const { return id; }
     float getX() const { return cord_x; }
