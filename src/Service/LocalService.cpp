@@ -74,34 +74,3 @@ bool LocalService::existeId(int id) {
         return false;
 }
 
-Local* LocalService::buscarPorId(int id) { // Atualizar diretamente no objeto local
-        for (auto& local : locais) {
-                if (local.getId() == id) {
-                        return &local;
-                }
-        }
-        return nullptr;
-}
-
-bool LocalService::atualizarEnderecoPorId(int id, const std::string& novoEndereco) {
-        if (!validarEndereco(novoEndereco.c_str())) {
-                std::cout << "Endereço inválido. Atualização cancelada.\n";
-                return false;
-        }
-
-        if (existeEndereco(novoEndereco)) {
-                std::cout << "Endereço ja cadastrado. Atualização cancelada.\n";
-                return false;
-        }
-
-        for (auto& local : locais) {
-                if (local.getId() == id) {
-                        local.setEndereco(novoEndereco);
-                        std::cout << "Endereço atualizado com sucesso.\n";
-                        return true;
-                }
-        }
-
-        std::cout << "ID não encontrado.\n";
-        return false;
-}
