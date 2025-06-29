@@ -11,7 +11,7 @@
 #include "../Model/Veiculo.h"
 
 enum EnumResultadoCriacaoVeiculo {
-    SUCESSO,
+    SUCESSO_CRIACAO_DO_VEICULO,
     PLACA_DUPLICADA,
 };
 
