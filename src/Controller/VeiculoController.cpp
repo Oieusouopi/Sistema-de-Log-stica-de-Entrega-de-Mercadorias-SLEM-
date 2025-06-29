@@ -233,8 +233,14 @@ void VeiculoController::updateLocalAtual() {
 }
 
 void VeiculoController::updateStatus() {
+    std::string placa;
+    std::cout << "Digite a placa do veículo: ";
+    std::cin >> placa;
+    std::cin.ignore();
+    bool status;
 
     std::cout << "Digite o novo status (1 - Disponível, 0 - Ocupado): ";
+    int opcao;
     std::cin >> opcao;
 
     if (opcao == 1)
