@@ -19,6 +19,8 @@ class LocalService {
         bool existeId(int id);
         int gerarNovoId();
         bool existeEndereco(const std::string& endereco) const;
+        bool atualizarEnderecoPorId(int id, const std::string& novoEndereco);
+        Local* buscarPorId(int id);
 
 
     private:
