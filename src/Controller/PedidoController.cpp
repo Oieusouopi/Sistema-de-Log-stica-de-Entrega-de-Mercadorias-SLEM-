@@ -94,9 +94,23 @@ void PedidoController::listar() {
     std::cout << "\n-------------------------- LISTA DE PEDIDOS ---------------------------\n";
 
     std::cout << std::left
-              << std::setw(10) << "PLACA"
-              << std::setw(20) << "MODELO"
-              << std::setw(12) << "STATUS"
-              << std::setw(30) << "LOCAL"  << "\n";
+              << std::setw(20) << "LOCAL DE ORIGEM"
+              << std::setw(20) << "LOCAL DE DESTINO"
+              << std::setw(10) << "PESO DO ITEM";
 
+    std::cout << std::string(72, '-') << '\n';
+
+    std::vector<Pedido> pedidos = pedidoService.listar();
+
+    for (const auto& pedido : pedidos) {
+        std::cout << std::left
+                 << std::setw(10) << pedido.localOrigem.getEndereco()
+                 << std::setw(20) << pedido.localDestino.getEndereco()
+                 << std::setw(12) << pedido.pesoDoItem
+                 << '\n';
+    }
+
+    std::cout << std::string(72, '-') << '\n';
+
+    std::cout << "Redirecionando para o menu do pedido..." << std::endl;
 }
