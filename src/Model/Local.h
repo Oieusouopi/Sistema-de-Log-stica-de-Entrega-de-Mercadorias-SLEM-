@@ -19,6 +19,8 @@ public:
 
     Local(int id, float x, float y, const std::string end): id(id), cord_x(x), cord_y(y), endereco(end) {}
 
+    Local(const char * id, int x, int y);
+
     void setX(float x) { cord_x = x; }
     void setY(float y) { cord_y = y; }
     void setEndereco(std::string end) { this->endereco = end; }
@@ -42,6 +44,7 @@ public:
                   << "\nEndereço: " << endereco
                   << "\nCoordenadas: (" << cord_x << ", " << cord_y << ")\n";
     }
-};
+
+
 
 #endif //LOCAL_H
