@@ -26,7 +26,7 @@ void VeiculoController::menu() {
         std::cout << static_cast<char>(CRIAR_VEICULO) << " -  Criar Veiculo\n";
         std::cout << static_cast<char>(EXCLUIR_VEICULO) << " -  Excluir Veiculo\n";
         std::cout << static_cast<char>(LISTAR_TODOS_VEICULOS) << " -  Listar todos veiculos\n";
-        std::cout << static_cast<char>(UPDATE_LOCAL_VEICULO) << " -  Atualizar Veiculos\n";
+        std::cout << static_cast<char>(ATUALIZAR_VEICULOS) << " -  Atualizar Veiculos\n";
         std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO) << " -  Voltar para o menu principal\n";
         std::cout << "-----------------------------\n";
 
@@ -48,7 +48,7 @@ void VeiculoController::menu() {
                 break;
             case LISTAR_TODOS_VEICULOS:
                 break;
-            case UPDATE_LOCAL_VEICULOS:
+            case ATUALIZAR_VEICULOS:
                 updateLocalAtual();
                 updateStatus();
                 break;
