@@ -4,8 +4,8 @@
 #include <string>
 
 #include "../Model/Local.h"
-#include "../Service/LocalService.h"
 #include "../Service/VeiculoService.h"
+#include "../Service/LocalService.h"
 
 #ifndef VEICULOCONTROLLER_H
 #define VEICULOCONTROLLER_H
@@ -13,7 +13,7 @@
 class VeiculoController {
 
 public:
-    VeiculoController(VeiculoService &veiculoService, LocalService &localService);
+    VeiculoController(VeiculoService &veiculoService);
     void criar();
     void listar();
     void excluir();
@@ -23,8 +23,8 @@ public:
 
 private:
     VeiculoService& veiculoService;
-    LocalService& localService;
     Local selecionarLocal();
+
 
 
 };
