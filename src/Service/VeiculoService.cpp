@@ -17,6 +17,14 @@ EnumResultadoCriacaoVeiculo VeiculoService::criar(Veiculo &veiculo) {
 }
 
 bool VeiculoService::excluir(std::string placa) {
+    for (int i = 0; i <= veiculos.size(); i++) {
+        if (veiculos[i].placa == placa) {
+            veiculos.erase(veiculos.begin() + i);
+        } else {
+            return false;
+        }
+    }
+
     return true;
 }
 
