@@ -26,6 +26,7 @@ void VeiculoController::menu() {
         std::cout << static_cast<char>(CRIAR_VEICULO) << " -  Criar Veiculo\n";
         std::cout << static_cast<char>(EXCLUIR_VEICULO) << " -  Excluir Veiculo\n";
         std::cout << static_cast<char>(LISTAR_TODOS_VEICULOS) << " -  Listar todos veiculos\n";
+        std::cout << static_cast<char>(ATUALIZAR_VEICULOS) << " -  Atualizar Veiculos\n";
         std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO) << " -  Voltar para o menu principal\n";
         std::cout << "-----------------------------\n";
 
@@ -46,7 +47,10 @@ void VeiculoController::menu() {
                 excluir();
                 break;
             case LISTAR_TODOS_VEICULOS:
-                listar();
+                break;
+            case ATUALIZAR_VEICULOS:
+                updateLocalAtual();
+                updateStatus();
                 break;
             case VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO:
                 return;
@@ -57,8 +61,6 @@ void VeiculoController::menu() {
 
     }
 }
-
-
 
 void VeiculoController::criar() {
 
@@ -166,12 +168,47 @@ void VeiculoController::excluir() {
 }
 
 void VeiculoController::updateLocalAtual() {
+    std::string placa;
 
+    std::cout << "Digite a placa do veículo: ";
+    std::cin >> placa;
+
+    Local novoLocal = LocalUtils::selecionarLocal(localService);
+
+    veiculoService.updateLocalAtual(placa, novoLocal);
+
+    std::cout << "Local atual do veículo atualizado com sucesso!" << std::endl;
 }
 
 void VeiculoController::updateStatus() {
+        std::string placa;
+        std::cout << "Digite a placa do veículo: ";
+        std::cin >> placa;
+        std::cin.ignore();
 
-}
+        std::cout << "Digite o novo status:\n";
+        std::cout << "0 - Pendente\n";
+        std::cout << "1 - Disponível\n";
+        std::cout << "2 - Ocupado\n";
+
+        int opcao;
+        std::cin >> opcao;
+
+        EnumStatusVeiculo novoStatus;
+
+        switch (opcao) {
+            case 0: novoStatus = PENDENTE; break;
+            case 1: novoStatus = DISPONIVEL; break;
+            case 2: novoStatus = OCUPADO; break;
+            default:
+                std::cout << "Opção inválida." << std::endl;
+                return;
+        }
+
+        veiculoService.updateStatus(placa, novoStatus);
+        std::cout << "Status atualizado com sucesso!" << std::endl;
+    }
+
 
 
 
