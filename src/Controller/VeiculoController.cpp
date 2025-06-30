@@ -173,29 +173,7 @@ void VeiculoController::updateLocalAtual() {
     std::cout << "Digite a placa do veículo: ";
     std::cin >> placa;
 
-    std::vector<Local> locais = {
-        Local("Minas Gerais", 0, 0),
-        Local("São Paulo", 10, 5),
-        Local("Rio de Janeiro", -8, 4),
-        Local("Bahia", 15, -3)
-    };
-
-    std::cout << "\nLocais disponíveis:\n";
-    for (int i = 0; i < locais.size(); ++i) {
-        std::cout << i + 1 << " - " << locais[i].getEndereco()
-                  << " (" << locais[i].getX() << ", " << locais[i].getY() << ")\n";
-    }
-
-    int escolha;
-    std::cout << "Digite o número do local desejado: ";
-    std::cin >> escolha;
-
-    if (escolha < 1 || escolha > locais.size()) {
-        std::cout << "Opção inválida!" << std::endl;
-        return;
-    }
-
-    Local novoLocal = locais[escolha - 1];
+    Local novoLocal = LocalUtils::selecionarLocal(localService);
 
     veiculoService.updateLocalAtual(placa, novoLocal);
 
