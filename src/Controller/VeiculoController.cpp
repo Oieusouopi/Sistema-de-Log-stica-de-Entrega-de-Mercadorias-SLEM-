@@ -203,28 +203,34 @@ void VeiculoController::updateLocalAtual() {
 }
 
 void VeiculoController::updateStatus() {
-    std::string placa;
-    std::cout << "Digite a placa do veículo: ";
-    std::cin >> placa;
-    std::cin.ignore();
-    bool status;
+        std::string placa;
+        std::cout << "Digite a placa do veículo: ";
+        std::cin >> placa;
+        std::cin.ignore();
 
-    std::cout << "Digite o novo status (1 - Disponível, 0 - Ocupado): ";
-    int opcao;
-    std::cin >> opcao;
+        std::cout << "Digite o novo status:\n";
+        std::cout << "0 - Pendente\n";
+        std::cout << "1 - Disponível\n";
+        std::cout << "2 - Ocupado\n";
 
-    if (opcao == 1)
-        status = true;
-    else if (opcao == 0)
-        status = false;
-    else {
-        std::cout << "Opção inválida." << std::endl;
-        return;
+        int opcao;
+        std::cin >> opcao;
+
+        EnumStatusVeiculo novoStatus;
+
+        switch (opcao) {
+            case 0: novoStatus = PENDENTE; break;
+            case 1: novoStatus = DISPONIVEL; break;
+            case 2: novoStatus = OCUPADO; break;
+            default:
+                std::cout << "Opção inválida." << std::endl;
+                return;
+        }
+
+        veiculoService.updateStatus(placa, novoStatus);
+        std::cout << "Status atualizado com sucesso!" << std::endl;
     }
 
-    veiculoService.updateStatus(placa, status);
-    std::cout << "Status atualizado com sucesso!" << std::endl;
-}
 
 
 
