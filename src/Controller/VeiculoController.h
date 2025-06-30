@@ -26,6 +26,7 @@ private:
     LocalService& localService;
 
 
+
 };
 
 #endif //VEICULOCONTROLLER_H
