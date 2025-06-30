@@ -11,6 +11,15 @@ std::vector<Pedido> PedidoService::listar() {
 }
 
 bool PedidoService::excluir(int id) {
+
+    for (int i = 0; i <= pedidos.size(); i++) {
+        if (pedidos[i].id == id) {
+            pedidos.erase(pedidos.begin() + i);
+        } else {
+            return false;
+        }
+    }
+
     return true;
 }
 

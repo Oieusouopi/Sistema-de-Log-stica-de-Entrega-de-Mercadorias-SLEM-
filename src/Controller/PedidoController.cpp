@@ -41,6 +41,7 @@ void PedidoController::menu() {
                 criar();
                 break;
             case EXCLUIR_PEDIDO:
+                excluir();
                 break;
             case LISTAR_TODOS_PEDIDOS:
                 listar();
