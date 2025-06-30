@@ -10,8 +10,8 @@ std::vector<Pedido> PedidoService::listar() {
 
 }
 
-void PedidoService::excluir(int id) {
-
+bool PedidoService::excluir(int id) {
+    return true;
 }
 
 void PedidoService::update(int id) {

@@ -86,6 +86,38 @@ void PedidoController::criar() {
 }
 
 void PedidoController::excluir() {
+    std::vector<Pedido> pedidos = pedidoService.listar();
+
+    if (pedidos.empty()) {
+        std::cout << "Sem pedido cadastrado para ser excluído" << std::endl;
+    } else {
+
+        std::cout << "\n-------------------------- LISTA DE PEDIDOS PARA SEREM EXCLUIDOS --------------------------\n";
+
+        for (int i = 0; i < pedidos.size(); i++) {
+            std::cout << (i + 1) << " - #" << pedidos[i].id << " | " <<  std::endl;
+        }
+
+        int opcao = 0;
+        while (true) {
+            std::cout << "Digite o número do pedido pra excluir: ";
+            std::cin >> opcao;
+
+            if (std::cin.fail() || opcao < 1 || opcao > pedidos.size()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Opção inválida. Tente novamente." << std::endl;
+            } else {
+                break;
+            }
+        }
+
+        if (pedidoService.excluir(pedidos[opcao - 1].id)) {
+            std::cout << "Pedido excluído com sucesso" << std::endl;
+        } else {
+            std::cout << "Aconteceu algum erro ao excluir o veículo" << std::endl;
+        }
+    }
 
 }
 
