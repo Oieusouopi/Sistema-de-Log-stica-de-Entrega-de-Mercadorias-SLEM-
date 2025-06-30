@@ -1,7 +1,9 @@
 //
 // Created by eec on 27/06/25.
 //
-#include "EnumStatusVeiculoUtils.h"
+#include <string>
+
+#include "EnumUtils.h"
 
 std::string statusToString(EnumStatusVeiculo status) {
     switch (status) {

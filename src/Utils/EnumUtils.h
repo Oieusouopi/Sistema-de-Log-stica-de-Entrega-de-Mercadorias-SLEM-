@@ -5,8 +5,11 @@
 #define ENUMUTILS_H
 
 enum EnumStatusVeiculo {
-    OCUPADO,
     PENDENTE,
+    DISPONIVEL,
+    OCUPADO
 };
+
+std::string statusToString(EnumStatusVeiculo status);
 
 #endif //ENUMUTILS_H

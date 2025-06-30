@@ -7,7 +7,7 @@
 
 #include "../Service/LocalService.h"
 #include "limits"
-#include "../Utils/EnumStatusVeiculoUtils.h"
+#include "../Utils/EnumUtils.h"
 
 
 Local LocalUtils::selecionarLocal(LocalService& localService) {
