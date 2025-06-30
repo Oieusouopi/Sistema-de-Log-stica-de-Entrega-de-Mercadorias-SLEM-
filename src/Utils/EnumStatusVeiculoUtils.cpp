@@ -5,7 +5,9 @@
 
 std::string statusToString(EnumStatusVeiculo status) {
     switch (status) {
-        case PENDENTE: return "PENDENTE";
-        default: return "DESCONHECIDO";
+        case PENDENTE: return "Pendente";
+        case DISPONIVEL: return "Disponível";
+        case OCUPADO: return "Ocupado";
+        default: return "Desconhecido";
     }
 }
