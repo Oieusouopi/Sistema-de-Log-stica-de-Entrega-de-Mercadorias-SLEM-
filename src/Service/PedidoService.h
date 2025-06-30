@@ -19,7 +19,7 @@ class PedidoService {
         EnumResultadoCriacaoPedido criar(const Pedido& pedido);
         std::vector<Pedido> listar();
         void update(int id);
-        void excluir(int id);
+        bool excluir(int id);
     private:
         std::vector<Pedido> pedidos;
 };
