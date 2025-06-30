@@ -9,13 +9,19 @@
 
 #include "../Model/Pedido.h"
 
+enum EnumResultadoCriacaoPedido {
+    SUCESSO_CRIACAO_DO_PEDIDO,
+    ERRO_CRIACAO_DO_PEDIDO_SEM_LOCAL,
+    ERRO_CRIACAO_DO_PEDIDO_COM_PESO_NEGATIVO,
+};
+
 class PedidoService {
 
     public:
-        void criar(const Pedido& pedido);
+        EnumResultadoCriacaoPedido criar(const Pedido& pedido);
         std::vector<Pedido> listar();
         void update(int id);
-        void excluir(int id);
+        bool excluir(int id);
     private:
         std::vector<Pedido> pedidos;
 };

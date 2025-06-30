@@ -35,8 +35,8 @@ public:
     AppImpl()
         : veiculoController(veiculoService),
           localController(localService),
-          pedidoController(pedidoService),
-          rotaController(rotaService) {}
+          pedidoController(pedidoService, localService),
+          rotaController(rotaService){}
 
     void menuPrincipal() {
         teclaGlobal = '\0';

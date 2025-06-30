@@ -37,4 +37,5 @@ add_executable(Sistema_de_Logistica_de_Entrega_de_Mercadorias src/main.cpp
         src/Utils/EnumUtils.h
         src/Utils/EnumStatusVeiculoUtils.h
         src/Utils/EnumStatusVeiculoUtils.cpp
-)
+        src/Utils/LocalUtils.h
+        src/Utils/LocalUtils.cpp)

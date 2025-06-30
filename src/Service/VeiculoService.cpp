@@ -13,14 +13,24 @@ EnumResultadoCriacaoVeiculo VeiculoService::criar(Veiculo &veiculo) {
 
     veiculos.push_back(veiculo);
 
-    return SUCESSO;
+    return SUCESSO_CRIACAO_DO_VEICULO;
 }
 
 bool VeiculoService::excluir(std::string placa) {
+    for (int i = 0; i <= veiculos.size(); i++) {
+        if (veiculos[i].placa == placa) {
+            veiculos.erase(veiculos.begin() + i);
+        } else {
+            return false;
+        }
+    }
+
     return true;
 }
 
-std::vector<Veiculo> VeiculoService::listar() {}
+std::vector<Veiculo> VeiculoService::listar() {
+    return veiculos;
+}
 
 void VeiculoService::updateLocalAtual(std::string placa, Local local) {
 
