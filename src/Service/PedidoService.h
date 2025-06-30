@@ -11,6 +11,8 @@
 
 enum EnumResultadoCriacaoPedido {
     SUCESSO_CRIACAO_DO_PEDIDO,
+    ERRO_CRIACAO_DO_PEDIDO_SEM_LOCAL,
+    ERRO_CRIACAO_DO_PEDIDO_COM_PESO_NEGATIVO,
 };
 
 class PedidoService {

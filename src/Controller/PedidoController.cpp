@@ -77,9 +77,15 @@ void PedidoController::criar() {
     Pedido pedido = Pedido(localOrigem, localDestino, pesoDoItem);
 
     switch (pedidoService.criar(pedido)) {
-        case SUCESSO_CRIACAO_DO_PEDIDO: {
+        case SUCESSO_CRIACAO_DO_PEDIDO:
             std::cout << "Pedido criado com sucesso" << std::endl;
-        }
+            break;
+        case ERRO_CRIACAO_DO_PEDIDO_COM_PESO_NEGATIVO:
+            std::cout << "Não é possivel criar pedido com peso negativo" << std::endl;
+            break;
+        case ERRO_CRIACAO_DO_PEDIDO_SEM_LOCAL:
+            std::cout << "Não é possivel criar pedido sem local de origem ou local de destino" << std::endl;
+            break;
     }
 
     std::cout << "Redirecionando para o menu pedidos...";
