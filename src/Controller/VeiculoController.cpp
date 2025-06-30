@@ -175,9 +175,12 @@ void VeiculoController::updateLocalAtual() {
 
     Local novoLocal = LocalUtils::selecionarLocal(localService);
 
-    veiculoService.updateLocalAtual(placa, novoLocal);
+    bool response = veiculoService.updateLocalAtual(placa, novoLocal);
 
-    std::cout << "Local atual do veículo atualizado com sucesso!" << std::endl;
+    if(response)
+        std::cout << "Local atual do veículo atualizado com sucesso!" << std::endl;
+    else
+        std::cout << "Veículo não encontrado, digite uma placa válida!" << std::endl;
 }
 
 void VeiculoController::updateStatus() {
