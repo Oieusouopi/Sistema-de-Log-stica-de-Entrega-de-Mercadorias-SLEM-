@@ -2,6 +2,8 @@
 #include <string>
 
 #include "../Model/Local.h"
+#include "../Utils/EnumStatusVeiculoUtils.h"
+
 //
 // Created by eec on 18/06/25.
 //
@@ -33,11 +35,17 @@ std::vector<Veiculo> VeiculoService::listar() {
 }
 
 void VeiculoService::updateLocalAtual(std::string placa, Local local) {
-
 }
 
-void VeiculoService::updateStatus(std::string placa, bool status) {
+bool VeiculoService::updateStatus(std::string placa, EnumStatusVeiculo status) {
+    for (int i = 0; i < veiculos.size(); i++) {
+        if (veiculos[i].placa == placa) {
+            veiculos[i].status = status;
+            return true;
+        }
+    }
 
+    return false;
 }
 
 bool VeiculoService::validarPlaca(std::string placa) {
