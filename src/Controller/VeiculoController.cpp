@@ -205,8 +205,12 @@ void VeiculoController::updateStatus() {
                 return;
         }
 
-        veiculoService.updateStatus(placa, novoStatus);
-        std::cout << "Status atualizado com sucesso!" << std::endl;
+        bool response = veiculoService.updateStatus(placa, novoStatus);
+
+        if (response)
+            std::cout << "Status atualizado com sucesso!" << std::endl;
+        else 
+            std::cout << "Veículo não encontrado, digite uma placa válida!" << std::endl;
     }
 
 
