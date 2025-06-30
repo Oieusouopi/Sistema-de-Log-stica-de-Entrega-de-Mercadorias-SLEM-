@@ -93,7 +93,7 @@ void VeiculoController::criar() {
             break;
         default:
             std::cout << "Veiculo não criado aconteceu algum erro inesperado" << std::endl;
-        break;
+            break;
     }
 
     std::cout << "Redirecionando para o menu veículo..." << std::endl;

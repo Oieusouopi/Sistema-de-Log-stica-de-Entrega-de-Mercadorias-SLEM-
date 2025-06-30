@@ -126,6 +126,7 @@ void PedidoController::excluir() {
         }
     }
 
+    std::cout << "Redirecionando para o menu do pedido..." << std::endl;
 }
 
 void PedidoController::listar() {
