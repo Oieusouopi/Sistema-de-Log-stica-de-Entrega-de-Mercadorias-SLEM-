@@ -10,6 +10,11 @@
 
 #include "EnumStatusVeiculoUtils.h"
 #include "EnumUtils.h"
+enum EnumStatusVeiculo {
+    PENDENTE,
+    DISPONIVEL,
+    OCUPADO
+};
 
 std::string statusToString(EnumStatusVeiculo status);
 
