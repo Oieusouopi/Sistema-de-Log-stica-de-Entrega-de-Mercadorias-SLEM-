@@ -20,7 +20,9 @@ bool VeiculoService::excluir(std::string placa) {
     return true;
 }
 
-std::vector<Veiculo> VeiculoService::listar() {}
+std::vector<Veiculo> VeiculoService::listar() {
+    return veiculos;
+}
 
 void VeiculoService::updateLocalAtual(std::string placa, Local local) {
 
