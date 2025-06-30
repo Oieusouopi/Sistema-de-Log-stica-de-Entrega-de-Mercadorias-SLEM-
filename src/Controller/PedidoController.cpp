@@ -89,7 +89,7 @@ void PedidoController::criar() {
             break;
     }
 
-    std::cout << "Redirecionando para o menu pedidos...";
+    std::cout << "Redirecionando para o menu pedidos..." << std::endl;
 }
 
 void PedidoController::excluir() {

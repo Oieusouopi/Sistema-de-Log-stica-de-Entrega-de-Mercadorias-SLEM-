@@ -162,7 +162,7 @@ void VeiculoController::excluir() {
         }
     }
 
-    std::cout << "Redirecionando para o menu veículo...";
+    std::cout << "Redirecionando para o menu veículo..." << std::endl;
 }
 
 void VeiculoController::updateLocalAtual() {
