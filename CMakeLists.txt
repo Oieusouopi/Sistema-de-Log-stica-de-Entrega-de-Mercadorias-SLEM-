@@ -39,5 +39,11 @@ add_executable(Sistema_de_Logistica_de_Entrega_de_Mercadorias src/main.cpp
         src/Utils/EnumStatusVeiculoUtils.cpp
         src/Utils/LocalUtils.h
         src/Utils/LocalUtils.cpp
-        src/Utils/VeiculoUtils.h
-        src/Utils/VeiculoUtils.cpp)
+        src/Repository/LocalRepository.cpp
+        src/Repository/LocalRepository.h
+        src/Repository/VeiculoRepository.h
+        src/Repository/VeiculoRepository.cpp
+        src/Repository/PedidoRepository.h
+        src/Repository/PedidoRepository.cpp
+        src/Controller/BancoController.cpp
+        src/Controller/BancoController.h)

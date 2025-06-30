@@ -9,6 +9,8 @@
 #include <iostream>
 
 #include "Controller/RotaController.h"
+#include "Repository/PedidoRepository.h"
+#include "Repository/VeiculoRepository.h"
 #include "Service/RotaService.h"
 #include "Utils/EnumMenu.h"
 #include "Utils/ExibirMensagem.h"
@@ -18,6 +20,8 @@
 
 class AppImpl {
 private:
+    LocalRepository localRepository;
+
     VeiculoService veiculoService;
     LocalService localService;
     PedidoService pedidoService;
@@ -33,7 +37,8 @@ public:
     char teclaGlobal;
 
     AppImpl()
-        : veiculoController(veiculoService, localService, pedidoService),
+        : localService(localRepository),
+          veiculoController(veiculoService, localService),
           localController(localService),
           pedidoController(pedidoService, localService, veiculoService),
           rotaController(rotaService, pedidoService, veiculoService){}

@@ -71,10 +71,7 @@ void LocalController::criar() {
     std::cout << "Digite o endereço (Ex: 'Sao Paulo', 'Avenida X 123'): ";
     std::cin.getline(endereco, 100);
 
-
-    int novoId = localService.gerarNovoId();
-
-    Local local(novoId, x, y, endereco);
+    Local local(x, y, endereco);
 
     localService.criar(local);
 }
@@ -113,15 +110,17 @@ void LocalController::atualizar() {
     std::cout << "Digite o ID do local que deseja atualizar: ";
     std::cin >> id;
 
-    Local* local = localService.buscarPorId(id);
+    Local local;
 
-    if (!local) {
-        std::cout << "Nenhum local encontrado com o ID " << id << ".\n";
+    try {
+        local = localService.buscarPorId(id);
+    } catch (const std::exception& e) {
+        std::cerr << "Erro: " << e.what() << std::endl;
         return;
     }
 
     std::cout << "Local atual:\n";
-    local->mostrar();
+    local.mostrar();
 
     char opcao;
     std::cout << "O que deseja atualizar?\n";
@@ -136,7 +135,7 @@ void LocalController::atualizar() {
             float novoX;
             std::cout << "Nova coordenada X: ";
             std::cin >> novoX;
-            local->setX(novoX);
+            local.setX(novoX);
             std::cout << "Coordenada X atualizada com sucesso.\n";
             break;
         }
@@ -144,7 +143,7 @@ void LocalController::atualizar() {
             float novoY;
             std::cout << "Nova coordenada Y: ";
             std::cin >> novoY;
-            local->setY(novoY);
+            local.setY(novoY);
             std::cout << "Coordenada Y atualizada com sucesso.\n";
             break;
         }

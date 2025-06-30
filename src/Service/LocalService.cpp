@@ -3,6 +3,8 @@
 // Created by eec on 18/06/25.
 //
 
+LocalService::LocalService(LocalRepository &localRepository): localRepository(localRepository) {};
+
 bool validarEndereco(const char end[]) {
         bool temLetra = false;
         for (int i = 0; end[i] != '\0'; i++) {
@@ -19,6 +21,7 @@ bool validarEndereco(const char end[]) {
 }
 
 bool LocalService::existeEndereco(const std::string& endereco) const {
+        std::vector<Local> locais = localRepository.listar();
         for (const auto& local : locais) {
                 if (local.getEndereco() == endereco) {
                         return true;
@@ -38,34 +41,23 @@ void LocalService::criar(const Local& local) {
                 return;
         }
 
-        locais.push_back(local);
+
+        localRepository.salvarOuAtualizar(local);
+
         std::cout << "Local criado com sucesso.\n";
 }
 
 std::vector<Local> LocalService::listar() {
-        return locais;
-}
-
-int LocalService::gerarNovoId() {
-        int maiorId = 0;
-
-        for (const auto& local : locais) {
-                if (local.getId() > maiorId) {
-                        maiorId = local.getId();
-                }
-        }
-
-        return maiorId + 1;
+        return localRepository.listar();
 }
 
 void LocalService::excluirPorId(int id) {
-        locais.erase(
-            std::remove_if(locais.begin(), locais.end(),
-                           [id](const Local& l) { return l.getId() == id; }),
-            locais.end());
+        localRepository.excluir(id);
 }
 
 bool LocalService::existeId(int id) {
+        std::vector<Local> locais = localRepository.listar();
+
         for (const auto& local : locais) {
                 if (local.getId() == id) {
                         return true;
@@ -74,13 +66,10 @@ bool LocalService::existeId(int id) {
         return false;
 }
 
-Local* LocalService::buscarPorId(int id) { // Atualizar diretamente no objeto local
-        for (auto& local : locais) {
-                if (local.getId() == id) {
-                        return &local;
-                }
+Local LocalService::buscarPorId(int id) {
+        if (id != NULL && id > 0) {
+                return localRepository.buscarPorId(id);
         }
-        return nullptr;
 }
 
 bool LocalService::atualizarEnderecoPorId(int id, const std::string& novoEndereco) {
@@ -94,13 +83,11 @@ bool LocalService::atualizarEnderecoPorId(int id, const std::string& novoEnderec
                 return false;
         }
 
-        for (auto& local : locais) {
-                if (local.getId() == id) {
-                        local.setEndereco(novoEndereco);
-                        std::cout << "Endereço atualizado com sucesso.\n";
-                        return true;
-                }
-        }
+        Local local = localRepository.buscarPorId(id);
+
+        local.setEndereco(novoEndereco);
+
+        localRepository.salvarOuAtualizar(local);
 
         std::cout << "ID não encontrado.\n";
         return false;
