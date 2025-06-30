@@ -32,8 +32,15 @@ std::vector<Veiculo> VeiculoService::listar() {
     return veiculos;
 }
 
-void VeiculoService::updateLocalAtual(std::string placa, Local local) {
+bool VeiculoService::updateLocalAtual(std::string placa, Local local) {
+    for (int i = 0; i < veiculos.size(); i++) {
+        if (veiculos[i].placa == placa) {
+            veiculos[i].localAtual = local;
+            return true;
+        }
+    }
 
+    return false;
 }
 
 void VeiculoService::updateStatus(std::string placa, bool status) {
