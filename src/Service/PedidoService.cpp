@@ -7,7 +7,7 @@ EnumResultadoCriacaoPedido PedidoService::criar(const Pedido& pedido) {
 }
 
 std::vector<Pedido> PedidoService::listar() {
-
+    return pedidos;
 }
 
 bool PedidoService::excluir(int id) {
