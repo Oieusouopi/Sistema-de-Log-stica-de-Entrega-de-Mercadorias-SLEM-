@@ -7,6 +7,8 @@
 
 #include "../Service/LocalService.h"
 #include "limits"
+#include "../Utils/EnumStatusVeiculoUtils.h"
+
 
 Local LocalUtils::selecionarLocal(LocalService& localService) {
     const std::vector<Local> locais = localService.listar();
@@ -26,6 +28,8 @@ Local LocalUtils::selecionarLocal(const std::vector<Local> locaisDisponiveis) {
     }
 
     int opcao = 0;
+    EnumStatusVeiculo status = PENDENTE;
+
     while (true) {
         std::cout << "Digite o número da opção: ";
         std::cin >> opcao;
