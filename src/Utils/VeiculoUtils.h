@@ -12,11 +12,9 @@
 
 class VeiculoUtils {
 public:
-    // Função que encontra o veículo mais próximo de um pedido
     static Veiculo* encontrarVeiculoMaisProximo(const std::vector<Veiculo>& veiculos, const Pedido& pedido);
 
 private:
-    // Função auxiliar para calcular a distância euclidiana entre dois locais
     static double calcularDistancia(const Local& local1, const Local& local2);
 };
 
