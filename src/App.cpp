@@ -33,10 +33,10 @@ public:
     char teclaGlobal;
 
     AppImpl()
-        : veiculoController(veiculoService, localService),
+        : veiculoController(veiculoService, localService, pedidoService),
           localController(localService),
-          pedidoController(pedidoService, localService),
-          rotaController(rotaService){}
+          pedidoController(pedidoService, localService, veiculoService),
+          rotaController(rotaService, pedidoService, veiculoService){}
 
     void menuPrincipal() {
         teclaGlobal = '\0';
