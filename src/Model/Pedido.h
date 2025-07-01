@@ -13,20 +13,13 @@ class Pedido {
 
 public:
     Pedido(Local localOrigem, Local localDestino, double pesoDoItem):
-    localDestino(localDestino), localOrigem(localOrigem), pesoDoItem(pesoDoItem) {
-        id = gerarIdUnico();
-    };
+    id(0), localDestino(localDestino), localOrigem(localOrigem), pesoDoItem(pesoDoItem) {};
 
-    int id;
     Local localOrigem;
     Local localDestino;
     double pesoDoItem;
-
-    static int gerarIdUnico() {
-        static std::mt19937 gerador(std::chrono::system_clock::now().time_since_epoch().count());
-        std::uniform_int_distribution<int> distribuicao(100000, 999999);
-        return distribuicao(gerador);
-    }
+private:
+    int id;
 };
 
 #endif //PEDIDO_H
