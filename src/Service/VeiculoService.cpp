@@ -2,6 +2,7 @@
 #include <string>
 
 #include "../Model/Local.h"
+#include "../Model/Veiculo.h"
 //
 // Created by eec on 18/06/25.
 //
@@ -38,6 +39,16 @@ void VeiculoService::updateLocalAtual(std::string placa, Local local) {
 
 void VeiculoService::updateStatus(std::string placa, bool status) {
 
+}
+
+void VeiculoService::updateStatusEPedido(std::string placa, EnumStatusVeiculo status, int pedidoId) {
+    for (auto& veiculo : veiculos) {
+        if (veiculo.placa == placa) {
+            veiculo.status = status;
+            veiculo.pedidoId = pedidoId;
+            break;
+        }
+    }
 }
 
 bool VeiculoService::validarPlaca(std::string placa) {

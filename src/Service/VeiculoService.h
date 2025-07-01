@@ -9,6 +9,7 @@
 
 #include "../Model/Local.h"
 #include "../Model/Veiculo.h"
+#include "../Utils/EnumUtils.h"
 
 enum EnumResultadoCriacaoVeiculo {
     SUCESSO_CRIACAO_DO_VEICULO,
@@ -23,6 +24,7 @@ class VeiculoService {
         bool excluir(std::string placa);
         void updateStatus(std::string placa, bool status);
         void updateLocalAtual(std::string placa, Local local);
+        void updateStatusEPedido(std::string placa, EnumStatusVeiculo status, int pedidoId);
         bool validarPlaca(std::string placa);
     private:
         std::vector<Veiculo> veiculos;

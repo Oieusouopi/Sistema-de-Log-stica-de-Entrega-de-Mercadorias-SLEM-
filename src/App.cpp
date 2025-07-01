@@ -35,7 +35,7 @@ public:
     AppImpl()
         : veiculoController(veiculoService, localService),
           localController(localService),
-          pedidoController(pedidoService, localService),
+          pedidoController(pedidoService, localService, veiculoService),
           rotaController(rotaService){}
 
     void menuPrincipal() {

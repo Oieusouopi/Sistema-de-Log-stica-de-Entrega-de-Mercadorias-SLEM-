@@ -18,7 +18,7 @@ enum EnumResultadoCriacaoPedido {
 class PedidoService {
 
     public:
-        EnumResultadoCriacaoPedido criar(const Pedido& pedido);
+        EnumResultadoCriacaoPedido criar(const Pedido& pedido, VeiculoService& veiculoService);
         std::vector<Pedido> listar();
         void update(int id);
         bool excluir(int id);
