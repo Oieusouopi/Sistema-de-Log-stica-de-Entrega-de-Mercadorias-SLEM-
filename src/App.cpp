@@ -33,7 +33,7 @@ public:
     char teclaGlobal;
 
     AppImpl()
-        : veiculoController(veiculoService, localService),
+        : veiculoController(veiculoService, localService, pedidoService),
           localController(localService),
           pedidoController(pedidoService, localService, veiculoService),
           rotaController(rotaService){}
