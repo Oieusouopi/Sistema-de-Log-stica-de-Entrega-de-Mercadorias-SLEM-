@@ -134,7 +134,7 @@ void PedidoController::listar() {
     std::cout << std::left
               << std::setw(20) << "LOCAL DE ORIGEM"
               << std::setw(20) << "LOCAL DE DESTINO"
-              << std::setw(10) << "PESO DO ITEM";
+              << std::setw(10) << "PESO DO ITEM" << std::endl;
 
     std::cout << std::string(72, '-') << '\n';
 
