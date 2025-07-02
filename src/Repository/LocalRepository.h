@@ -12,7 +12,7 @@
 class LocalRepository {
 
 public:
-    void salvarTodos(char caminho[]);
+    void salvarBackup(char caminho[]);
     void salvarNoBanco();
     std::vector<Local> listar();
     Local buscarPorId(int id);

@@ -3,17 +3,23 @@
 // Created by eec on 30/06/25.
 //
 
-void LocalRepository::salvarTodos(char caminho[30]) {
-    FILE* file = fopen(caminho, "rb");
+void LocalRepository::salvarBackup(char caminho[30]) {
+    FILE* file = fopen(caminho, "wb");
 
     if (file == NULL) {
         std::cout << "Problema na abertura do arquivo";
         return;
     }
 
-    fwrite(&locais,  sizeof(char) ,locais.size() * sizeof(Local), file);
+    int quantidade = locais.size();
+    fwrite(&quantidade, sizeof(int), 1, file);
+
+    for (const Local& local : locais) {
+        fwrite(&local, sizeof(Local), 1, file);
+    }
 
     fclose(file);
+    std::cout << "Backup salvo com sucesso!\n";
 }
 
 std::vector<Local> LocalRepository::listar() {

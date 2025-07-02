@@ -8,6 +8,7 @@
 
 #include <iostream>
 
+#include "Controller/BancoController.h"
 #include "Controller/RotaController.h"
 #include "Repository/PedidoRepository.h"
 #include "Repository/VeiculoRepository.h"
@@ -28,24 +29,28 @@ private:
     LocalService localService;
     PedidoService pedidoService;
     RotaService rotaService;
+    BancoService bancoService;
 
     VeiculoController veiculoController;
     LocalController localController;
     PedidoController pedidoController;
     RotaController rotaController;
+    BancoController bancoController;
 
 public:
 
     char teclaGlobal;
 
     AppImpl()
-        : localService(localRepository),
+        : bancoService(pedidoRepository,localRepository, veiculoRepository),
+          localService(localRepository),
           pedidoService(pedidoRepository),
           veiculoService(veiculoRepository),
-          veiculoController(veiculoService, localService),
+          veiculoController(veiculoService, localService, pedidoService),
           localController(localService),
           pedidoController(pedidoService, localService, veiculoService),
-          rotaController(rotaService, pedidoService, veiculoService){}
+          rotaController(rotaService, pedidoService, veiculoService),
+          bancoController(bancoService){}
 
     void menuPrincipal() {
         teclaGlobal = '\0';
@@ -85,7 +90,7 @@ public:
                     rotaController.menu();
                     break;
                 case EXIBIR_MENU_BANCO:
-                    // menuBanco();
+                    bancoController.menu();
                     break;
                 case FINALIZAR_PROGRAMA:
                     ExibirMensagem::exibirDespedida();

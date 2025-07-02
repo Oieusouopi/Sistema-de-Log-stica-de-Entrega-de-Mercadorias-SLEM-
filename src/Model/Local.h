@@ -18,7 +18,7 @@ public:
     Local() {};
     Local(std::string endereco): endereco(endereco) {}
 
-    Local(int id, float x, float y, const std::string& end)
+    Local(float x, float y, const std::string& end)
         : id(id), cord_x(x), cord_y(y), endereco(end) {}
 
     void setId(int id) { this->id = id; }

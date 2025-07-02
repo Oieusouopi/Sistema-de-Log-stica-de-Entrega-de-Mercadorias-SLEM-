@@ -4,12 +4,16 @@
 
 #ifndef BANCOCONTROLLER_H
 #define BANCOCONTROLLER_H
+#include "../Service/BancoService.h"
 
 class BancoController {
     public:
+        BancoController(BancoService &bancoService);
         void menu();
-        void salvarTodos();
+        void salvarDados();
         void restaurar();
+    private:
+        BancoService bancoService;
 };
 
 #endif //BANCOCONTROLLER_H
