@@ -2,7 +2,6 @@
 //
 // Created by eec on 30/06/25.
 //
-int LocalRepository::proximoId = 1;
 
 void LocalRepository::salvarTodos(char caminho[30]) {
     FILE* file = fopen(caminho, "rb");
@@ -40,7 +39,7 @@ void LocalRepository::excluir(int id) {
 }
 
 
-bool LocalRepository::salvarOuAtualizar(Local local) {
+void LocalRepository::salvarOuAtualizar(Local local) {
     for (auto& l : locais) {
         if (l.getId() == local.getId()) {
             l = local;

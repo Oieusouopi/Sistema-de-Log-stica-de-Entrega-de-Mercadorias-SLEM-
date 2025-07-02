@@ -4,16 +4,19 @@
 //
 // Created by eec on 18/06/25.
 //
-EnumResultadoCriacaoPedido PedidoService::criar(const Pedido& pedido) {
+PedidoService::PedidoService(PedidoRepository &pedidoRepository): pedidoRepository(pedidoRepository) {}
 
-    if (pedido.localOrigem.getEndereco() == "Não definido" || pedido.localDestino.getEndereco() == "Não definido") {
+EnumResultadoCriacaoPedido PedidoService::criar(Pedido pedido) {
+
+    if (pedido.getLocalOrigem().getEndereco() == "Não definido" || pedido.getLocalDestino().getEndereco() == "Não definido") {
         return ERRO_CRIACAO_DO_PEDIDO_SEM_LOCAL;
     }
 
-    if (pedido.pesoDoItem <= 0) {
+    if (pedido.getPesoItem() <= 0) {
         return ERRO_CRIACAO_DO_PEDIDO_COM_PESO_NEGATIVO;
     }
 
+    pedidoRepository.salvarOuAtualizar(pedido);
     std::vector<Veiculo> veiculos = veiculoService.listar();
     Veiculo* veiculoMaisProximo = VeiculoUtils::encontrarVeiculoMaisProximo(veiculos, pedido);
 
@@ -27,20 +30,11 @@ EnumResultadoCriacaoPedido PedidoService::criar(const Pedido& pedido) {
 }
 
 std::vector<Pedido> PedidoService::listar() {
-    return pedidos;
+    return pedidoRepository.listar();
 }
 
-bool PedidoService::excluir(int id) {
-
-    for (int i = 0; i <= pedidos.size(); i++) {
-        if (pedidos[i].id == id) {
-            pedidos.erase(pedidos.begin() + i);
-        } else {
-            return false;
-        }
-    }
-
-    return true;
+void PedidoService::excluir(int id) {
+    pedidoRepository.excluir(id);
 }
 
 void PedidoService::update(int id) {

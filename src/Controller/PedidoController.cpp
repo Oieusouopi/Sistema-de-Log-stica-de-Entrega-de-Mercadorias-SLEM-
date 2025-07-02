@@ -102,7 +102,7 @@ void PedidoController::excluir() {
         std::cout << "\n-------------------------- LISTA DE PEDIDOS PARA SEREM EXCLUIDOS --------------------------\n";
 
         for (int i = 0; i < pedidos.size(); i++) {
-            std::cout << (i + 1) << " - #" << pedidos[i].id << " | " <<  std::endl;
+            std::cout << (i + 1) << " - #" << pedidos[i].getId() << " | " <<  std::endl;
         }
 
         int opcao = 0;
@@ -119,11 +119,9 @@ void PedidoController::excluir() {
             }
         }
 
-        if (pedidoService.excluir(pedidos[opcao - 1].id)) {
-            std::cout << "Pedido excluído com sucesso" << std::endl;
-        } else {
-            std::cout << "Aconteceu algum erro ao excluir o veículo" << std::endl;
-        }
+        pedidoService.excluir(pedidos[opcao - 1].getId());
+
+        std::cout << "Pedido excluído com sucesso" << std::endl;
     }
 
     std::cout << "Redirecionando para o menu do pedido..." << std::endl;
@@ -142,11 +140,11 @@ void PedidoController::listar() {
 
     std::vector<Pedido> pedidos = pedidoService.listar();
 
-    for (const auto& pedido : pedidos) {
+    for ( auto& pedido : pedidos) {
         std::cout << std::left
-                 << std::setw(10) << pedido.localOrigem.getEndereco()
-                 << std::setw(20) << pedido.localDestino.getEndereco()
-                 << std::setw(12) << pedido.pesoDoItem
+                 << std::setw(10) << pedido.getLocalOrigem().getEndereco()
+                 << std::setw(20) << pedido.getLocalDestino().getEndereco()
+                 << std::setw(12) << pedido.getPesoItem()
                  << '\n';
     }
 

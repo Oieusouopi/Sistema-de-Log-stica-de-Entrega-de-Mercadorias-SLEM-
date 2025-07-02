@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "../Model/Pedido.h"
+#include "../Repository/PedidoRepository.h"
 
 enum EnumResultadoCriacaoPedido {
     SUCESSO_CRIACAO_DO_PEDIDO,
@@ -18,12 +19,13 @@ enum EnumResultadoCriacaoPedido {
 class PedidoService {
 
     public:
-        EnumResultadoCriacaoPedido criar(const Pedido& pedido, VeiculoService& veiculoService);
+        PedidoService(PedidoRepository &pedidoRespository);
+        EnumResultadoCriacaoPedido criar(Pedido pedido);
         std::vector<Pedido> listar();
         void update(int id);
-        bool excluir(int id);
+        void excluir(int id);
     private:
-        std::vector<Pedido> pedidos;
+        PedidoRepository &pedidoRepository;
 };
 
 #endif //PEDIDOSERVICE_H
