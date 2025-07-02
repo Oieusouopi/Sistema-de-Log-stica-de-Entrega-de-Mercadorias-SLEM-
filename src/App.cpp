@@ -22,6 +22,7 @@ class AppImpl {
 private:
     LocalRepository localRepository;
     PedidoRepository pedidoRepository;
+    VeiculoRepository veiculoRepository;
 
     VeiculoService veiculoService;
     LocalService localService;
@@ -40,6 +41,7 @@ public:
     AppImpl()
         : localService(localRepository),
           pedidoService(pedidoRepository),
+          veiculoService(veiculoRepository),
           veiculoController(veiculoService, localService),
           localController(localService),
           pedidoController(pedidoService, localService, veiculoService),

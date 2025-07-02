@@ -9,10 +9,7 @@
 
 #include "../Model/Local.h"
 #include "../Model/Veiculo.h"
-#include "../Utils/EnumUtils.h"
-
-// Forward declaration
-class PedidoService;
+#include "../Repository/VeiculoRepository.h"
 
 enum EnumResultadoCriacaoVeiculo {
     SUCESSO_CRIACAO_DO_VEICULO,
@@ -22,9 +19,10 @@ enum EnumResultadoCriacaoVeiculo {
 class VeiculoService {
 
     public:
-        EnumResultadoCriacaoVeiculo criar(Veiculo& veiculo, PedidoService& pedidoService);
+        VeiculoService(VeiculoRepository &veiculoRepository);
+        EnumResultadoCriacaoVeiculo criar(Veiculo& veiculo);
         std::vector<Veiculo> listar();
-        bool excluir(std::string placa);
+        void excluir(int id);
         void updateStatus(std::string placa, bool status);
         void updateStatus(std::string placa, EnumStatusVeiculo status, PedidoService& pedidoService);
         void updateLocalAtual(std::string placa, Local local);
@@ -32,7 +30,7 @@ class VeiculoService {
         void verificarEAssociarPedidos(class PedidoService& pedidoService);
         bool validarPlaca(std::string placa);
     private:
-        std::vector<Veiculo> veiculos;
+        VeiculoRepository &veiculoRepository;
 };
 
 #endif //VEICULOSERVICE_H

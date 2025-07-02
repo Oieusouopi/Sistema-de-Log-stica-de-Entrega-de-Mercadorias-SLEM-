@@ -86,7 +86,7 @@ void VeiculoController::criar() {
 
     Local localSelecionado = LocalUtils::selecionarLocal(localService);
 
-    Veiculo veiculo = Veiculo(placa, modelo, localSelecionado);
+    Veiculo veiculo = Veiculo(placa, modelo, localSelecionado.getId());
 
     EnumResultadoCriacaoVeiculo resultado = veiculoService.criar(veiculo, pedidoService);
 
@@ -117,12 +117,14 @@ void VeiculoController::listar() {
 
     std::vector<Veiculo> veiculos = veiculoService.listar();
 
-    for (const auto& v : veiculos) {
+    for (auto& v : veiculos) {
+        Local local = localService.buscarPorId(v.getLocalAtualId());
+
         std::cout << std::left
-                  << std::setw(10) << v.placa
-                  << std::setw(20) << v.modelo
-                  << std::setw(12) << statusToString(v.status)
-                  << std::setw(30) << v.localAtual.getEndereco()
+                  << std::setw(10) << v.getPlaca()
+                  << std::setw(20) << v.getModelo()
+                  << std::setw(12) << statusToString(v.getStatus())
+                  << std::setw(30) << local.getEndereco()
                   << '\n';
     }
 
@@ -141,7 +143,7 @@ void VeiculoController::excluir() {
         std::cout << "\n-------------------------- LISTA DE VEÍCULOS PARA SEREM EXCLUIDOS --------------------------\n";
 
         for (int i = 0; i < veiculos.size(); i++) {
-            std::cout << (i + 1) << " - " << veiculos[i].placa << " | " << veiculos[i].modelo <<  std::endl;
+            std::cout << (i + 1) << " - " << veiculos[i].getPlaca() << " | " << veiculos[i].getModelo() <<  std::endl;
         }
 
         int opcao = 0;
@@ -158,11 +160,8 @@ void VeiculoController::excluir() {
             }
         }
 
-        if (veiculoService.excluir(veiculos[opcao - 1].placa)) {
-            std::cout << "Veículo excluído com sucesso" << std::endl;
-        } else {
-            std::cout << "Aconteceu algum erro ao excluir o veículo" << std::endl;
-        }
+        veiculoService.excluir(veiculos[opcao - 1].getId());
+        std::cout << "Veículo excluído com sucesso" << std::endl;
     }
 
     std::cout << "Redirecionando para o menu veículo..." << std::endl;

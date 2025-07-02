@@ -42,7 +42,7 @@ Pedido PedidoRepository::buscarPorId(int id) {
         }
     }
 
-    throw std::runtime_error("Local com ID " + std::to_string(id) + " não encontrado.");
+    throw std::runtime_error("Pedido com ID " + std::to_string(id) + " não encontrado.");
 }
 
 void PedidoRepository::excluir(int id) {

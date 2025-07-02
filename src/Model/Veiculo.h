@@ -4,21 +4,42 @@
 
 #ifndef VEICULO_H
 #define VEICULO_H
-#include <string.h>
+#include <string>
 
 #include "../Utils/EnumUtils.h"
 
 class Veiculo {
-public:
-    Veiculo(std::string placa)
-        : placa(placa), modelo("Modelo " + placa), status(PENDENTE), localAtual(Local("Local " + placa)), pedidoId(NULL) {}
-    Veiculo(std::string placa, std::string modelo, Local localAtual):placa(placa), modelo(modelo), status(PENDENTE),  localAtual(localAtual), pedidoId(NULL) {}
-    Veiculo(std::string placa, std::string modelo, EnumStatusVeiculo status, Local localAtual, int pedidoId)
-        : placa(placa), modelo(modelo), status(status), localAtual(localAtual), pedidoId(pedidoId) {}
-
+private:
+    int id;
     std::string placa;
     std::string modelo;
     EnumStatusVeiculo status;
+    int localAtualId;
+
+public:
+    Veiculo(std::string placa)
+        : id(0), placa(placa), modelo("Modelo " + placa), status(PENDENTE), localAtualId(0) {}
+    Veiculo(std::string placa, std::string modelo, int localAtualId): id(0), placa(placa), modelo(modelo), status(PENDENTE),  localAtualId(localAtualId) {}
+
+    void setId(int id) { this->id = id; }
+
+    int getId() { return this->id; }
+
+    void setPlaca(std::string) { this->placa = placa; }
+
+    std::string getPlaca() { return this->placa; }
+
+    void setModelo(std::string modelo) { this->modelo = modelo; }
+
+    std::string getModelo() { return this->modelo; }
+
+    void setStatus(EnumStatusVeiculo status) { this->status = status; }
+
+    EnumStatusVeiculo getStatus() { return this->status; }
+
+    void setLocalAtualId(int localAtualId) { this->localAtualId = localAtualId; }
+
+    int getLocalAtualId() { return this->localAtualId; }
     Local localAtual;
     int pedidoId;
 
