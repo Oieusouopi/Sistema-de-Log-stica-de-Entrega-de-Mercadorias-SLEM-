@@ -33,10 +33,10 @@ void BancoController::menu() {
 
         switch (teclaGlobal) {
             case SALVAR_TODOS_DADOS:
-                salvarDados();
+                salvarBackup();
                 break;
             case RESTAURAR_DADOS_DE_BACKUPS_ANTIGOS:
-                restaurar();
+                restaurarBackup();
                 break;
             case VOLTAR_PARA_O_MENU_PRINCIPAL_BANCO:
                 return;
@@ -48,11 +48,11 @@ void BancoController::menu() {
 
 }
 
-void BancoController::restaurar() {
-
+void BancoController::restaurarBackup() {
+    bancoService.restaurarBackup();
 }
 
 
-void BancoController::salvarDados() {
-    bancoService.salvarDados();
+void BancoController::salvarBackup() {
+    bancoService.salvarBackup();
 }

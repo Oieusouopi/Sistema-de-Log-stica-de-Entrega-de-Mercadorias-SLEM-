@@ -5,6 +5,49 @@
 // Created by eec on 30/06/25.
 //
 
+void PedidoRepository::salvarBackup(char caminho[]) {
+    FILE* file = fopen(caminho, "wb");
+
+    if (file == NULL) {
+        std::cout << "Problema na abertura do arquivo";
+        return;
+    }
+
+    int quantidade = pedidos.size();
+    fwrite(&quantidade, sizeof(int), 1, file);
+
+    for (const Pedido& local : pedidos) {
+        fwrite(&local, sizeof(Pedido), 1, file);
+    }
+
+    fclose(file);
+    std::cout << "Backup salvo com sucesso!\n";
+}
+
+void PedidoRepository::restaurarBackup(char caminho[]) {
+    FILE* file = fopen(caminho, "rb");
+
+    if (file == NULL) {
+        perror("Erro ao abrir arquivo");
+        return;
+    }
+
+    int quantidade = 0;
+    fread(&quantidade, sizeof(int), 1, file);
+
+    pedidos.clear();
+
+    for (int i = 0; i < quantidade; ++i) {
+        Pedido pedido;
+        fread(&pedido, sizeof(Pedido), 1, file);
+        pedidos.push_back(pedido);
+    }
+
+    fclose(file);
+    std::cout << "Backup restaurado com sucesso!\n";
+}
+
+
 void PedidoRepository::salvarOuAtualizar(Pedido pedido) {
     for (auto& p : pedidos) {
         if (p.getId() == pedido.getId()) {
@@ -52,11 +95,6 @@ void PedidoRepository::excluir(int id) {
             pedidos.erase(pedidos.begin() + i);
         }
     }
-
-}
-
-
-void PedidoRepository::salvarBackup(char caminho[]) {
 
 }
 

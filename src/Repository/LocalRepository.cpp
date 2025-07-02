@@ -3,7 +3,7 @@
 // Created by eec on 30/06/25.
 //
 
-void LocalRepository::salvarBackup(char caminho[30]) {
+void LocalRepository::salvarBackup(char caminho[]) {
     FILE* file = fopen(caminho, "wb");
 
     if (file == NULL) {
@@ -20,6 +20,29 @@ void LocalRepository::salvarBackup(char caminho[30]) {
 
     fclose(file);
     std::cout << "Backup salvo com sucesso!\n";
+}
+
+void LocalRepository::restaurarBackup(char caminho[]) {
+    FILE* file = fopen(caminho, "rb");
+
+    if (file == NULL) {
+        perror("Erro ao abrir arquivo");
+        return;
+    }
+
+    int quantidade = 0;
+    fread(&quantidade, sizeof(int), 1, file);
+
+    locais.clear();
+
+    for (int i = 0; i < quantidade; ++i) {
+        Local local;
+        fread(&local, sizeof(Local), 1, file);
+        locais.push_back(local);
+    }
+
+    fclose(file);
+    std::cout << "Backup restaurado com sucesso!\n";
 }
 
 std::vector<Local> LocalRepository::listar() {
@@ -43,7 +66,6 @@ void LocalRepository::excluir(int id) {
                            [id](const Local& l) { return l.getId() == id; }),
             locais.end());
 }
-
 
 void LocalRepository::salvarOuAtualizar(Local local) {
     for (auto& l : locais) {

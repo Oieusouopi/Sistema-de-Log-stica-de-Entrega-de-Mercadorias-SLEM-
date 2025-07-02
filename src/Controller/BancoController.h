@@ -10,8 +10,8 @@ class BancoController {
     public:
         BancoController(BancoService &bancoService);
         void menu();
-        void salvarDados();
-        void restaurar();
+        void salvarBackup();
+        void restaurarBackup();
     private:
         BancoService bancoService;
 };

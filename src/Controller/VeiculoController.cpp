@@ -48,6 +48,7 @@ void VeiculoController::menu() {
                 excluir();
                 break;
             case LISTAR_TODOS_VEICULOS:
+                listar();
                 break;
             case ATUALIZAR_VEICULOS:
                 updateLocalAtual();
@@ -68,10 +69,9 @@ void VeiculoController::criar() {
     std::cout << "\n----- CRIAÇÃO DE UM VEICULO -----\n";
     std::cout << "Para criar um veículo vamos precisar de algumas informações" << std::endl;
     std::cout << "se você der alguma informação que não é certa vai pedir a informação novamente" << std::endl;
-    // std::cout << "se você quiser cancelar a qualquer momento a criação do veiculo escreva ''" << std::endl;
     std::cout << "-----------------------------\n";
 
-    std::string placa;
+    char placa[7];
 
     std::cout << "Qual a placa deste veiculo: ";
 
@@ -79,10 +79,10 @@ void VeiculoController::criar() {
 
     std::cout << "Qual o modelo deste veiculo: ";
 
-    std::string modelo;
+    char modelo[30];
 
     std::cin.ignore();
-    getline(std::cin, modelo);
+    std::cin.getline(modelo, 30);
 
     Local localSelecionado = LocalUtils::selecionarLocal(localService);
 

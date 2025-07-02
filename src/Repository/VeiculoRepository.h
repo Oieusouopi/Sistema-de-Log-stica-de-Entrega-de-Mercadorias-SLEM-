@@ -11,6 +11,7 @@
 class VeiculoRepository {
 public:
     void salvarBackup(char caminho[]);
+    void restaurarBackup(char caminho[]);
     std::vector<Veiculo> listar();
     Veiculo buscarPorId(int id);
     void excluir(int id);

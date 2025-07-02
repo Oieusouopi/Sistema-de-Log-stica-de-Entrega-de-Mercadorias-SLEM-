@@ -20,8 +20,8 @@ class LocalService {
         void excluirPorId(int id);
         bool existeId(int id);
         int gerarNovoId();
-        bool existeEndereco(const std::string& endereco) const;
-        bool atualizarEnderecoPorId(int id, const std::string& novoEndereco);
+        bool existeEndereco(const char endereco[]) const;
+        bool atualizarEnderecoPorId(int id, char novoEndereco[]);
         Local buscarPorId(int id);
     private:
         LocalRepository &localRepository;

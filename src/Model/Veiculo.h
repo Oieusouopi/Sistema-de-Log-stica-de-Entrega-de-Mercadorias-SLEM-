@@ -6,43 +6,60 @@
 #define VEICULO_H
 #include <string>
 
+#include <cstring>  // Para strncpy, strlen
 #include "../Utils/EnumUtils.h"
 
 class Veiculo {
 private:
     int id;
-    std::string placa;
-    std::string modelo;
+    char placa[8];
+    char modelo[30];
     EnumStatusVeiculo status;
     int localAtualId;
 
 public:
-    Veiculo(std::string placa)
-        : id(0), placa(placa), modelo("Modelo " + placa), status(PENDENTE), localAtualId(0) {}
-    Veiculo(std::string placa, std::string modelo, int localAtualId): id(0), placa(placa), modelo(modelo), status(PENDENTE),  localAtualId(localAtualId) {}
+    Veiculo() {}
+    Veiculo(const char* placa) : id(0), status(PENDENTE), localAtualId(0) {
+        strncpy(this->placa, placa, sizeof(this->placa) - 1);
+        this->placa[sizeof(this->placa) - 1] = '\0';
+        strncpy(this->modelo, "Modelo ", sizeof(this->modelo) - 1);
+        this->modelo[sizeof(this->modelo) - 1] = '\0';
+        strncat(this->modelo, placa, sizeof(this->modelo) - strlen(this->modelo) - 1);
+    }
+
+    Veiculo(const char* placa, const char* modelo, int localAtualId)
+        : id(0), status(PENDENTE), localAtualId(localAtualId) {
+        strncpy(this->placa, placa, sizeof(this->placa) - 1);
+        this->placa[sizeof(this->placa) - 1] = '\0';
+        strncpy(this->modelo, modelo, sizeof(this->modelo) - 1);
+        this->modelo[sizeof(this->modelo) - 1] = '\0';
+    }
 
     void setId(int id) { this->id = id; }
 
-    int getId() { return this->id; }
+    int getId() const { return this->id; }
 
-    void setPlaca(std::string) { this->placa = placa; }
+    void setPlaca(const char* placa) {
+        strncpy(this->placa, placa, sizeof(this->placa) - 1);
+        this->placa[sizeof(this->placa) - 1] = '\0';
+    }
 
-    std::string getPlaca() { return this->placa; }
+    const char* getPlaca() const { return this->placa; }
 
-    void setModelo(std::string modelo) { this->modelo = modelo; }
+    void setModelo(const char* modelo) {
+        strncpy(this->modelo, modelo, sizeof(this->modelo) - 1);
+        this->modelo[sizeof(this->modelo) - 1] = '\0';
+    }
 
-    std::string getModelo() { return this->modelo; }
+    const char* getModelo() const { return this->modelo; }
 
     void setStatus(EnumStatusVeiculo status) { this->status = status; }
 
-    EnumStatusVeiculo getStatus() { return this->status; }
+    EnumStatusVeiculo getStatus() const { return this->status; }
 
     void setLocalAtualId(int localAtualId) { this->localAtualId = localAtualId; }
 
-    int getLocalAtualId() { return this->localAtualId; }
-    Local localAtual;
-    int pedidoId;
-
+    int getLocalAtualId() const { return this->localAtualId; }
 };
 
-#endif //VEICULO_H
+#endif // VEICULO_H

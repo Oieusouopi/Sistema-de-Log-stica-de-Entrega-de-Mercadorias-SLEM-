@@ -148,10 +148,10 @@ void LocalController::atualizar() {
             break;
         }
         case '3': {
-            std::string novoEndereco;
+            char novoEndereco[100];
             std::cin.ignore();
             std::cout << "Novo endereço: ";
-            std::getline(std::cin, novoEndereco);
+            std::cin.getline(novoEndereco, 100);
 
             if (!localService.atualizarEnderecoPorId(id, novoEndereco)) {
                 return;

@@ -20,7 +20,7 @@ bool validarEndereco(const char end[]) {
         return temLetra;
 }
 
-bool LocalService::existeEndereco(const std::string& endereco) const {
+bool LocalService::existeEndereco(const char endereco[]) const {
         std::vector<Local> locais = localRepository.listar();
         for (const auto& local : locais) {
                 if (local.getEndereco() == endereco) {
@@ -31,7 +31,7 @@ bool LocalService::existeEndereco(const std::string& endereco) const {
 }
 
 void LocalService::criar(const Local& local) {
-        if (!validarEndereco(local.getEndereco().c_str())) {
+        if (!validarEndereco(local.getEndereco())) {
                 std::cout << "Endereço inválido. Local não foi criado.\n";
                 return;
         }
@@ -72,8 +72,8 @@ Local LocalService::buscarPorId(int id) {
         }
 }
 
-bool LocalService::atualizarEnderecoPorId(int id, const std::string& novoEndereco) {
-        if (!validarEndereco(novoEndereco.c_str())) {
+bool LocalService::atualizarEnderecoPorId(int id, char novoEndereco[]) {
+        if (!validarEndereco(novoEndereco)) {
                 std::cout << "Endereço inválido. Atualização cancelada.\n";
                 return false;
         }

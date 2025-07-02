@@ -12,8 +12,8 @@ class BancoService {
 
 public:
     BancoService(PedidoRepository &pedidoRespository, LocalRepository &localRepository, VeiculoRepository &veiculoRepository);
-    void salvarDados();
-    void recuperarDados();
+    void salvarBackup();
+    void restaurarBackup();
 private:
     PedidoRepository &pedidoRepository;
     LocalRepository &localRepository;

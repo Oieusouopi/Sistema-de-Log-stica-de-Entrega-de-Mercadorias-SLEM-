@@ -9,6 +9,7 @@
 class PedidoRepository {
 public:
     void salvarBackup(char caminho[]);
+    void restaurarBackup(char caminho[]);
     std::vector<Pedido> listar();
     Pedido buscarPorId(int id);
     void excluir(int id);

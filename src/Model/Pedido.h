@@ -17,6 +17,7 @@ private:
     double pesoItem;
 
 public:
+    Pedido() {};
     Pedido(Local localOrigem, Local localDestino, double pesoItem):
     id(0), localDestino(localDestino), localOrigem(localOrigem), pesoItem(pesoItem) {};
 
