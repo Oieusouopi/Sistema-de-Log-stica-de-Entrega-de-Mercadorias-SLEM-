@@ -129,6 +129,13 @@ void PedidoController::excluir() {
 
 void PedidoController::listar() {
 
+    std::vector<Pedido> pedidos = pedidoService.listar();
+
+    if (pedidos.empty()) {
+        std::cout << "Nenhum pedido cadastrado.\n";
+        return;
+    }
+
     std::cout << "\n-------------------------- LISTA DE PEDIDOS ---------------------------\n";
 
     std::cout << std::left
@@ -137,8 +144,6 @@ void PedidoController::listar() {
               << std::setw(10) << "PESO DO ITEM" << std::endl;
 
     std::cout << std::string(72, '-') << '\n';
-
-    std::vector<Pedido> pedidos = pedidoService.listar();
 
     for ( auto& pedido : pedidos) {
         std::cout << std::left

@@ -105,6 +105,13 @@ void VeiculoController::criar() {
 
 void VeiculoController::listar() {
 
+    std::vector<Veiculo> veiculos = veiculoService.listar();
+
+    if (veiculos.empty()) {
+        std::cout << "Nenhum veiculo cadastrado.\n";
+        return;
+    }
+
     std::cout << "\n-------------------------- LISTA DE VEÍCULOS ---------------------------\n";
 
     std::cout << std::left
@@ -114,8 +121,6 @@ void VeiculoController::listar() {
               << std::setw(30) << "LOCAL"  << "\n";
 
     std::cout << std::string(72, '-') << '\n';
-
-    std::vector<Veiculo> veiculos = veiculoService.listar();
 
     for (auto& v : veiculos) {
         Local local = localService.buscarPorId(v.getLocalAtualId());
