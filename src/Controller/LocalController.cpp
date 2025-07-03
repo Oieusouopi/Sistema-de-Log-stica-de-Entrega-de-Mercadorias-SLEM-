@@ -5,9 +5,11 @@
 
 #include <iostream>
 #include <cstring>
+#include <iomanip>
 
 #include "../Utils/EnumMenu.h"
 #include "../Utils/ExibirMensagem.h"
+#include "../Utils/InputUtils.h"
 
 LocalController::LocalController(LocalService &localService): localService(localService) {
 }
@@ -18,13 +20,13 @@ void LocalController::menu() {
 
     while (true) {
 
-        std::cout << "\n----- MENU LOCAL -----\n";
+        std::cout << "\n---------- MENU LOCAL ---------\n";
         std::cout << static_cast<char>(CRIAR_LOCAL) << " -  Criar local\n";
         std::cout << static_cast<char>(EXCLUIR_LOCAL) << " -  Excluir local\n";
         std::cout << static_cast<char>(LISTAR_TODOS_LOCAIS) << " -  Listar todos locais\n";
         std::cout << static_cast<char>(ATUALIZAR_LOCAL) << " -  Atualizar local\n";
         std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_LOCAL) << " -  Voltar para o menu principal\n";
-        std::cout << "-----------------------------\n";
+        std::cout << "----------------------------------\n";
 
         std::cin >> entrada;
 
@@ -37,6 +39,7 @@ void LocalController::menu() {
 
         switch (teclaGlobal) {
             case CRIAR_LOCAL:
+                std::cin.ignore();
                 criar();
                 break;
             case EXCLUIR_LOCAL:
@@ -61,29 +64,40 @@ void LocalController::criar() {
     float x, y;
     char endereco[100];
 
-    std::cout << "Digite a coordenada X: ";
-    std::cin >> x;
+    if (!lerFloat("Digite a coordenada X (Cancelar operação digite 0): ", x)) {
+        std::cout << "Operação cancelada" << std::endl;
+        return;
+    };
 
-    std::cout << "Digite a coordenada Y: ";
-    std::cin >> y;
+    if (!lerFloat("Digite a coordenada Y (Cancelar operação digite 0):", y)) {
+        std::cout << "Operação cancelada" << std::endl;
+        return;
+    };
 
-    std::cin.ignore();
-    std::cout << "Digite o endereço (Ex: 'Sao Paulo', 'Avenida X 123'): ";
+    std::cout << "Digite o endereço (Ex: 'Sao Paulo', 'Avenida X 123') (Cancelar operação digite 0):";
     std::cin.getline(endereco, 100);
 
+    if (std::strcmp(endereco, "0") == 0) {
+        std::cout << "Operação cancelada.\n";
+        return;
+    }
 
-    int novoId = localService.gerarNovoId();
-
-    Local local(novoId, x, y, endereco);
+    Local local(x, y, endereco);
 
     localService.criar(local);
 }
 
 
 void LocalController::excluir() {
-    std::cout << "Digite o ID do local para excluir: ";
+    std::cout << "Digite o ID do local para excluir: (Cancelar operação digite 0):";
     int id;
+
     std::cin >> id;
+
+    if (id == 0) {
+        std::cout << "Operação cancelada.\n";
+        return;
+    }
 
     if (localService.existeId(id)) {
         localService.excluirPorId(id);
@@ -101,27 +115,50 @@ void LocalController::listar() {
         return;
     }
 
-    std::cout << "\n--- Lista de Locais Cadastrados ---\n";
+    std::cout << "\n-------------------------- LISTA DE LOCAIS ------------------------\n";
+
+    std::cout << std::left
+              << std::setw(10) << "ID"
+              << std::setw(30) << "ENDEREÇO"
+              << std::setw(10) << "CORDENADA X"
+              << std::setw(10) << "CORDENADA Y" << "\n";
+
+    std::cout << std::string(70, '-') << '\n';
+
     for (const auto& local : locais) {
-        local.mostrar();
-        std::cout << "--------------------------\n";
+
+        std::cout << std::left
+                  << std::setw(10) << local.getId()
+                  << std::setw(30) << local.getEndereco()
+                  << std::setw(10) << local.getX()
+                  << std::setw(10) << local.getY() << '\n';
     }
+
+    std::cout << std::string(70, '-') << '\n';
+
+    std::cout << "Redirecionando para o menu do local..." << std::endl;
 }
 
 void LocalController::atualizar() {
     int id;
-    std::cout << "Digite o ID do local que deseja atualizar: ";
+    std::cout << "Digite o ID do local que deseja atualizar (Cancelar operação digite 0):";
     std::cin >> id;
 
-    Local* local = localService.buscarPorId(id);
+    if (id == 0) {
+        std::cout << "Operação cancelada.\n";
+        return;
+    }
 
-    if (!local) {
-        std::cout << "Nenhum local encontrado com o ID " << id << ".\n";
+
+    Local local = localService.buscarPorId(id);
+
+    if (local.getId() == -1) {
+        std::cout << "Nenhum local encontrdao com o ID " << id;
         return;
     }
 
     std::cout << "Local atual:\n";
-    local->mostrar();
+    local.mostrar();
 
     char opcao;
     std::cout << "O que deseja atualizar?\n";
@@ -134,28 +171,30 @@ void LocalController::atualizar() {
     switch (opcao) {
         case '1': {
             float novoX;
-            std::cout << "Nova coordenada X: ";
-            std::cin >> novoX;
-            local->setX(novoX);
-            std::cout << "Coordenada X atualizada com sucesso.\n";
+            std::cin.ignore();
+            lerFloat("Nova coordenada X: ", novoX);
+            if (localService.atualizarCordX(local.getId(), novoX)) {
+                std::cout << "Coordenada X atualizada com sucesso.\n";
+            }
             break;
         }
         case '2': {
             float novoY;
-            std::cout << "Nova coordenada Y: ";
-            std::cin >> novoY;
-            local->setY(novoY);
-            std::cout << "Coordenada Y atualizada com sucesso.\n";
+            std::cin.ignore();
+            lerFloat("Nova coordenada X: ", novoY);
+            if (localService.atualizarCordY(local.getId(), novoY)) {
+                std::cout << "Coordenada Y atualizada com sucesso.\n";
+            };
             break;
         }
         case '3': {
-            std::string novoEndereco;
+            char novoEndereco[100];
             std::cin.ignore();
             std::cout << "Novo endereço: ";
-            std::getline(std::cin, novoEndereco);
+            std::cin.getline(novoEndereco, 100);
 
             if (!localService.atualizarEnderecoPorId(id, novoEndereco)) {
-                return;
+                std::cout << "Endereço atualizado com sucesso.\n";
             }
             break;
         }

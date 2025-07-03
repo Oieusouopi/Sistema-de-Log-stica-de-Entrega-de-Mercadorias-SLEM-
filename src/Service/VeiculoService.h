@@ -7,32 +7,41 @@
 #include <string>
 #include <vector>
 
+#include "LocalService.h"
+#include "PedidoService.h"
 #include "../Model/Local.h"
 #include "../Model/Veiculo.h"
-#include "../Utils/EnumUtils.h"
-
-// Forward declaration
-class PedidoService;
+#include "../Repository/VeiculoRepository.h"
+#include "../Model/Pedido.h"
 
 enum EnumResultadoCriacaoVeiculo {
     SUCESSO_CRIACAO_DO_VEICULO,
     PLACA_DUPLICADA,
+    SEM_LOCAL_CADASTRADO
 };
+
+class PedidoService;
 
 class VeiculoService {
 
     public:
-        EnumResultadoCriacaoVeiculo criar(Veiculo& veiculo, PedidoService& pedidoService);
+        VeiculoService(VeiculoRepository &veiculoRepository, PedidoService &pedidoService, LocalService &localService);
+        EnumResultadoCriacaoVeiculo criar(Veiculo veiculo);
         std::vector<Veiculo> listar();
-        bool excluir(std::string placa);
+        void excluir(int id);
         void updateStatus(std::string placa, bool status);
-        void updateStatus(std::string placa, EnumStatusVeiculo status, PedidoService& pedidoService);
-        void updateLocalAtual(std::string placa, Local local);
-        void updateStatusEPedido(std::string placa, EnumStatusVeiculo status, int pedidoId);
-        void verificarEAssociarPedidos(class PedidoService& pedidoService);
-        bool validarPlaca(std::string placa);
+        void updateStatus(std::string placa, EnumStatusVeiculo status);
+        bool atualizarPlacaPorId(int id, const char* novaPlaca);
+        bool atualizarLocalAtualPorId(int id, int novoLocalId);
+        void updateStatusEPedido(int id, EnumStatusVeiculo status, int pedidoId);
+        void verificarEAssociarPedidos();
+        bool validarPlaca(const char *placa);
+        Veiculo encontrarVeiculoMaisProximo(Pedido pedido);
+        Veiculo buscarPorId(int id);
     private:
-        std::vector<Veiculo> veiculos;
+        VeiculoRepository &veiculoRepository;
+        PedidoService &pedidoService;
+        LocalService &localService;
 };
 
 #endif //VEICULOSERVICE_H

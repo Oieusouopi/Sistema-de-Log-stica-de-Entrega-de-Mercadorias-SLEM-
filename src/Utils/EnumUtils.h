@@ -10,6 +10,6 @@ enum EnumStatusVeiculo {
     OCUPADO
 };
 
-std::string statusToString(EnumStatusVeiculo status);
+char* statusToString(EnumStatusVeiculo status);
 
 #endif //ENUMUTILS_H

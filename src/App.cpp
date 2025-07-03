@@ -8,7 +8,10 @@
 
 #include <iostream>
 
+#include "Controller/BancoController.h"
 #include "Controller/RotaController.h"
+#include "Repository/PedidoRepository.h"
+#include "Repository/VeiculoRepository.h"
 #include "Service/RotaService.h"
 #include "Utils/EnumMenu.h"
 #include "Utils/ExibirMensagem.h"
@@ -18,25 +21,37 @@
 
 class AppImpl {
 private:
+    LocalRepository localRepository;
+    PedidoRepository pedidoRepository;
+    VeiculoRepository veiculoRepository;
+
     VeiculoService veiculoService;
     LocalService localService;
     PedidoService pedidoService;
     RotaService rotaService;
+    BancoService bancoService;
 
     VeiculoController veiculoController;
     LocalController localController;
     PedidoController pedidoController;
     RotaController rotaController;
+    BancoController bancoController;
 
 public:
 
     char teclaGlobal;
 
     AppImpl()
-        : veiculoController(veiculoService, localService, pedidoService),
+        : rotaService(veiculoService, localService),
+          bancoService(pedidoRepository,localRepository, veiculoRepository),
+          localService(localRepository),
+          pedidoService(pedidoRepository, veiculoService, localService),
+          veiculoService(veiculoRepository, pedidoService, localService),
+          veiculoController(veiculoService, localService, pedidoService),
           localController(localService),
           pedidoController(pedidoService, localService, veiculoService),
-          rotaController(rotaService, pedidoService, veiculoService){}
+          rotaController(rotaService, pedidoService, veiculoService),
+          bancoController(bancoService){}
 
     void menuPrincipal() {
         teclaGlobal = '\0';
@@ -44,14 +59,14 @@ public:
         bool sairDoSistema = false;
 
         while (!sairDoSistema) {
-            std::cout << "\n----- MENU PRINCIPAL -----\n";
+            std::cout << "\n------ MENU PRINCIPAL ------\n";
             std::cout << static_cast<char>(EXIBIR_MENU_LOCAL) << " -  Ir para o menu local\n";
             std::cout << static_cast<char>(EXIBIR_MENU_VEICULO) << " -  Ir para o menu veiculo\n";
             std::cout << static_cast<char>(EXIBIR_MENU_PEDIDO) << " -  Ir para o menu pedido\n";
             std::cout << static_cast<char>(EXIBIR_MENU_ROTA) << " -  Ir para o menu rota\n";
             std::cout << static_cast<char>(EXIBIR_MENU_BANCO) << " -  Ir para o menu banco\n";
             std::cout << static_cast<char>(FINALIZAR_PROGRAMA) << " -  Finalizar o programa\n";
-            std::cout << "-----------------------------\n";
+            std::cout << "----------------------------\n";
 
             std::cin >> entrada;
 
@@ -76,7 +91,7 @@ public:
                     rotaController.menu();
                     break;
                 case EXIBIR_MENU_BANCO:
-                    // menuBanco();
+                    bancoController.menu();
                     break;
                 case FINALIZAR_PROGRAMA:
                     ExibirMensagem::exibirDespedida();

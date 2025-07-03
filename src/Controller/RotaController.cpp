@@ -14,10 +14,10 @@ void RotaController::menu() {
     std::string entrada;
 
     while (true) {
-        std::cout << "\n----- MENU ROTAS -----\n";
+        std::cout << "\n---------- MENU ROTAS ----------\n";
         std::cout << "1 - Mostrar rota de um pedido\n";
-        std::cout << "0 - Voltar para o menu principal\n";
-        std::cout << "------------------------\n";
+        std::cout << "2 - Voltar para o menu principal\n";
+        std::cout << "--------------------------------\n";
 
         std::cin >> entrada;
         teclaGlobal = entrada[0];
@@ -26,7 +26,7 @@ void RotaController::menu() {
             case '1':
                 mostrarRotaPedido();
                 break;
-            case '0':
+            case '2':
                 return;
             default:
                 std::cout << "Opção inválida. Tente novamente.\n";
@@ -46,9 +46,9 @@ void RotaController::mostrarRotaPedido() {
     // Listar pedidos disponíveis
     std::cout << "\n--- PEDIDOS DISPONÍVEIS ---\n";
     for (size_t i = 0; i < pedidos.size(); ++i) {
-        std::cout << (i + 1) << " - Pedido ID: " << pedidos[i].id 
-                  << " | Origem: " << pedidos[i].localOrigem.getEndereco()
-                  << " | Destino: " << pedidos[i].localDestino.getEndereco() << std::endl;
+        std::cout << (i + 1) << " - Pedido ID: " << pedidos[i].getId()
+                  << " | Origem: " << pedidos[i].getLocalOrigem().getEndereco()
+                  << " | Destino: " << pedidos[i].getLocalDestino().getEndereco() << std::endl;
     }
 
     int opcao = 0;
@@ -67,5 +67,5 @@ void RotaController::mostrarRotaPedido() {
 
     // Mostrar rota do pedido selecionado
     std::vector<Veiculo> veiculos = veiculoService.listar();
-    rotaService.mostrarRota(pedidos[opcao - 1], veiculos);
+    rotaService.mostrarRota(pedidos[opcao - 1]);
 }

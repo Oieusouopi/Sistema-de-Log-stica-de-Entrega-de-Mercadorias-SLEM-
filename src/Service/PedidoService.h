@@ -7,7 +7,10 @@
 #include <string>
 #include <vector>
 
+#include "VeiculoService.h"
 #include "../Model/Pedido.h"
+#include "../Repository/PedidoRepository.h"
+#include "../Model/Veiculo.h"
 
 enum EnumResultadoCriacaoPedido {
     SUCESSO_CRIACAO_DO_PEDIDO,
@@ -15,15 +18,23 @@ enum EnumResultadoCriacaoPedido {
     ERRO_CRIACAO_DO_PEDIDO_COM_PESO_NEGATIVO,
 };
 
+class VeiculoService;
+class LocalService;
+
 class PedidoService {
 
     public:
-        EnumResultadoCriacaoPedido criar(const Pedido& pedido, VeiculoService& veiculoService);
+        PedidoService(PedidoRepository &pedidoRespository, VeiculoService &veiculoService, LocalService &localService);
+        EnumResultadoCriacaoPedido criar(Pedido pedido);
         std::vector<Pedido> listar();
-        void update(int id);
-        bool excluir(int id);
+        void salvarOuAtualizar(Pedido pedido);
+        Pedido buscarPorId(int id);
+        void excluir(int id);
+        Pedido encontrarPedidoSemVeiculoMaisProximo(Veiculo veiculoDisponivel);
     private:
-        std::vector<Pedido> pedidos;
+        PedidoRepository &pedidoRepository;
+        VeiculoService &veiculoService;
+        LocalService &localService;
 };
 
 #endif //PEDIDOSERVICE_H

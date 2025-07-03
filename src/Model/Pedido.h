@@ -10,23 +10,37 @@
 #include "Local.h"
 
 class Pedido {
-
-public:
-    Pedido(Local localOrigem, Local localDestino, double pesoDoItem):
-    localDestino(localDestino), localOrigem(localOrigem), pesoDoItem(pesoDoItem) {
-        id = gerarIdUnico();
-    };
-
+private:
     int id;
     Local localOrigem;
     Local localDestino;
-    double pesoDoItem;
+    double pesoItem;
+    int veiculoVinculadoId;
 
-    static int gerarIdUnico() {
-        static std::mt19937 gerador(std::chrono::system_clock::now().time_since_epoch().count());
-        std::uniform_int_distribution<int> distribuicao(100000, 999999);
-        return distribuicao(gerador);
-    }
+public:
+    Pedido(): id(-1), veiculoVinculadoId(-1) {};
+    Pedido(Local localOrigem, Local localDestino, double pesoItem):
+    id(-1), localDestino(localDestino), localOrigem(localOrigem), pesoItem(pesoItem), veiculoVinculadoId(-1) {};
+
+    int getId() const { return id; }
+
+    void setId(int id) { this->id = id; }
+
+    Local getLocalOrigem() { return this->localOrigem; }
+
+    void setLocalOrigem(Local localOrigem) { this->localOrigem = localOrigem; }
+
+    Local getLocalDestino() { return this->localDestino; }
+
+    void setLocalDestino(Local localDestino) { this->localDestino = localDestino; }
+
+    double getPesoItem() {return this->pesoItem; }
+
+    void setPesoItem(double pesoItem) { this->pesoItem = pesoItem; }
+
+    void setVeiculoVinculadoId(int veiculoVinculadoId) { this->veiculoVinculadoId = veiculoVinculadoId; }
+
+    int getVeiculoVinculadoId() { return this->veiculoVinculadoId; }
 };
 
 #endif //PEDIDO_H

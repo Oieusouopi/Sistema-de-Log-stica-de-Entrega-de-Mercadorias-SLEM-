@@ -7,17 +7,24 @@
 
 #include <vector>
 #include <iostream>
+
+#include "LocalService.h"
+#include "VeiculoService.h"
 #include "../Model/Pedido.h"
 #include "../Model/Veiculo.h"
 
 class RotaService {
 public:
-    void mostrarRota(const Pedido& pedido, const std::vector<Veiculo>& veiculos);
+    RotaService(VeiculoService &veiculoService, LocalService &localService);
+    void mostrarRota(Pedido pedido);
     
 private:
-    double calcularDistanciaTotal(const Veiculo& veiculo, const Pedido& pedido);
+    VeiculoService &veiculoService;
+    LocalService &localService;
+    double calcularDistanciaTotal(Veiculo veiculo, Pedido pedido);
     double calcularDistancia(const Local& local1, const Local& local2);
-    Veiculo* encontrarVeiculoAssociado(const Pedido& pedido, const std::vector<Veiculo>& veiculos);
+
+    Veiculo encontrarVeiculoAssociado(Pedido pedido);
 };
 
 #endif //ROTASERVICE_H

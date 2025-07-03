@@ -4,24 +4,67 @@
 
 #ifndef VEICULO_H
 #define VEICULO_H
-#include <string.h>
+#include <string>
 
+#include <cstring>  // Para strncpy, strlen
 #include "../Utils/EnumUtils.h"
 
 class Veiculo {
-public:
-    Veiculo(std::string placa)
-        : placa(placa), modelo("Modelo " + placa), status(PENDENTE), localAtual(Local("Local " + placa)), pedidoId(NULL) {}
-    Veiculo(std::string placa, std::string modelo, Local localAtual):placa(placa), modelo(modelo), status(PENDENTE),  localAtual(localAtual), pedidoId(NULL) {}
-    Veiculo(std::string placa, std::string modelo, EnumStatusVeiculo status, Local localAtual, int pedidoId)
-        : placa(placa), modelo(modelo), status(status), localAtual(localAtual), pedidoId(pedidoId) {}
-
-    std::string placa;
-    std::string modelo;
+private:
+    int id;
+    char placa[8];
+    char modelo[30];
     EnumStatusVeiculo status;
-    Local localAtual;
+    int localAtualId;
     int pedidoId;
 
+public:
+    Veiculo(): id(-1) {}
+    Veiculo(const char* placa) : id(-1), status(DISPONIVEL), localAtualId(0) {
+        strncpy(this->placa, placa, sizeof(this->placa) - 1);
+        this->placa[sizeof(this->placa) - 1] = '\0';
+        strncpy(this->modelo, "Modelo ", sizeof(this->modelo) - 1);
+        this->modelo[sizeof(this->modelo) - 1] = '\0';
+        strncat(this->modelo, placa, sizeof(this->modelo) - strlen(this->modelo) - 1);
+    }
+
+    Veiculo(const char* placa, const char* modelo, int localAtualId)
+        : id(0), status(DISPONIVEL), localAtualId(localAtualId) {
+        strncpy(this->placa, placa, sizeof(this->placa) - 1);
+        this->placa[sizeof(this->placa) - 1] = '\0';
+        strncpy(this->modelo, modelo, sizeof(this->modelo) - 1);
+        this->modelo[sizeof(this->modelo) - 1] = '\0';
+    }
+
+    void setId(int id) { this->id = id; }
+
+    int getId() const { return this->id; }
+
+    void setPlaca(const char* placa) {
+        strncpy(this->placa, placa, sizeof(this->placa) - 1);
+        this->placa[sizeof(this->placa) - 1] = '\0';
+    }
+
+    const char* getPlaca() const { return this->placa; }
+
+    void setModelo(const char* modelo) {
+        strncpy(this->modelo, modelo, sizeof(this->modelo) - 1);
+        this->modelo[sizeof(this->modelo) - 1] = '\0';
+    }
+
+    const char* getModelo() const { return this->modelo; }
+
+    void setStatus(EnumStatusVeiculo status) { this->status = status; }
+
+    EnumStatusVeiculo getStatus() const { return this->status; }
+
+    void setLocalAtualId(int localAtualId) { this->localAtualId = localAtualId; }
+
+    int getLocalAtualId() const { return this->localAtualId; }
+
+    void setPedidoId(int pedidoId) { this->pedidoId = pedidoId; }
+
+    int getPedidoId() { return this->pedidoId; }
 };
 
-#endif //VEICULO_H
+#endif // VEICULO_H

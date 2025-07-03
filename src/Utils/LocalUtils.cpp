@@ -18,7 +18,7 @@ Local LocalUtils::selecionarLocal(LocalService& localService) {
 
 Local LocalUtils::selecionarLocal(const std::vector<Local> locaisDisponiveis) {
     if (locaisDisponiveis.empty()) {
-        std::cout << "Nenhum local cadastrado.\n";
+        std::cout <<  std::endl << "Nenhum local cadastrado." << std::endl;
         return Local("Não definido");
     }
 
@@ -28,19 +28,19 @@ Local LocalUtils::selecionarLocal(const std::vector<Local> locaisDisponiveis) {
     }
 
     int opcao = 0;
-    EnumStatusVeiculo status = PENDENTE;
 
     while (true) {
-        std::cout << "Digite o número da opção: ";
+        std::cout << "Digite o número da opção: (Opção inválida para cancelar)";
         std::cin >> opcao;
 
         if (std::cin.fail() || opcao < 1 || static_cast<size_t>(opcao) > locaisDisponiveis.size()) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Opção inválida. Tente novamente.\n";
-        } else {
-            break;
+            std::cout << "Opção inválida." << std::endl;
+            return Local("Não definido");
         }
+
+        break;
     }
 
     return locaisDisponiveis[opcao - 1];

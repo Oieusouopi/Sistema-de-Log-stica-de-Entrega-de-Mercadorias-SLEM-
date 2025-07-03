@@ -3,6 +3,8 @@
 // Created by eec on 18/06/25.
 //
 
+LocalService::LocalService(LocalRepository &localRepository): localRepository(localRepository) {};
+
 bool validarEndereco(const char end[]) {
         bool temLetra = false;
         for (int i = 0; end[i] != '\0'; i++) {
@@ -18,7 +20,8 @@ bool validarEndereco(const char end[]) {
         return temLetra;
 }
 
-bool LocalService::existeEndereco(const std::string& endereco) const {
+bool LocalService::existeEndereco(const char endereco[]) const {
+        std::vector<Local> locais = localRepository.listar();
         for (const auto& local : locais) {
                 if (local.getEndereco() == endereco) {
                         return true;
@@ -28,7 +31,7 @@ bool LocalService::existeEndereco(const std::string& endereco) const {
 }
 
 void LocalService::criar(const Local& local) {
-        if (!validarEndereco(local.getEndereco().c_str())) {
+        if (!validarEndereco(local.getEndereco())) {
                 std::cout << "Endereço inválido. Local não foi criado.\n";
                 return;
         }
@@ -38,34 +41,23 @@ void LocalService::criar(const Local& local) {
                 return;
         }
 
-        locais.push_back(local);
+
+        localRepository.salvarOuAtualizar(local);
+
         std::cout << "Local criado com sucesso.\n";
 }
 
 std::vector<Local> LocalService::listar() {
-        return locais;
-}
-
-int LocalService::gerarNovoId() {
-        int maiorId = 0;
-
-        for (const auto& local : locais) {
-                if (local.getId() > maiorId) {
-                        maiorId = local.getId();
-                }
-        }
-
-        return maiorId + 1;
+        return localRepository.listar();
 }
 
 void LocalService::excluirPorId(int id) {
-        locais.erase(
-            std::remove_if(locais.begin(), locais.end(),
-                           [id](const Local& l) { return l.getId() == id; }),
-            locais.end());
+        localRepository.excluir(id);
 }
 
 bool LocalService::existeId(int id) {
+        std::vector<Local> locais = localRepository.listar();
+
         for (const auto& local : locais) {
                 if (local.getId() == id) {
                         return true;
@@ -74,17 +66,12 @@ bool LocalService::existeId(int id) {
         return false;
 }
 
-Local* LocalService::buscarPorId(int id) { // Atualizar diretamente no objeto local
-        for (auto& local : locais) {
-                if (local.getId() == id) {
-                        return &local;
-                }
-        }
-        return nullptr;
+Local LocalService::buscarPorId(int id) {
+        return localRepository.buscarPorId(id);
 }
 
-bool LocalService::atualizarEnderecoPorId(int id, const std::string& novoEndereco) {
-        if (!validarEndereco(novoEndereco.c_str())) {
+bool LocalService::atualizarEnderecoPorId(int id, char novoEndereco[]) {
+        if (!validarEndereco(novoEndereco)) {
                 std::cout << "Endereço inválido. Atualização cancelada.\n";
                 return false;
         }
@@ -94,14 +81,48 @@ bool LocalService::atualizarEnderecoPorId(int id, const std::string& novoEnderec
                 return false;
         }
 
-        for (auto& local : locais) {
-                if (local.getId() == id) {
-                        local.setEndereco(novoEndereco);
-                        std::cout << "Endereço atualizado com sucesso.\n";
-                        return true;
-                }
+        Local local = localRepository.buscarPorId(id);
+
+        if (local.getId() == -1) {
+                std::cout << "ID Não existe";
+                return false;
         }
 
-        std::cout << "ID não encontrado.\n";
-        return false;
+        local.setEndereco(novoEndereco);
+
+        localRepository.salvarOuAtualizar(local);
+
+        return true;
+}
+
+bool LocalService::atualizarCordX(int id, float x) {
+
+        Local localPersistence = localRepository.buscarPorId(id);
+
+        if (localPersistence.getId() == -1) {
+                std::cout << "ID Não existe";
+                return false;
+        }
+
+        localPersistence.setX(x);
+
+        localRepository.salvarOuAtualizar(localPersistence);
+
+        return true;
+}
+
+bool LocalService::atualizarCordY(int id, float y) {
+
+        Local localPersistence = localRepository.buscarPorId(id);
+
+        if (localPersistence.getId() == -1) {
+                std::cout << "ID Não existe";
+                return false;
+        }
+
+        localPersistence.setY(y);
+
+        localRepository.salvarOuAtualizar(localPersistence);
+
+        return true;
 }

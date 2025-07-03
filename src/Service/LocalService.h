@@ -9,22 +9,24 @@
 #include <algorithm>
 
 #include "../Model/Local.h"
+#include "../Repository/LocalRepository.h"
 
 class LocalService {
 
     public:
+        LocalService(LocalRepository &localRepository);
         void criar(const Local& local);
         std::vector<Local> listar();
         void excluirPorId(int id);
         bool existeId(int id);
         int gerarNovoId();
-        bool existeEndereco(const std::string& endereco) const;
-        bool atualizarEnderecoPorId(int id, const std::string& novoEndereco);
-        Local* buscarPorId(int id);
-
-
+        bool existeEndereco(const char endereco[]) const;
+        bool atualizarEnderecoPorId(int id, char novoEndereco[]);
+        bool atualizarCordX(int id, float x);
+        bool atualizarCordY(int id, float y);
+        Local buscarPorId(int id);
     private:
-        std::vector<Local> locais;
+        LocalRepository &localRepository;
 };
 
 
