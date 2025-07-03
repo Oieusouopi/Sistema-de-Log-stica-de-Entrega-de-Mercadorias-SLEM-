@@ -25,7 +25,6 @@ EnumResultadoCriacaoVeiculo VeiculoService::criar(Veiculo veiculo) {
 
     veiculoRepository.salvarOuAtualizar(veiculo);
 
-    // Se o veículo foi criado como disponível, verificar pedidos sem veículo
     if (veiculo.getStatus() == DISPONIVEL) {
         verificarEAssociarPedidos();
     }
@@ -34,15 +33,19 @@ EnumResultadoCriacaoVeiculo VeiculoService::criar(Veiculo veiculo) {
 }
 
 void VeiculoService::excluir(int id) {
+    Veiculo veiculo = veiculoRepository.buscarPorId(id);
+
+    if (veiculo.getPedidoId() != -1) {
+        Pedido pedido = pedidoService.buscarPorId(veiculo.getPedidoId());
+        pedido.setVeiculoVinculadoId(-1);
+        pedidoService.salvarOuAtualizar(pedido);
+    }
+
     veiculoRepository.excluir(id);
 }
 
 std::vector<Veiculo> VeiculoService::listar() {
     return veiculoRepository.listar();
-}
-
-void VeiculoService::updateLocalAtual(std::string placa, Local local) {
-
 }
 
 void VeiculoService::updateStatus(std::string placa, EnumStatusVeiculo status) {
@@ -76,14 +79,16 @@ void VeiculoService::verificarEAssociarPedidos() {
 
     for (auto& veiculo : veiculos) {
         if (veiculo.getStatus() == DISPONIVEL) {
-            // Buscar pedido sem veículo mais próximo
             std::vector<Pedido> pedidos = pedidoService.listar();
             Pedido pedidoMaisProximo = pedidoService.encontrarPedidoSemVeiculoMaisProximo(veiculo);
 
             if (pedidoMaisProximo.getId() != -1) {
-                // Associar veículo ao pedido
                 veiculo.setStatus(OCUPADO);
                 veiculo.setPedidoId(pedidoMaisProximo.getId());
+                pedidoMaisProximo.setVeiculoVinculadoId(veiculo.getId());
+
+                veiculoRepository.salvarOuAtualizar(veiculo);
+                pedidoService.salvarOuAtualizar(pedidoMaisProximo);
                 std::cout << "Veículo " << veiculo.getPlaca() << " foi automaticamente associado ao pedido "
                           << pedidoMaisProximo.getId() << std::endl;
             }
@@ -91,20 +96,18 @@ void VeiculoService::verificarEAssociarPedidos() {
     }
 }
 
-bool VeiculoService::validarPlaca(std::string placa) {
-
+bool VeiculoService::validarPlaca(const char* placa) {
     std::vector<Veiculo> veiculos = veiculoRepository.listar();
 
-    if (veiculos.empty()) {
-        for (auto& veiculo : veiculos) {
-            if (veiculo.getPlaca() == placa) {
-                return false;
-            }
+    for (const Veiculo& veiculo : veiculos) {
+        if (std::strcmp(veiculo.getPlaca(), placa) == 0) {
+            return false; // placa já existe
         }
     }
 
     return true;
 }
+
 
 Veiculo VeiculoService::encontrarVeiculoMaisProximo(Pedido pedido) {
     std::vector<Veiculo> veiculos = veiculoRepository.listar();
@@ -145,6 +148,36 @@ Veiculo VeiculoService::buscarPorId(int id) {
     return veiculoRepository.buscarPorId(id);
 }
 
+bool VeiculoService::atualizarPlacaPorId(int id, const char* novaPlaca) {
+    Veiculo veiculo = veiculoRepository.buscarPorId(id);
 
+    if (!validarPlaca(novaPlaca)) {
+        std::cout << "Erro: placa já existe no sistema.\n";
+        return false;
+    }
 
+    if (veiculo.getId() == -1) {
+        return false;
+    }
+
+    veiculo.setPlaca(novaPlaca);
+
+    veiculoRepository.salvarOuAtualizar(veiculo);
+
+    return true;
+}
+
+bool VeiculoService::atualizarLocalAtualPorId(int id, int novoLocalId) {
+    Local local = localService.buscarPorId(novoLocalId);
+    Veiculo veiculo = veiculoRepository.buscarPorId(id);
+    if (local.getId() == -1) {
+        return false;
+    }
+
+    veiculo.setLocalAtualId(novoLocalId);
+
+    veiculoRepository.salvarOuAtualizar(veiculo);
+
+    return true;
+}
 

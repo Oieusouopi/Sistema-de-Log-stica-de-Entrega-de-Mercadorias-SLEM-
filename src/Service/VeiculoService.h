@@ -31,10 +31,11 @@ class VeiculoService {
         void excluir(int id);
         void updateStatus(std::string placa, bool status);
         void updateStatus(std::string placa, EnumStatusVeiculo status);
-        void updateLocalAtual(std::string placa, Local local);
+        bool atualizarPlacaPorId(int id, const char* novaPlaca);
+        bool atualizarLocalAtualPorId(int id, int novoLocalId);
         void updateStatusEPedido(int id, EnumStatusVeiculo status, int pedidoId);
         void verificarEAssociarPedidos();
-        bool validarPlaca(std::string placa);
+        bool validarPlaca(const char *placa);
         Veiculo encontrarVeiculoMaisProximo(Pedido pedido);
         Veiculo buscarPorId(int id);
     private:

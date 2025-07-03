@@ -20,8 +20,7 @@ public:
     void criar();
     void listar();
     void excluir();
-    void updateStatus();
-    void updateLocalAtual();
+    void atualizar();
     void menu();
 
 private:

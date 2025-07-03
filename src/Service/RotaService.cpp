@@ -12,7 +12,12 @@ RotaService::RotaService(VeiculoService &veiculoService, LocalService &localServ
 void RotaService::mostrarRota(Pedido pedido) {
     std::vector<Veiculo> veiculos = veiculoService.listar();
 
-    Veiculo veiculoAssociado = encontrarVeiculoAssociado(pedido);
+    Veiculo veiculoAssociado;
+
+    if (pedido.getVeiculoVinculadoId() != -1) {
+        veiculoAssociado = veiculoService.buscarPorId(pedido.getVeiculoVinculadoId());
+    }
+
     Local localAssociado = localService.buscarPorId(veiculoAssociado.getLocalAtualId());
     
     if (veiculoAssociado.getId() == -1) {

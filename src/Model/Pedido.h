@@ -18,9 +18,9 @@ private:
     int veiculoVinculadoId;
 
 public:
-    Pedido(): id(-1) {};
+    Pedido(): id(-1), veiculoVinculadoId(-1) {};
     Pedido(Local localOrigem, Local localDestino, double pesoItem):
-    id(-1), localDestino(localDestino), localOrigem(localOrigem), pesoItem(pesoItem) {};
+    id(-1), localDestino(localDestino), localOrigem(localOrigem), pesoItem(pesoItem), veiculoVinculadoId(-1) {};
 
     int getId() const { return id; }
 

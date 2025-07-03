@@ -24,7 +24,7 @@ void VeiculoController::menu() {
 
     while (true) {
 
-        std::cout << "\n--------- MENU VEICULO ---------\n";
+        std::cout << "\n---------- MENU VEICULO ----------\n";
         std::cout << static_cast<char>(CRIAR_VEICULO) << " -  Criar Veiculo\n";
         std::cout << static_cast<char>(EXCLUIR_VEICULO) << " -  Excluir Veiculo\n";
         std::cout << static_cast<char>(LISTAR_TODOS_VEICULOS) << " -  Listar todos veiculos\n";
@@ -52,8 +52,7 @@ void VeiculoController::menu() {
                 listar();
                 break;
             case ATUALIZAR_VEICULOS:
-                updateLocalAtual();
-                updateStatus();
+                atualizar();
                 break;
             case VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO:
                 return;
@@ -206,51 +205,63 @@ void VeiculoController::excluir() {
     std::cout << "Redirecionando para o menu veículo..." << std::endl;
 }
 
+void VeiculoController::atualizar() {
+    int id;
+    std::cout << "Digite o ID do veículo que deseja atualizar (Cancelar operação digite 0): ";
+    std::cin >> id;
 
-
-void VeiculoController::updateLocalAtual() {
-    std::string placa;
-
-    std::cout << "Digite a placa do veículo: ";
-    std::cin >> placa;
-
-    Local novoLocal = LocalUtils::selecionarLocal(localService);
-
-    veiculoService.updateLocalAtual(placa, novoLocal);
-
-    std::cout << "Local atual do veículo atualizado com sucesso!" << std::endl;
-}
-
-void VeiculoController::updateStatus() {
-        std::string placa;
-        std::cout << "Digite a placa do veículo: ";
-        std::cin >> placa;
-        std::cin.ignore();
-
-        std::cout << "Digite o novo status:\n";
-        std::cout << "0 - Pendente\n";
-        std::cout << "1 - Disponível\n";
-        std::cout << "2 - Ocupado\n";
-
-        int opcao;
-        std::cin >> opcao;
-
-        EnumStatusVeiculo novoStatus;
-
-        switch (opcao) {
-            case 0: novoStatus = PENDENTE; break;
-            case 1: novoStatus = DISPONIVEL; break;
-            case 2: novoStatus = OCUPADO; break;
-            default:
-                std::cout << "Opção inválida." << std::endl;
-                return;
-        }
-
-        veiculoService.updateStatus(placa, novoStatus);
-        std::cout << "Status atualizado com sucesso!" << std::endl;
+    if (id == 0) {
+        std::cout << "Operação cancelada.\n";
+        return;
     }
 
+    Veiculo veiculo = veiculoService.buscarPorId(id);
+
+    if (veiculo.getId() == -1) {
+        std::cout << "Nenhum veículo encontrado com o ID " << id << ".\n";
+        return;
+    }
+
+    std::cout << "Veículo atual:\n";
+    std::cout << "Placa: " << veiculo.getPlaca() << "\n";
+    std::cout << "Local Atual ID: " << veiculo.getLocalAtualId() << "\n";
+
+    char opcao;
+    std::cout << "O que deseja atualizar?\n";
+    std::cout << "1 - Placa\n";
+    std::cout << "2 - Local Atual ID\n";
+    std::cout << "Escolha: ";
+    std::cin >> opcao;
+
+    switch (opcao) {
+        case '1': {
+            char novaPlaca[8];
+            std::cin.ignore();
+            std::cout << "Nova placa: ";
+            std::cin.getline(novaPlaca, 8);
 
 
+            if (veiculoService.atualizarPlacaPorId(id, novaPlaca)) {
+                std::cout << "Placa atualizada com sucesso.\n";
+            } else {
+                std::cout << "Erro ao atualizar a placa.\n";
+            }
+            break;
+        }
+        case '2': {
+            int novoLocalId;
+            std::cout << "Novo ID do local atual: ";
+            std::cin >> novoLocalId;
 
-
+            if (veiculoService.atualizarLocalAtualPorId(id, novoLocalId)) {
+                std::cout << "Local atual atualizado com sucesso.\n";
+            } else {
+                std::cout << "Erro ao atualizar o local atual.\n";
+            }
+            break;
+        }
+        default:
+            std::cout << "Opção inválida.\n";
+            return;
+    }
+}

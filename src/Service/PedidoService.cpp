@@ -36,11 +36,17 @@ std::vector<Pedido> PedidoService::listar() {
 }
 
 void PedidoService::excluir(int id) {
+    Pedido pedido = pedidoRepository.buscarPorId(id);
+
+    if (pedido.getVeiculoVinculadoId() != -1) {
+        veiculoService.updateStatusEPedido(pedido.getVeiculoVinculadoId(), DISPONIVEL, -1);
+    }
+
     pedidoRepository.excluir(id);
 }
 
 void PedidoService::salvarOuAtualizar(Pedido pedido) {
-
+    pedidoRepository.salvarOuAtualizar(pedido);
 }
 
 Pedido PedidoService::encontrarPedidoSemVeiculoMaisProximo(Veiculo veiculoDisponivel) {
@@ -48,11 +54,13 @@ Pedido PedidoService::encontrarPedidoSemVeiculoMaisProximo(Veiculo veiculoDispon
     std::vector<Veiculo> veiculos = veiculoService.listar();
 
     if (pedidos.empty()) {
-        return Pedido();
+        std::cout << "Nenhum pedido disponível no sistema.\n";
+        return Pedido(); // id será -1 se isso for garantido no construtor padrão
     }
 
+    // Identifica os pedidos que já estão vinculados a veículos
     std::set<int> pedidosComVeiculo;
-    for (auto& veiculo : veiculos) {
+    for (Veiculo& veiculo : veiculos) {
         if (veiculo.getStatus() == OCUPADO && veiculo.getPedidoId() != -1) {
             pedidosComVeiculo.insert(veiculo.getPedidoId());
         }
@@ -61,26 +69,35 @@ Pedido PedidoService::encontrarPedidoSemVeiculoMaisProximo(Veiculo veiculoDispon
     Pedido pedidoMaisProximo;
     double menorDistancia = std::numeric_limits<double>::max();
 
-    for (size_t i = 0; i < pedidos.size(); ++i) {
+    Local localVeiculo = localService.buscarPorId(veiculoDisponivel.getLocalAtualId());
 
-        if (pedidosComVeiculo.find(pedidos[i].getId()) == pedidosComVeiculo.end()) {
-            Local localAtual = localService.buscarPorId(veiculoDisponivel.getLocalAtualId());
-            double distancia = VeiculoUtils::calcularDistancia(localAtual, pedidos[i].getLocalOrigem());
+    for (Pedido& pedido : pedidos) {
+        if (pedidosComVeiculo.find(pedido.getId()) == pedidosComVeiculo.end()) {
+            double distancia = VeiculoUtils::calcularDistancia(localVeiculo, pedido.getLocalOrigem());
 
             if (distancia < menorDistancia) {
                 menorDistancia = distancia;
-                pedidoMaisProximo = pedidos[i];
+                pedidoMaisProximo = pedido;
             }
         }
     }
 
-    if (pedidoMaisProximo.getId() == -1) {
-        std::cout << "Pedido sem veículo encontrado para o veículo " << veiculoDisponivel.getPlaca()
-                  << ": Pedido ID " << pedidoMaisProximo.getId() << " (Distância: " << menorDistancia << ")\n";
+    if (pedidoMaisProximo.getId() != -1) {
+        std::cout << "Pedido mais próximo sem veículo para o veículo " << veiculoDisponivel.getPlaca()
+                  << ": Pedido ID " << pedidoMaisProximo.getId()
+                  << " (Distância: " << menorDistancia << ")\n";
+    } else {
+        std::cout << "Nenhum pedido sem veículo disponível para o veículo " << veiculoDisponivel.getPlaca() << ".\n";
     }
 
     return pedidoMaisProximo;
 }
+
+Pedido PedidoService::buscarPorId(int id) {
+    return pedidoRepository.buscarPorId(id);
+}
+
+
 
 
 

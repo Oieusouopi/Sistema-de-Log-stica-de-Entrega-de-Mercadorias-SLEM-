@@ -14,10 +14,10 @@ void RotaController::menu() {
     std::string entrada;
 
     while (true) {
-        std::cout << "\n----- MENU ROTAS -----\n";
+        std::cout << "\n---------- MENU ROTAS ----------\n";
         std::cout << "1 - Mostrar rota de um pedido\n";
-        std::cout << "0 - Voltar para o menu principal\n";
-        std::cout << "------------------------\n";
+        std::cout << "2 - Voltar para o menu principal\n";
+        std::cout << "--------------------------------\n";
 
         std::cin >> entrada;
         teclaGlobal = entrada[0];
@@ -26,7 +26,7 @@ void RotaController::menu() {
             case '1':
                 mostrarRotaPedido();
                 break;
-            case '0':
+            case '2':
                 return;
             default:
                 std::cout << "Opção inválida. Tente novamente.\n";
