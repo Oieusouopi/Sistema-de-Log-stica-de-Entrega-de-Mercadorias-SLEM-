@@ -97,11 +97,26 @@ Operações do serviço {
 │  ├──Utils
 │  │  ├──ExibirMensagem.cpp --> Implementações das mensagens
 │  │  ├──ExibirMensagm.h --> Cabeçalho para exibir mensagem
+│  │  ├──EnumStatusVeiculoUtils.cpp --> Enum utils para veiculo
+│  │  ├──EnumStatusVeiculoUtils.h
+│  │  ├──EnumUtils.h
+│  │  ├──inputUtils.h
+│  │  ├──LocalUtils.cpp
+│  │  ├──LocalUtils.h
+│  │  ├──VeiculoUtils.cpp
+│  │  ├──VeiculoUtils.h
 │  │  └──EnumMenu.h
 │  ├──Storage --> Aqui vão ser armazenado os arquivos bin
 │  │  ├──pedidos.bin
 │  │  ├──locais.bin
 │  │  └──veiculos.bin
+│  ├──Repository --> Camada para manusear os dados
+│  │  ├─LocalRepository.cpp
+│  │  ├─LocalRepository.h
+│  │  ├─VeiculoRepository.cpp
+│  │  ├─VeiculoRepository.h
+│  │  ├─PedidoRepository.cpp
+│  │  └──PedidoRepository.h
 │  ├──Controller --> Camada para a requisição e resposta para o usuário camada mais externa
 │  │  ├──PedidoController.cpp --> Implementação
 │  │  ├──PedidoController.h --> Declaração
