@@ -11,7 +11,7 @@
 #include "../Utils/ExibirMensagem.h"
 #include "../Utils/LocalUtils.h"
 
-PedidoController::PedidoController(PedidoService &pedidoService, LocalService &localService): pedidoService(pedidoService), localService(localService) {}
+PedidoController::PedidoController(PedidoService &pedidoService, LocalService &localService, VeiculoService &veiculoService): pedidoService(pedidoService), localService(localService), veiculoService(veiculoService) {}
 
 
 void PedidoController::menu() {
@@ -77,7 +77,7 @@ void PedidoController::criar() {
 
     Pedido pedido = Pedido(localOrigem, localDestino, pesoDoItem);
 
-    switch (pedidoService.criar(pedido)) {
+    switch (pedidoService.criar(pedido, veiculoService)) {
         case SUCESSO_CRIACAO_DO_PEDIDO:
             std::cout << "Pedido criado com sucesso" << std::endl;
             break;

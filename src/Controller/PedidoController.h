@@ -6,10 +6,11 @@
 #define PEDIDOCONTROLLER_H
 #include "../Service/LocalService.h"
 #include "../Service/PedidoService.h"
+#include "../Service/VeiculoService.h"
 
 class PedidoController {
     public:
-        PedidoController(PedidoService& pedidoService, LocalService& localService);
+        PedidoController(PedidoService& pedidoService, LocalService& localService, VeiculoService& veiculoService);
         void criar();
         void listar();
         void excluir();
@@ -19,6 +20,7 @@ class PedidoController {
     private:
         PedidoService& pedidoService;
         LocalService& localService;
+        VeiculoService& veiculoService;
 };
 
 #endif //PEDIDOCONTROLLER_H

@@ -7,13 +7,16 @@
 #include "../Service/LocalService.h"
 #include "../Service/VeiculoService.h"
 
+// Forward declaration
+class PedidoService;
+
 #ifndef VEICULOCONTROLLER_H
 #define VEICULOCONTROLLER_H
 
 class VeiculoController {
 
 public:
-    VeiculoController(VeiculoService &veiculoService, LocalService &localService);
+    VeiculoController(VeiculoService &veiculoService, LocalService &localService, PedidoService &pedidoService);
     void criar();
     void listar();
     void excluir();
@@ -24,6 +27,7 @@ public:
 private:
     VeiculoService& veiculoService;
     LocalService& localService;
+    PedidoService& pedidoService;
 
 
 

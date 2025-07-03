@@ -3,6 +3,7 @@
 //
 
 #include "VeiculoController.h"
+#include "../Service/PedidoService.h"
 
 #include <iomanip>
 #include <iostream>
@@ -14,7 +15,7 @@
 #include "../Utils/ExibirMensagem.h"
 #include "../Utils/LocalUtils.h"
 
-VeiculoController::VeiculoController(VeiculoService &veiculoService, LocalService &localService): veiculoService(veiculoService), localService(localService) {}
+VeiculoController::VeiculoController(VeiculoService &veiculoService, LocalService &localService, PedidoService &pedidoService): veiculoService(veiculoService), localService(localService), pedidoService(pedidoService) {}
 
 void VeiculoController::menu() {
     char teclaGlobal = '\0';
@@ -87,7 +88,7 @@ void VeiculoController::criar() {
 
     Veiculo veiculo = Veiculo(placa, modelo, localSelecionado);
 
-    EnumResultadoCriacaoVeiculo resultado = veiculoService.criar(veiculo);
+    EnumResultadoCriacaoVeiculo resultado = veiculoService.criar(veiculo, pedidoService);
 
     switch (resultado) {
         case SUCESSO_CRIACAO_DO_VEICULO:
@@ -205,7 +206,7 @@ void VeiculoController::updateStatus() {
                 return;
         }
 
-        veiculoService.updateStatus(placa, novoStatus);
+        veiculoService.updateStatus(placa, novoStatus, pedidoService);
         std::cout << "Status atualizado com sucesso!" << std::endl;
     }
 
