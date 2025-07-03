@@ -36,7 +36,7 @@ public:
         : veiculoController(veiculoService, localService, pedidoService),
           localController(localService),
           pedidoController(pedidoService, localService, veiculoService),
-          rotaController(rotaService){}
+          rotaController(rotaService, pedidoService, veiculoService){}
 
     void menuPrincipal() {
         teclaGlobal = '\0';
