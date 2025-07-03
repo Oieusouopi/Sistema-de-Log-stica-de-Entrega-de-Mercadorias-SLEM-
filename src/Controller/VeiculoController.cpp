@@ -88,7 +88,7 @@ void VeiculoController::criar() {
 
     Veiculo veiculo = Veiculo(placa, modelo, localSelecionado.getId());
 
-    EnumResultadoCriacaoVeiculo resultado = veiculoService.criar(veiculo, pedidoService);
+    EnumResultadoCriacaoVeiculo resultado = veiculoService.criar(veiculo);
 
     switch (resultado) {
         case SUCESSO_CRIACAO_DO_VEICULO:
@@ -227,7 +227,7 @@ void VeiculoController::updateStatus() {
                 return;
         }
 
-        veiculoService.updateStatus(placa, novoStatus, pedidoService);
+        veiculoService.updateStatus(placa, novoStatus);
         std::cout << "Status atualizado com sucesso!" << std::endl;
     }
 

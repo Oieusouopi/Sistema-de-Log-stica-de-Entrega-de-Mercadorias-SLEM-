@@ -16,7 +16,7 @@ private:
     char endereco[100];
 
 public:
-    Local() {}
+    Local(): id(-1) {}
 
     Local(const char* endereco) {
         strncpy(this->endereco, endereco, sizeof(this->endereco) - 1);

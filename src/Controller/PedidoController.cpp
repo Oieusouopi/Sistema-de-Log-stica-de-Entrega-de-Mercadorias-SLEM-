@@ -77,7 +77,7 @@ void PedidoController::criar() {
 
     Pedido pedido = Pedido(localOrigem, localDestino, pesoDoItem);
 
-    switch (pedidoService.criar(pedido, veiculoService)) {
+    switch (pedidoService.criar(pedido)) {
         case SUCESSO_CRIACAO_DO_PEDIDO:
             std::cout << "Pedido criado com sucesso" << std::endl;
             break;

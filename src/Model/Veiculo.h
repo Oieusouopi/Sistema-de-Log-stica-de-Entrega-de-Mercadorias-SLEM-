@@ -16,10 +16,11 @@ private:
     char modelo[30];
     EnumStatusVeiculo status;
     int localAtualId;
+    int pedidoId;
 
 public:
-    Veiculo() {}
-    Veiculo(const char* placa) : id(0), status(PENDENTE), localAtualId(0) {
+    Veiculo(): id(-1) {}
+    Veiculo(const char* placa) : id(-1), status(PENDENTE), localAtualId(0) {
         strncpy(this->placa, placa, sizeof(this->placa) - 1);
         this->placa[sizeof(this->placa) - 1] = '\0';
         strncpy(this->modelo, "Modelo ", sizeof(this->modelo) - 1);
@@ -60,6 +61,10 @@ public:
     void setLocalAtualId(int localAtualId) { this->localAtualId = localAtualId; }
 
     int getLocalAtualId() const { return this->localAtualId; }
+
+    void setPedidoId(int pedidoId) { this->pedidoId = pedidoId; }
+
+    int getPedidoId() { return this->pedidoId; }
 };
 
 #endif // VEICULO_H

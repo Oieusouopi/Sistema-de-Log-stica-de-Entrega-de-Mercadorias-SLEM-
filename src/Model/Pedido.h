@@ -17,9 +17,9 @@ private:
     double pesoItem;
 
 public:
-    Pedido() {};
+    Pedido(): id(-1) {};
     Pedido(Local localOrigem, Local localDestino, double pesoItem):
-    id(0), localDestino(localDestino), localOrigem(localOrigem), pesoItem(pesoItem) {};
+    id(-1), localDestino(localDestino), localOrigem(localOrigem), pesoItem(pesoItem) {};
 
     int getId() const { return id; }
 

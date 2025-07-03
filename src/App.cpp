@@ -42,10 +42,11 @@ public:
     char teclaGlobal;
 
     AppImpl()
-        : bancoService(pedidoRepository,localRepository, veiculoRepository),
+        : rotaService(veiculoService, localService),
+          bancoService(pedidoRepository,localRepository, veiculoRepository),
           localService(localRepository),
-          pedidoService(pedidoRepository),
-          veiculoService(veiculoRepository),
+          pedidoService(pedidoRepository, veiculoService, localService),
+          veiculoService(veiculoRepository, pedidoService, localService),
           veiculoController(veiculoService, localService, pedidoService),
           localController(localService),
           pedidoController(pedidoService, localService, veiculoService),

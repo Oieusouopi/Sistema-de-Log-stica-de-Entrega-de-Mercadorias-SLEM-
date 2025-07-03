@@ -120,7 +120,7 @@ void LocalController::listar() {
 
     std::cout << std::string(70, '-') << '\n';
 
-    std::cout << "Redirecionando para o meno do local..." << std::endl;
+    std::cout << "Redirecionando para o menu do local..." << std::endl;
 }
 
 void LocalController::atualizar() {

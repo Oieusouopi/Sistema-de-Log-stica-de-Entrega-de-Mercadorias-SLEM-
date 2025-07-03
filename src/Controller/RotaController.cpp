@@ -46,9 +46,9 @@ void RotaController::mostrarRotaPedido() {
     // Listar pedidos disponíveis
     std::cout << "\n--- PEDIDOS DISPONÍVEIS ---\n";
     for (size_t i = 0; i < pedidos.size(); ++i) {
-        std::cout << (i + 1) << " - Pedido ID: " << pedidos[i].id 
-                  << " | Origem: " << pedidos[i].localOrigem.getEndereco()
-                  << " | Destino: " << pedidos[i].localDestino.getEndereco() << std::endl;
+        std::cout << (i + 1) << " - Pedido ID: " << pedidos[i].getId()
+                  << " | Origem: " << pedidos[i].getLocalOrigem().getEndereco()
+                  << " | Destino: " << pedidos[i].getLocalDestino().getEndereco() << std::endl;
     }
 
     int opcao = 0;
@@ -67,5 +67,5 @@ void RotaController::mostrarRotaPedido() {
 
     // Mostrar rota do pedido selecionado
     std::vector<Veiculo> veiculos = veiculoService.listar();
-    rotaService.mostrarRota(pedidos[opcao - 1], veiculos);
+    rotaService.mostrarRota(pedidos[opcao - 1]);
 }
