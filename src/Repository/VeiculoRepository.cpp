@@ -23,7 +23,6 @@ void VeiculoRepository::salvarBackup(char caminho[]) {
     }
 
     fclose(file);
-    std::cout << "Backup salvo com sucesso!\n";
 }
 
 void VeiculoRepository::restaurarBackup(char caminho[]) {
@@ -46,7 +45,6 @@ void VeiculoRepository::restaurarBackup(char caminho[]) {
     }
 
     fclose(file);
-    std::cout << "Backup restaurado com sucesso!\n";
 }
 
 

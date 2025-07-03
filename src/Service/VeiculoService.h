@@ -20,7 +20,7 @@ class VeiculoService {
 
     public:
         VeiculoService(VeiculoRepository &veiculoRepository);
-        EnumResultadoCriacaoVeiculo criar(Veiculo& veiculo);
+        EnumResultadoCriacaoVeiculo criar(Veiculo veiculo);
         std::vector<Veiculo> listar();
         void excluir(int id);
         void updateStatus(std::string placa, bool status);

@@ -50,9 +50,11 @@ void BancoController::menu() {
 
 void BancoController::restaurarBackup() {
     bancoService.restaurarBackup();
+    std::cout << "Backup restaurado com sucesso!\n";
 }
 
 
 void BancoController::salvarBackup() {
     bancoService.salvarBackup();
+    std::cout << "Backup salvo com sucesso!\n";
 }

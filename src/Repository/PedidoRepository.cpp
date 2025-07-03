@@ -21,7 +21,6 @@ void PedidoRepository::salvarBackup(char caminho[]) {
     }
 
     fclose(file);
-    std::cout << "Backup salvo com sucesso!\n";
 }
 
 void PedidoRepository::restaurarBackup(char caminho[]) {
@@ -44,7 +43,6 @@ void PedidoRepository::restaurarBackup(char caminho[]) {
     }
 
     fclose(file);
-    std::cout << "Backup restaurado com sucesso!\n";
 }
 
 

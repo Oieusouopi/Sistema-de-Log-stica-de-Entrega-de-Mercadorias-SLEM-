@@ -12,7 +12,7 @@
 VeiculoService::VeiculoService(VeiculoRepository &veiculoRepository): veiculoRepository(veiculoRepository) {}
 
 
-EnumResultadoCriacaoVeiculo VeiculoService::criar(Veiculo &veiculo) {
+EnumResultadoCriacaoVeiculo VeiculoService::criar(Veiculo veiculo) {
 
     if (!validarPlaca(veiculo.getPlaca())) {
         return PLACA_DUPLICADA;

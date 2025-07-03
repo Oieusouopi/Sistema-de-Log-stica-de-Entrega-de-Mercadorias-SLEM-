@@ -19,7 +19,6 @@ void LocalRepository::salvarBackup(char caminho[]) {
     }
 
     fclose(file);
-    std::cout << "Backup salvo com sucesso!\n";
 }
 
 void LocalRepository::restaurarBackup(char caminho[]) {
@@ -42,7 +41,6 @@ void LocalRepository::restaurarBackup(char caminho[]) {
     }
 
     fclose(file);
-    std::cout << "Backup restaurado com sucesso!\n";
 }
 
 std::vector<Local> LocalRepository::listar() {
