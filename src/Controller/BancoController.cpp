@@ -16,11 +16,11 @@ void BancoController::menu() {
     std::string entrada;
 
     while (true) {
-        std::cout << "\n----- MENU BACO -----\n";
+        std::cout << "\n---------- MENU BANCO ----------\n";
         std::cout << static_cast<char>(SALVAR_TODOS_DADOS) << " -  Salvar todos dados\n";
         std::cout << static_cast<char>(RESTAURAR_DADOS_DE_BACKUPS_ANTIGOS) << " -  Restaurar Backups\n";
         std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_BANCO) << " -  Voltar para o menu principal\n";
-        std::cout << "-----------------------------\n";
+        std::cout << "---------------------------------\n";
 
         std::cin >> entrada;
 

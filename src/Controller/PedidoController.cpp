@@ -20,12 +20,12 @@ void PedidoController::menu() {
 
     while (true) {
 
-        std::cout << "\n----- MENU PEDIDOS -----\n";
+        std::cout << "\n-------- MENU PEDIDOS --------\n";
         std::cout << static_cast<char>(CRIAR_PEDIDO) << " -  Criar pedido\n";
         std::cout << static_cast<char>(EXCLUIR_PEDIDO) << " -  Excluir pedido\n";
         std::cout << static_cast<char>(LISTAR_TODOS_PEDIDOS) << " -  Listar todos pedidos\n";
         std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_PEDIDOS) << " -  Voltar para o menu principal\n";
-        std::cout << "-----------------------------\n";
+        std::cout << "---------------------------------\n";
 
         std::cin >> entrada;
 
@@ -136,7 +136,7 @@ void PedidoController::listar() {
         return;
     }
 
-    std::cout << "\n-------------------------- LISTA DE PEDIDOS ---------------------------\n";
+    std::cout << "\n-------------------------- LISTA DE PEDIDOS ----------------------------\n";
 
     std::cout << std::left
               << std::setw(20) << "LOCAL DE ORIGEM"
@@ -147,9 +147,9 @@ void PedidoController::listar() {
 
     for ( auto& pedido : pedidos) {
         std::cout << std::left
-                 << std::setw(10) << pedido.getLocalOrigem().getEndereco()
+                 << std::setw(20) << pedido.getLocalOrigem().getEndereco()
                  << std::setw(20) << pedido.getLocalDestino().getEndereco()
-                 << std::setw(12) << pedido.getPesoItem()
+                 << std::setw(10) << pedido.getPesoItem()
                  << '\n';
     }
 

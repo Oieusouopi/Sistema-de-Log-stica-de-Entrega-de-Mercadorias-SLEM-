@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <iomanip>
 
 #include "../Utils/EnumMenu.h"
 #include "../Utils/ExibirMensagem.h"
@@ -18,13 +19,13 @@ void LocalController::menu() {
 
     while (true) {
 
-        std::cout << "\n----- MENU LOCAL -----\n";
+        std::cout << "\n---------- MENU LOCAL ---------\n";
         std::cout << static_cast<char>(CRIAR_LOCAL) << " -  Criar local\n";
         std::cout << static_cast<char>(EXCLUIR_LOCAL) << " -  Excluir local\n";
         std::cout << static_cast<char>(LISTAR_TODOS_LOCAIS) << " -  Listar todos locais\n";
         std::cout << static_cast<char>(ATUALIZAR_LOCAL) << " -  Atualizar local\n";
         std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_LOCAL) << " -  Voltar para o menu principal\n";
-        std::cout << "-----------------------------\n";
+        std::cout << "----------------------------------\n";
 
         std::cin >> entrada;
 
@@ -98,11 +99,28 @@ void LocalController::listar() {
         return;
     }
 
-    std::cout << "\n--- Lista de Locais Cadastrados ---\n";
+    std::cout << "\n-------------------------- LISTA DE LOCAIS ------------------------\n";
+
+    std::cout << std::left
+              << std::setw(10) << "ID"
+              << std::setw(30) << "ENDEREÇO"
+              << std::setw(10) << "CORDENADA X"
+              << std::setw(10) << "CORDENADA Y" << "\n";
+
+    std::cout << std::string(70, '-') << '\n';
+
     for (const auto& local : locais) {
-        local.mostrar();
-        std::cout << "--------------------------\n";
+
+        std::cout << std::left
+                  << std::setw(10) << local.getId()
+                  << std::setw(30) << local.getEndereco()
+                  << std::setw(10) << local.getX()
+                  << std::setw(10) << local.getY() << '\n';
     }
+
+    std::cout << std::string(70, '-') << '\n';
+
+    std::cout << "Redirecionando para o meno do local..." << std::endl;
 }
 
 void LocalController::atualizar() {

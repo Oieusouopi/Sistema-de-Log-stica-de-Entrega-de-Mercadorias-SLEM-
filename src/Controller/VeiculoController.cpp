@@ -23,13 +23,13 @@ void VeiculoController::menu() {
 
     while (true) {
 
-        std::cout << "\n----- MENU VEICULO -----\n";
+        std::cout << "\n--------- MENU VEICULO ---------\n";
         std::cout << static_cast<char>(CRIAR_VEICULO) << " -  Criar Veiculo\n";
         std::cout << static_cast<char>(EXCLUIR_VEICULO) << " -  Excluir Veiculo\n";
         std::cout << static_cast<char>(LISTAR_TODOS_VEICULOS) << " -  Listar todos veiculos\n";
         std::cout << static_cast<char>(ATUALIZAR_VEICULOS) << " -  Atualizar Veiculos\n";
         std::cout << static_cast<char>(VOLTAR_PARA_O_MENU_PRINCIPAL_VEICULO) << " -  Voltar para o menu principal\n";
-        std::cout << "-----------------------------\n";
+        std::cout << "--------------------------------\n";
 
         std::cin >> entrada;
 
@@ -144,33 +144,50 @@ void VeiculoController::excluir() {
     if (veiculos.empty()) {
         std::cout << "Sem veículo nenhum cadastrado para ser excluído" << std::endl;
     } else {
+        std::cout << "\n-------------------------- LISTA DE VEÍCULOS PARA SEREM EXCLUÍDOS --------------------------\n";
 
-        std::cout << "\n-------------------------- LISTA DE VEÍCULOS PARA SEREM EXCLUIDOS --------------------------\n";
+        std::cout << std::left
+                  << std::setw(10) << "PLACA"
+                  << std::setw(20) << "MODELO"
+                  << std::setw(12) << "STATUS"
+                  << std::setw(30) << "LOCAL" << "\n";
 
-        for (int i = 0; i < veiculos.size(); i++) {
-            std::cout << (i + 1) << " - " << veiculos[i].getPlaca() << " | " << veiculos[i].getModelo() <<  std::endl;
+        for (const Veiculo& v : veiculos) {
+            std::cout << "ID: " << v.getId() << " | "
+                      << v.getPlaca() << " | "
+                      << v.getModelo() << std::endl;
         }
 
-        int opcao = 0;
-        while (true) {
-            std::cout << "Digite o número do veículo pra excluir: ";
-            std::cin >> opcao;
+        int idSelecionado;
+        std::cout << "Digite o ID do veículo para excluir (ou um valor inválido para cancelar): ";
+        std::cin >> idSelecionado;
 
-            if (std::cin.fail() || opcao < 1 || opcao > veiculos.size()) {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::cout << "Opção inválida. Tente novamente." << std::endl;
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Entrada inválida. Operação cancelada." << std::endl;
+        } else {
+            Veiculo* veiculoEncontrado = nullptr;
+            for (auto& v : veiculos) {
+                if (v.getId() == idSelecionado) {
+                    veiculoEncontrado = &v;
+                    break;
+                }
+            }
+
+            if (veiculoEncontrado == nullptr) {
+                std::cout << "Nenhum veículo com esse ID foi encontrado. Operação cancelada." << std::endl;
             } else {
-                break;
+                veiculoService.excluir(veiculoEncontrado->getId());
+                std::cout << "Veículo excluído com sucesso." << std::endl;
             }
         }
-
-        veiculoService.excluir(veiculos[opcao - 1].getId());
-        std::cout << "Veículo excluído com sucesso" << std::endl;
     }
 
     std::cout << "Redirecionando para o menu veículo..." << std::endl;
 }
+
+
 
 void VeiculoController::updateLocalAtual() {
     std::string placa;
