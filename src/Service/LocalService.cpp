@@ -67,9 +67,7 @@ bool LocalService::existeId(int id) {
 }
 
 Local LocalService::buscarPorId(int id) {
-        if (id != NULL && id > 0) {
-                return localRepository.buscarPorId(id);
-        }
+        return localRepository.buscarPorId(id);
 }
 
 bool LocalService::atualizarEnderecoPorId(int id, char novoEndereco[]) {

@@ -18,12 +18,12 @@ EnumResultadoCriacaoPedido PedidoService::criar(Pedido pedido) {
         return ERRO_CRIACAO_DO_PEDIDO_COM_PESO_NEGATIVO;
     }
 
-    pedidoRepository.salvarOuAtualizar(pedido);
     std::vector<Veiculo> veiculos = veiculoService.listar();
     Veiculo veiculoMaisProximo = veiculoService.encontrarVeiculoMaisProximo(pedido);
 
     if (veiculoMaisProximo.getId() !=  -1) {
-        veiculoService.updateStatusEPedido(veiculoMaisProximo.getPlaca(), OCUPADO, pedido.getId());
+        veiculoService.updateStatusEPedido(veiculoMaisProximo.getId(), OCUPADO, pedido.getId());
+        pedido.setVeiculoVinculadoId(veiculoMaisProximo.getId());
     }
 
     pedidoRepository.salvarOuAtualizar(pedido);
@@ -39,9 +39,10 @@ void PedidoService::excluir(int id) {
     pedidoRepository.excluir(id);
 }
 
-void PedidoService::update(int id) {
+void PedidoService::salvarOuAtualizar(Pedido pedido) {
 
 }
+
 Pedido PedidoService::encontrarPedidoSemVeiculoMaisProximo(Veiculo veiculoDisponivel) {
     std::vector<Pedido> pedidos = pedidoRepository.listar();
     std::vector<Veiculo> veiculos = veiculoService.listar();

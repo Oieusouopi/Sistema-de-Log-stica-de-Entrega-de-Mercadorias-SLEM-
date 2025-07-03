@@ -94,6 +94,11 @@ void VeiculoController::criar() {
 
     Local localSelecionado = LocalUtils::selecionarLocal(localService);
 
+    if (localSelecionado.getId() == -1) {
+        std::cout << "Operação cancelada" << std::endl;
+        return;
+    }
+
     Veiculo veiculo = Veiculo(placa, modelo, localSelecionado.getId());
 
 
@@ -132,7 +137,7 @@ void VeiculoController::listar() {
               << std::setw(10) << "PLACA"
               << std::setw(20) << "MODELO"
               << std::setw(12) << "STATUS"
-              << std::setw(30) << "LOCAL"  << "\n";
+              << std::setw(30) << "LOCAL" << "\n";
 
     std::cout << std::string(72, '-') << '\n';
 

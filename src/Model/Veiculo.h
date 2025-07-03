@@ -20,7 +20,7 @@ private:
 
 public:
     Veiculo(): id(-1) {}
-    Veiculo(const char* placa) : id(-1), status(PENDENTE), localAtualId(0) {
+    Veiculo(const char* placa) : id(-1), status(DISPONIVEL), localAtualId(0) {
         strncpy(this->placa, placa, sizeof(this->placa) - 1);
         this->placa[sizeof(this->placa) - 1] = '\0';
         strncpy(this->modelo, "Modelo ", sizeof(this->modelo) - 1);
@@ -29,7 +29,7 @@ public:
     }
 
     Veiculo(const char* placa, const char* modelo, int localAtualId)
-        : id(0), status(PENDENTE), localAtualId(localAtualId) {
+        : id(0), status(DISPONIVEL), localAtualId(localAtualId) {
         strncpy(this->placa, placa, sizeof(this->placa) - 1);
         this->placa[sizeof(this->placa) - 1] = '\0';
         strncpy(this->modelo, modelo, sizeof(this->modelo) - 1);

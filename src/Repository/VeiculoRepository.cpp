@@ -95,7 +95,7 @@ Veiculo VeiculoRepository::buscarPorId(int id) {
         }
     }
 
-    throw std::runtime_error("Local com ID " + std::to_string(id) + " não encontrado.");
+    return Veiculo();
 }
 
 

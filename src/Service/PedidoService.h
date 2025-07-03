@@ -27,7 +27,8 @@ class PedidoService {
         PedidoService(PedidoRepository &pedidoRespository, VeiculoService &veiculoService, LocalService &localService);
         EnumResultadoCriacaoPedido criar(Pedido pedido);
         std::vector<Pedido> listar();
-        void update(int id);
+        void salvarOuAtualizar(Pedido pedido);
+        Pedido buscarPorId(int id);
         void excluir(int id);
         Pedido encontrarPedidoSemVeiculoMaisProximo(Veiculo veiculoDisponivel);
     private:

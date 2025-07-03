@@ -32,10 +32,11 @@ class VeiculoService {
         void updateStatus(std::string placa, bool status);
         void updateStatus(std::string placa, EnumStatusVeiculo status);
         void updateLocalAtual(std::string placa, Local local);
-        void updateStatusEPedido(std::string placa, EnumStatusVeiculo status, int pedidoId);
+        void updateStatusEPedido(int id, EnumStatusVeiculo status, int pedidoId);
         void verificarEAssociarPedidos();
         bool validarPlaca(std::string placa);
         Veiculo encontrarVeiculoMaisProximo(Pedido pedido);
+        Veiculo buscarPorId(int id);
     private:
         VeiculoRepository &veiculoRepository;
         PedidoService &pedidoService;

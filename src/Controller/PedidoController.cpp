@@ -20,7 +20,7 @@ void PedidoController::menu() {
 
     while (true) {
 
-        std::cout << "\n-------- MENU PEDIDOS --------\n";
+        std::cout << "\n---------- MENU PEDIDOS ----------\n";
         std::cout << static_cast<char>(CRIAR_PEDIDO) << " -  Criar pedido\n";
         std::cout << static_cast<char>(EXCLUIR_PEDIDO) << " -  Excluir pedido\n";
         std::cout << static_cast<char>(LISTAR_TODOS_PEDIDOS) << " -  Listar todos pedidos\n";
@@ -149,24 +149,32 @@ void PedidoController::listar() {
         return;
     }
 
-    std::cout << "\n-------------------------- LISTA DE PEDIDOS ----------------------------\n";
+    std::cout << "\n------------------------------- LISTA DE PEDIDOS ---------------------------------\n";
 
     std::cout << std::left
               << std::setw(20) << "LOCAL DE ORIGEM"
               << std::setw(20) << "LOCAL DE DESTINO"
-              << std::setw(10) << "PESO DO ITEM" << std::endl;
+              << std::setw(15) << "PESO DO ITEM"
+              << std::setw(20)  << "PLACA DO VEÍCULO VINCULADO" << std::endl;
 
-    std::cout << std::string(72, '-') << '\n';
+    std::cout << std::string(80, '-') << '\n';
 
     for ( auto& pedido : pedidos) {
+        Veiculo veiculo = veiculoService.buscarPorId(pedido.getVeiculoVinculadoId());
+        char placa[8] = "Nenhum";
+        if (veiculo.getId() != -1) {
+            strcpy(placa, veiculo.getPlaca());
+        }
+
         std::cout << std::left
                  << std::setw(20) << pedido.getLocalOrigem().getEndereco()
                  << std::setw(20) << pedido.getLocalDestino().getEndereco()
-                 << std::setw(10) << pedido.getPesoItem()
+                 << std::setw(15) << pedido.getPesoItem()
+                 << std::setw(20) << placa
                  << '\n';
     }
 
-    std::cout << std::string(72, '-') << '\n';
+    std::cout << std::string(80, '-') << '\n';
 
     std::cout << "Redirecionando para o menu do pedido..." << std::endl;
 }

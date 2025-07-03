@@ -62,17 +62,13 @@ void VeiculoService::updateStatus(std::string placa, EnumStatusVeiculo status) {
     }
 }
 
-void VeiculoService::updateStatusEPedido(std::string placa, EnumStatusVeiculo status, int pedidoId) {
-    std::vector<Veiculo> veiculos = veiculoRepository.listar();
-    for (auto& veiculo : veiculos) {
-        if (veiculo.getPlaca() == placa) {
-            veiculo.setStatus(status);
-            veiculo.setPedidoId(pedidoId);
-            break;
-        }
-        veiculoRepository.salvarOuAtualizar(veiculo);
-    }
+void VeiculoService::updateStatusEPedido(int id, EnumStatusVeiculo status, int pedidoId) {
+    Veiculo veiculo = veiculoRepository.buscarPorId(id);
 
+    veiculo.setStatus(status);
+    veiculo.setPedidoId(pedidoId);
+
+    veiculoRepository.salvarOuAtualizar(veiculo);
 }
 
 void VeiculoService::verificarEAssociarPedidos() {
@@ -114,25 +110,24 @@ Veiculo VeiculoService::encontrarVeiculoMaisProximo(Pedido pedido) {
     std::vector<Veiculo> veiculos = veiculoRepository.listar();
 
     if (veiculos.empty()) {
-        std::cout << "Nenhum veículo disponível.\n";
-        return nullptr;
+        std::cout << "Nenhum veículo disponível para buscar o seu pedido. Aguarde...\n";
+        return Veiculo();
     }
 
     Veiculo veiculoMaisProximo;
-
     double menorDistancia = std::numeric_limits<double>::max();
 
-    for (size_t i = 0; i < veiculos.size(); ++i) {
+    for (const Veiculo& veiculo : veiculos) {
+        if (veiculo.getStatus() != DISPONIVEL) {
+            continue;
+        }
 
-        Local localAtual = localService.buscarPorId(veiculos[i].getLocalAtualId());
+        Local localAtual = localService.buscarPorId(veiculo.getLocalAtualId());
+        double distancia = VeiculoUtils::calcularDistancia(localAtual, pedido.getLocalOrigem());
 
-        if (veiculos[i].getStatus() == DISPONIVEL) {
-            double distancia = VeiculoUtils::calcularDistancia(localAtual, pedido.getLocalOrigem());
-
-            if (distancia < menorDistancia) {
-                menorDistancia = distancia;
-                veiculoMaisProximo = veiculos[i];
-            }
+        if (distancia < menorDistancia) {
+            menorDistancia = distancia;
+            veiculoMaisProximo = veiculo;
         }
     }
 
@@ -145,6 +140,11 @@ Veiculo VeiculoService::encontrarVeiculoMaisProximo(Pedido pedido) {
 
     return veiculoMaisProximo;
 }
+
+Veiculo VeiculoService::buscarPorId(int id) {
+    return veiculoRepository.buscarPorId(id);
+}
+
 
 
 

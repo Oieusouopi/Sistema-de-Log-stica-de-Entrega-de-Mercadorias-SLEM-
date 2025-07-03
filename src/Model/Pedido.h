@@ -15,6 +15,7 @@ private:
     Local localOrigem;
     Local localDestino;
     double pesoItem;
+    int veiculoVinculadoId;
 
 public:
     Pedido(): id(-1) {};
@@ -36,6 +37,10 @@ public:
     double getPesoItem() {return this->pesoItem; }
 
     void setPesoItem(double pesoItem) { this->pesoItem = pesoItem; }
+
+    void setVeiculoVinculadoId(int veiculoVinculadoId) { this->veiculoVinculadoId = veiculoVinculadoId; }
+
+    int getVeiculoVinculadoId() { return this->veiculoVinculadoId; }
 };
 
 #endif //PEDIDO_H
