@@ -85,10 +85,46 @@ bool LocalService::atualizarEnderecoPorId(int id, char novoEndereco[]) {
 
         Local local = localRepository.buscarPorId(id);
 
+        if (local.getId() == -1) {
+                std::cout << "ID Não existe";
+                return false;
+        }
+
         local.setEndereco(novoEndereco);
 
         localRepository.salvarOuAtualizar(local);
 
-        std::cout << "ID não encontrado.\n";
-        return false;
+        return true;
+}
+
+bool LocalService::atualizarCordX(int id, float x) {
+
+        Local localPersistence = localRepository.buscarPorId(id);
+
+        if (localPersistence.getId() == -1) {
+                std::cout << "ID Não existe";
+                return false;
+        }
+
+        localPersistence.setX(x);
+
+        localRepository.salvarOuAtualizar(localPersistence);
+
+        return true;
+}
+
+bool LocalService::atualizarCordY(int id, float y) {
+
+        Local localPersistence = localRepository.buscarPorId(id);
+
+        if (localPersistence.getId() == -1) {
+                std::cout << "ID Não existe";
+                return false;
+        }
+
+        localPersistence.setY(y);
+
+        localRepository.salvarOuAtualizar(localPersistence);
+
+        return true;
 }

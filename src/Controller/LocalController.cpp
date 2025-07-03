@@ -9,6 +9,7 @@
 
 #include "../Utils/EnumMenu.h"
 #include "../Utils/ExibirMensagem.h"
+#include "../Utils/InputUtils.h"
 
 LocalController::LocalController(LocalService &localService): localService(localService) {
 }
@@ -38,6 +39,7 @@ void LocalController::menu() {
 
         switch (teclaGlobal) {
             case CRIAR_LOCAL:
+                std::cin.ignore();
                 criar();
                 break;
             case EXCLUIR_LOCAL:
@@ -62,13 +64,9 @@ void LocalController::criar() {
     float x, y;
     char endereco[100];
 
-    std::cout << "Digite a coordenada X: ";
-    std::cin >> x;
+    lerFloat("Digite a coordenada X: ", x);
+    lerFloat("Digite a coordenada Y: ", y);
 
-    std::cout << "Digite a coordenada Y: ";
-    std::cin >> y;
-
-    std::cin.ignore();
     std::cout << "Digite o endereço (Ex: 'Sao Paulo', 'Avenida X 123'): ";
     std::cin.getline(endereco, 100);
 
@@ -151,18 +149,20 @@ void LocalController::atualizar() {
     switch (opcao) {
         case '1': {
             float novoX;
-            std::cout << "Nova coordenada X: ";
-            std::cin >> novoX;
-            local.setX(novoX);
-            std::cout << "Coordenada X atualizada com sucesso.\n";
+            std::cin.ignore();
+            lerFloat("Nova coordenada X: ", novoX);
+            if (localService.atualizarCordX(local.getId(), novoX)) {
+                std::cout << "Coordenada X atualizada com sucesso.\n";
+            }
             break;
         }
         case '2': {
             float novoY;
-            std::cout << "Nova coordenada Y: ";
-            std::cin >> novoY;
-            local.setY(novoY);
-            std::cout << "Coordenada Y atualizada com sucesso.\n";
+            std::cin.ignore();
+            lerFloat("Nova coordenada X: ", novoY);
+            if (localService.atualizarCordY(local.getId(), novoY)) {
+                std::cout << "Coordenada Y atualizada com sucesso.\n";
+            };
             break;
         }
         case '3': {
@@ -172,7 +172,7 @@ void LocalController::atualizar() {
             std::cin.getline(novoEndereco, 100);
 
             if (!localService.atualizarEnderecoPorId(id, novoEndereco)) {
-                return;
+                std::cout << "Endereço atualizado com sucesso.\n";
             }
             break;
         }

@@ -50,6 +50,7 @@ void PedidoRepository::salvarOuAtualizar(Pedido pedido) {
     for (auto& p : pedidos) {
         if (p.getId() == pedido.getId()) {
             p = pedido;
+            return;
         }
     }
 

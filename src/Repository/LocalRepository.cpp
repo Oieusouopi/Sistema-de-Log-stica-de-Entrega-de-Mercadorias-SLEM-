@@ -55,7 +55,7 @@ Local LocalRepository::buscarPorId(int id) {
         }
     }
 
-    throw std::runtime_error("Local com ID " + std::to_string(id) + " não encontrado.");
+    return Local();
 }
 
 void LocalRepository::excluir(int id) {
@@ -69,6 +69,7 @@ void LocalRepository::salvarOuAtualizar(Local local) {
     for (auto& l : locais) {
         if (l.getId() == local.getId()) {
             l = local;
+            return;
         }
     }
 

@@ -22,6 +22,8 @@ class LocalService {
         int gerarNovoId();
         bool existeEndereco(const char endereco[]) const;
         bool atualizarEnderecoPorId(int id, char novoEndereco[]);
+        bool atualizarCordX(int id, float x);
+        bool atualizarCordY(int id, float y);
         Local buscarPorId(int id);
     private:
         LocalRepository &localRepository;

@@ -50,4 +50,5 @@ add_executable(Sistema_de_Logistica_de_Entrega_de_Mercadorias src/main.cpp
         src/Controller/BancoController.cpp
         src/Controller/BancoController.h
         src/Service/BancoService.cpp
-        src/Service/BancoService.h)
+        src/Service/BancoService.h
+        src/Utils/InputUtils.h)

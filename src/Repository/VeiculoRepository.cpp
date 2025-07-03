@@ -41,6 +41,7 @@ void VeiculoRepository::restaurarBackup(char caminho[]) {
     for (int i = 0; i < quantidade; ++i) {
         Veiculo veiculo;
         fread(&veiculo, sizeof(Veiculo), 1, file);
+
         veiculos.push_back(veiculo);
     }
 
@@ -64,6 +65,7 @@ void VeiculoRepository::salvarOuAtualizar(Veiculo veiculo) {
     for (auto& v : veiculos) {
         if (v.getId() == veiculo.getId()) {
             v = veiculo;
+            return;
         }
     }
 
