@@ -17,6 +17,7 @@
 enum EnumResultadoCriacaoVeiculo {
     SUCESSO_CRIACAO_DO_VEICULO,
     PLACA_DUPLICADA,
+    SEM_LOCAL_CADASTRADO
 };
 
 class PedidoService;

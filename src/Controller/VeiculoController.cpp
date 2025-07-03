@@ -13,6 +13,7 @@
 #include "../Utils/EnumMenu.h"
 #include "../Utils/EnumStatusVeiculoUtils.h"
 #include "../Utils/ExibirMensagem.h"
+#include "../Utils/InputUtils.h"
 #include "../Utils/LocalUtils.h"
 
 VeiculoController::VeiculoController(VeiculoService &veiculoService, LocalService &localService, PedidoService &pedidoService): veiculoService(veiculoService), localService(localService), pedidoService(pedidoService) {}
@@ -66,33 +67,46 @@ void VeiculoController::menu() {
 
 void VeiculoController::criar() {
 
-    std::cout << "\n----- CRIAÇÃO DE UM VEICULO -----\n";
+    std::cout << "\n------------------- CRIAÇÃO DE UM VEICULO ------------------------\n";
     std::cout << "Para criar um veículo vamos precisar de algumas informações" << std::endl;
     std::cout << "se você der alguma informação que não é certa vai pedir a informação novamente" << std::endl;
-    std::cout << "-----------------------------\n";
-
-    char placa[7];
-
-    std::cout << "Qual a placa deste veiculo: ";
-
-    std::cin >> placa;
-
-    std::cout << "Qual o modelo deste veiculo: ";
-
-    char modelo[30];
+    std::cout << "---------------------------------------------------------------------\n";
 
     std::cin.ignore();
-    std::cin.getline(modelo, 30);
+
+    std::string placaStr;
+    if (!lerStringComTamanhoExato("Qual a placa deste veículo (7 caracteres) (Cancelar operação digite 0): ", placaStr, 7)) {
+        std::cout << "Operação cancelada" << std::endl;
+        return;
+    }
+
+    std::string modeloStr;
+    if (!lerStringComTamanhoMaximo("Qual o modelo deste veículo (até 30 caracteres) (Cancelar operação digite 0): ", modeloStr, 30)) {
+        std::cout << "Operação cancelada" << std::endl;
+        return;
+    };
+
+    char placa[7];
+    char modelo[30];
+
+    std::strncpy(placa, placaStr.c_str(), 7);
+    std::strncpy(modelo, modeloStr.c_str(), 30);
 
     Local localSelecionado = LocalUtils::selecionarLocal(localService);
 
     Veiculo veiculo = Veiculo(placa, modelo, localSelecionado.getId());
 
-    EnumResultadoCriacaoVeiculo resultado = veiculoService.criar(veiculo);
 
+    EnumResultadoCriacaoVeiculo resultado = veiculoService.criar(veiculo);
     switch (resultado) {
         case SUCESSO_CRIACAO_DO_VEICULO:
             std::cout << "Veiculo criado com sucesso" << std::endl;
+            break;
+        case PLACA_DUPLICADA:
+            std::cout << "Veículo com placa duplicada não é possivel criar" << std::endl;
+            break;
+        case SEM_LOCAL_CADASTRADO:
+            std::cout << "Sem local cadastrado não é possivel criar um veículo" << std::endl;
             break;
         default:
             std::cout << "Veiculo não criado aconteceu algum erro inesperado" << std::endl;

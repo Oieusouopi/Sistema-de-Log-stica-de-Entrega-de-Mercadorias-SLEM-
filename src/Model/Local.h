@@ -18,13 +18,13 @@ private:
 public:
     Local(): id(-1) {}
 
-    Local(const char* endereco) {
+    Local(const char* endereco): id(-1) {
         strncpy(this->endereco, endereco, sizeof(this->endereco) - 1);
         this->endereco[sizeof(this->endereco) - 1] = '\0';
     }
 
     Local(float x, float y, const char* end)
-        : cord_x(x), cord_y(y) {
+        : id(-1), cord_x(x), cord_y(y) {
         strncpy(this->endereco, end, sizeof(this->endereco) - 1);
         this->endereco[sizeof(this->endereco) - 1] = '\0';
     }

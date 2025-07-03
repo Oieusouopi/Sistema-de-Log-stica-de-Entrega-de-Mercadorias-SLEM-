@@ -64,11 +64,23 @@ void LocalController::criar() {
     float x, y;
     char endereco[100];
 
-    lerFloat("Digite a coordenada X: ", x);
-    lerFloat("Digite a coordenada Y: ", y);
+    if (!lerFloat("Digite a coordenada X (Cancelar operação digite 0): ", x)) {
+        std::cout << "Operação cancelada" << std::endl;
+        return;
+    };
 
-    std::cout << "Digite o endereço (Ex: 'Sao Paulo', 'Avenida X 123'): ";
+    if (!lerFloat("Digite a coordenada Y (Cancelar operação digite 0):", y)) {
+        std::cout << "Operação cancelada" << std::endl;
+        return;
+    };
+
+    std::cout << "Digite o endereço (Ex: 'Sao Paulo', 'Avenida X 123') (Cancelar operação digite 0):";
     std::cin.getline(endereco, 100);
+
+    if (std::strcmp(endereco, "0") == 0) {
+        std::cout << "Operação cancelada.\n";
+        return;
+    }
 
     Local local(x, y, endereco);
 
@@ -77,9 +89,15 @@ void LocalController::criar() {
 
 
 void LocalController::excluir() {
-    std::cout << "Digite o ID do local para excluir: ";
+    std::cout << "Digite o ID do local para excluir: (Cancelar operação digite 0):";
     int id;
+
     std::cin >> id;
+
+    if (id == 0) {
+        std::cout << "Operação cancelada.\n";
+        return;
+    }
 
     if (localService.existeId(id)) {
         localService.excluirPorId(id);
@@ -123,15 +141,19 @@ void LocalController::listar() {
 
 void LocalController::atualizar() {
     int id;
-    std::cout << "Digite o ID do local que deseja atualizar: ";
+    std::cout << "Digite o ID do local que deseja atualizar (Cancelar operação digite 0):";
     std::cin >> id;
 
-    Local local;
+    if (id == 0) {
+        std::cout << "Operação cancelada.\n";
+        return;
+    }
 
-    try {
-        local = localService.buscarPorId(id);
-    } catch (const std::exception& e) {
-        std::cerr << "Erro: " << e.what() << std::endl;
+
+    Local local = localService.buscarPorId(id);
+
+    if (local.getId() == -1) {
+        std::cout << "Nenhum local encontrdao com o ID " << id;
         return;
     }
 

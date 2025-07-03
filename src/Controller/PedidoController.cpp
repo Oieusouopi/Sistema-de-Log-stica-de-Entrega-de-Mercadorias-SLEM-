@@ -65,15 +65,28 @@ void PedidoController::criar() {
 
     Local localOrigem = LocalUtils::selecionarLocal(localService);
 
+    if (localOrigem.getId() == -1) {
+        return;
+    }
+
     std::cout << "Selecione o local de destino do pedido: ";
 
     Local localDestino = LocalUtils::selecionarLocal(localService);
 
-    std::cout << "Digite o peso do item de entrega: ";
+    if (localDestino.getId() == -1) {
+        return;
+    }
+
+    std::cout << "Digite o peso do item de entrega: (Cancelar operação digite 0):";
 
     double pesoDoItem = 0;
 
     std::cin >> pesoDoItem;
+
+    if (pesoDoItem == 0) {
+        std::cout << "Operação cancelada" << std::endl;
+        return;
+    }
 
     Pedido pedido = Pedido(localOrigem, localDestino, pesoDoItem);
 
@@ -107,7 +120,7 @@ void PedidoController::excluir() {
 
         int opcao = 0;
         while (true) {
-            std::cout << "Digite o número do pedido pra excluir: ";
+            std::cout << "Digite o número do pedido pra excluir (ou um valor inválido para cancelar): ";
             std::cin >> opcao;
 
             if (std::cin.fail() || opcao < 1 || opcao > pedidos.size()) {

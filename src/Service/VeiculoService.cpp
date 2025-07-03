@@ -19,6 +19,10 @@ EnumResultadoCriacaoVeiculo VeiculoService::criar(Veiculo veiculo) {
         return PLACA_DUPLICADA;
     }
 
+    if (veiculo.getLocalAtualId() == -1) {
+        return SEM_LOCAL_CADASTRADO;
+    }
+
     veiculoRepository.salvarOuAtualizar(veiculo);
 
     // Se o veículo foi criado como disponível, verificar pedidos sem veículo
