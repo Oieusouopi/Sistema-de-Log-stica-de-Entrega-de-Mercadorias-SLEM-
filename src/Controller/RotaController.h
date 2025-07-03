@@ -6,14 +6,21 @@
 #define ROTACONTROLLER_H
 #include "../Service/RotaService.h"
 
+// Forward declarations
+class PedidoService;
+class VeiculoService;
+
 class RotaController {
 
     public:
-        RotaController(RotaService &rotaService);
+        RotaController(RotaService &rotaService, PedidoService &pedidoService, VeiculoService &veiculoService);
         void menu();
+        void mostrarRotaPedido();
 
     private:
         RotaService &rotaService;
+        PedidoService &pedidoService;
+        VeiculoService &veiculoService;
 
 };
 
